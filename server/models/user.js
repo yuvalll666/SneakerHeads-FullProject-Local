@@ -10,11 +10,17 @@ const userRole = {
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
       type: String,
       required: true,
       minlength: 2,
-      maxlength: 255,
+      maxlength: 30,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      minlength: 2,
+      maxlength: 30,
     },
     email: {
       type: String,

@@ -16,12 +16,13 @@ const schema = yup.object().shape({
     .string()
     .matches(/^([^0-9]*)$/, "First name should not contain numbers")
     .required("First name is required")
-    .min(2, "First name should be at least 2 charcters long"),
+    .min(2, "First name should be at least 2 charcters long")
+    .max(30, "First name most be shorter then 30 charcters "),
   lastName: yup
     .string()
     .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
     .required("Last name is required")
-    .min(2, "Last name should be at least 2 charcters long"),
+    .min(2, "Last name should be at least 2 charcters long").max(30, "First name most be shorter then 30 charcters"),
 });
 
 function Signup() {
