@@ -8,18 +8,20 @@ import Input from "./forms/Input";
 import PrimaryButton from "./forms/PrimaryButton";
 import Typography from "@material-ui/core/Typography";
 //Dependcies
-import yup from "yup";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const schema = yup.object().shape({
   firstName: yup
     .string()
-    .matches(/^([^0-9])$/, "First name should not contain numbers")
-    .required("First name is required"),
+    .matches(/^([^0-9]*)$/, "First name should not contain numbers")
+    .required("First name is required")
+    .min(2, "First name should be at least 2 charcters long"),
   lastName: yup
     .string()
-    .matches(/^([^0-9])$/, "Last name should not contain numbers")
-    .required("Last name is required"),
+    .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
+    .required("Last name is required")
+    .min(2, "Last name should be at least 2 charcters long"),
 });
 
 function Signup() {
@@ -39,8 +41,22 @@ function Signup() {
         Sign Up (step 1)
       </Typography>
       <Form className="mt-4">
-        <Input ref={register} name="firstName" type="text" label="First Name" />
-        <Input ref={register} name="lastName" type="text" label="Last Name" />
+        <Input
+          ref={register}
+          name="firstName"
+          type="text"
+          label="First Name"
+          error={Boolean(errors.firstName)}
+          helperText={errors?.firstName?.message}
+        />
+        <Input
+          ref={register}
+          name="lastName"
+          type="text"
+          label="Last Name"
+          error={Boolean(errors.lastName)}
+          helperText={errors?.lastName?.message}
+        />
         <PrimaryButton type="submit">Next</PrimaryButton>
       </Form>
     </MainContainer>
