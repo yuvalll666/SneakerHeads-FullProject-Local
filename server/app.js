@@ -14,5 +14,9 @@ mongoose
   .then(() => console.log("Connected to mongoDB..."))
   .catch((err) => console.error("Could not conncet to mongoDB"));
 
+app.use(cors());
+app.use(require("morgan")("dev"));
+app.use(express.json());
+
 const port = 3900;
 http.listen(port, () => console.log(`Listening on port ${port}...`));
