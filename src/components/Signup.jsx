@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+
 import Form from "./forms/Form";
 import MainContainer from "./forms/MainContainer";
+import Input from "./forms/Input";
 
 function Signup() {
   const { register, handleSubmit, errors } = useForm();
@@ -16,13 +18,13 @@ function Signup() {
     <MainContainer>
       <h2 className="mt-4">Sign Up (step 1)</h2>
       <Form className="mt-4">
-        <input
+        <Input
           ref={register}
           name="firstName"
           type="text"
           placeholder="First Name"
         />
-        <input
+        <Input
           ref={register}
           name="lastName"
           type="text"
