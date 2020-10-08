@@ -8,9 +8,25 @@ import Input from "./forms/Input";
 import PrimaryButton from "./forms/PrimaryButton";
 import Typography from "@material-ui/core/Typography";
 //Dependcies
+import yup from "yup";
+import { yupResolver } from "@hookform/resolvers";
+
+const schema = yup.object().shape({
+  firstName: yup
+    .string()
+    .matches(/^([^0-9])$/, "First name should not contain numbers")
+    .required("First name is required"),
+  lastName: yup
+    .string()
+    .matches(/^([^0-9])$/, "Last name should not contain numbers")
+    .required("Last name is required"),
+});
 
 function Signup() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
   const history = useHistory();
 
   const onSubmit = (data) => {
