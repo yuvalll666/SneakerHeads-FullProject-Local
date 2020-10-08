@@ -7,7 +7,7 @@ function Navbar() {
       <div className="container">
         <Link className="navbar-brand" to="/">
           Shop App
-        </Link> 
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
