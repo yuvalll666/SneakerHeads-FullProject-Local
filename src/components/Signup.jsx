@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import Form from "./forms/Form";
 import MainContainer from "./forms/MainContainer";
 
 function Signup() {
@@ -14,7 +15,7 @@ function Signup() {
   return (
     <MainContainer>
       <h2 className="mt-4">Sign Up (step 1)</h2>
-      <form className="mt-4">
+      <Form className="mt-4">
         <input
           ref={register}
           name="firstName"
@@ -28,7 +29,7 @@ function Signup() {
           placeholder="Last Name"
         />
         <button type="submit">Next</button>
-      </form>
+      </Form>
     </MainContainer>
   );
 }
