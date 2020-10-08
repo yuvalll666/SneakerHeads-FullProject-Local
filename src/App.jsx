@@ -5,7 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
-import Signup from "./components/Signup";
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/step1" component={Step1} />
+          <Route path="/step2" component={Step2} />
         </Switch>
       </main>
       <footer></footer>
