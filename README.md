@@ -1,3 +1,9 @@
+# clinet - create Navbar component
+
+- use bootstrap to created navbar component
+- import Link and Navlink from react-router-dom and use on nav links
+- add Navbar copmponent to App.jsx
+
 # client - reset settings
 
 - reset all react default css and html
