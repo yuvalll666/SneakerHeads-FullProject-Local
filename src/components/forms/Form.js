@@ -13,7 +13,7 @@ function Form({ children, ...props }) {
 
   return (
     <form className={styles.root} noValidate {...props}>
-      {{ children }}
+      {children}
     </form>
   );
 }
