@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import MainContainer from "./forms/MainContainer";
 
 function Signup() {
   const { register, handleSubmit, errors } = useForm();
@@ -11,7 +12,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <MainContainer>
       <h2 className="mt-4">Sign Up (step 1)</h2>
       <form className="mt-4">
         <input
@@ -28,7 +29,7 @@ function Signup() {
         />
         <button type="submit">Next</button>
       </form>
-    </div>
+    </MainContainer>
   );
 }
 
