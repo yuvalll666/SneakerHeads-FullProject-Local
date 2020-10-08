@@ -44,7 +44,7 @@ function Step1() {
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
-        Sign Up (step 1)
+        Step 1
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
         <Input
