@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "../components/forms/Form";
 import MainContainer from "../components/forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
@@ -6,9 +6,11 @@ import Input from "../components/forms/Input";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useData } from "../DataContext";
+import {} from "../DataContext";
 import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { DataUsageSharp } from "@material-ui/icons";
 
 const schema = yup.object().shape({
   email: yup
@@ -34,7 +36,7 @@ function Step2() {
   });
 
   const onSubmit = (data) => {
-    history.push("/signin");
+    history.push("/signin-result");
     setValues(data);
   };
 

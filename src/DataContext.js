@@ -4,7 +4,6 @@ const DataContext = createContext();
 
 function DataProvider({ children }) {
   const [data, setData] = useState({});
-
   const setValues = (values) => {
     setData((prevData) => ({
       ...prevData,
