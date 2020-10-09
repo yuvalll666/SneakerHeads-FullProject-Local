@@ -1,6 +1,7 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const { options } = require("@hapi/joi");
 
 const userRole = {
   NORMAL: 0,
@@ -49,8 +50,27 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+//create a user token with needed user information
+userSchema.methods.generateAuthToken = function (options = null) {
+  const token = jwt.sign(
+    {
+      _id: this.id,
+      confirmed: true,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      role: this.role,
+    },
+    //Todo - add an procces.env with unique TOKEN_KEY
+    options
+  );
+
+  return token;
+};
+
 const User = mongoose.model("User", userSchema);
 
+//exepts user object and check if inputs as required
+//return validate user
 function validateUser(user) {
   const schema = Joi.object({
     firstName: Joi.string()
