@@ -7,6 +7,7 @@ const userRole = {
   EDITOR: 1,
   ADMIN: 2,
 };
+const { NORMAL } = userRole;
 
 const userSchema = new mongoose.Schema(
   {
@@ -25,8 +26,6 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      minlength: 6,
-      maxlength: 255,
       trim: true,
       unique: true,
     },
@@ -43,7 +42,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: Number,
       required: true,
-      default: 0,
+      default: NORMAL,
     },
     createdAt: { type: Date, default: Date.now },
   },
@@ -51,5 +50,24 @@ const userSchema = new mongoose.Schema(
 );
 
 const User = mongoose.model("User", userSchema);
+
+function validateUser(user) {
+  const schema = Joi.object({
+    firstName: Joi.string()
+      .min(2)
+      .max(30)
+      .required()
+      .pattern(/^([^0-9]*)$/),
+    lastName: Joi.string()
+      .min(2)
+      .max(30)
+      .required()
+      .pattern(/^([^0-9]*)$/),
+    email: Joi.string().required().email(),
+    password: Joi.string().min(6).max(1024).required(),
+  });
+
+  return schema.validate(user, { abortEarly: false });
+}
 
 exports.User = User;

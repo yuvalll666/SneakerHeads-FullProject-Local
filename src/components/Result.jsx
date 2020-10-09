@@ -1,7 +1,6 @@
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import MainContainer from "./forms/MainContainer";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Link } from "react-router-dom";
 import { useData } from "../DataContext";
 import PrimaryButton from "./forms/PrimaryButton";
@@ -44,7 +43,7 @@ function Result() {
             {entries.map((entry) => (
               <TableRow key={entry[0]}>
                 <TableCell>{entry[0]}</TableCell>
-                <TableCell>{entry[1].toString()}</TableCell>
+                <TableCell>{entry[1]}</TableCell>
               </TableRow>
             ))}
           </TableBody>
