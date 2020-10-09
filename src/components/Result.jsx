@@ -4,6 +4,7 @@ import MainContainer from "./forms/MainContainer";
 import { Link } from "react-router-dom";
 import { useData } from "../DataContext";
 import PrimaryButton from "./forms/PrimaryButton";
+import { useHistory } from "react-router-dom";
 import {
   TableContainer,
   Paper,
@@ -18,9 +19,10 @@ function Result() {
   const { data } = useData();
   let entries = Object.entries(data);
   entries.pop();
-
+  
+  const history = useHistory();
   const onSubmit = async () => {
-    console.log(data);
+
   };
 
   return (
