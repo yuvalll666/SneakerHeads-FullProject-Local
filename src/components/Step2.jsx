@@ -36,7 +36,7 @@ function Step2() {
   });
 
   const onSubmit = (data) => {
-    history.push("/signin-result");
+    history.push("/result");
     setValues(data);
   };
 
@@ -64,7 +64,7 @@ function Step2() {
           error={!!errors.password}
           helperText={errors?.password?.message}
         />
-        <PrimaryButton type="submit">Submit</PrimaryButton>
+        <PrimaryButton type="submit">Next</PrimaryButton>
       </Form>
     </MainContainer>
   );

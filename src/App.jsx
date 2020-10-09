@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
+import Result from "./components/Result";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/step1" component={Step1} />
           <Route path="/step2" component={Step2} />
+          <Route path="/result" component={Result} />
         </Switch>
       </main>
       <footer></footer>
