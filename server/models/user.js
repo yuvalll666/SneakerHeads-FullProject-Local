@@ -1,7 +1,6 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const { options } = require("@hapi/joi");
 
 const userRole = {
   NORMAL: 0,
@@ -90,4 +89,8 @@ function validateUser(user) {
   return schema.validate(user, { abortEarly: false });
 }
 
-exports.User = User;
+module.exports = {
+  User,
+  validateUser,
+  userRole,
+};
