@@ -1,10 +1,11 @@
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useState } from "react";
 import MainContainer from "./forms/MainContainer";
 import { Link } from "react-router-dom";
 import { useData } from "../DataContext";
 import PrimaryButton from "./forms/PrimaryButton";
 import { useHistory } from "react-router-dom";
+import http from "../services/httpService";
 import {
   TableContainer,
   Paper,
@@ -19,11 +20,21 @@ function Result() {
   const { data } = useData();
   let entries = Object.entries(data);
   entries.pop();
-  
+  const [error, setError] = useState("");
   const history = useHistory();
-  const onSubmit = async () => {
 
-  };
+  async function onSubmit() {
+    try {
+      await http.post(`http://localhost:3900/api/users`, data);
+      history.push("/");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setError(error.response.data.error);
+      } else if (error.response && error.response.status === 409) {
+        setError(error.response.data.error);
+      }
+    }
+  }
 
   return (
     <MainContainer>
@@ -52,6 +63,11 @@ function Result() {
         </Table>
       </TableContainer>
       <PrimaryButton onClick={onSubmit}>Submit</PrimaryButton>
+      {error && (
+        <Typography component="div" variant="subtitle1" color="secondary">
+          {error}
+        </Typography>
+      )}
       <Link to="/step1">Start Over</Link>
     </MainContainer>
   );
