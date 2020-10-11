@@ -28,7 +28,7 @@ function Step2() {
   });
 
   const onSubmit = (data) => {
-    
+    console.log("sub")
   };
 
   return (
