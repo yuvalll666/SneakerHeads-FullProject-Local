@@ -1,12 +1,10 @@
 import React from "react";
-import Form from "../components/forms/Form";
-import MainContainer from "../components/forms/MainContainer";
+import Form from "./forms/Form";
+import MainContainer from "./forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
-import Input from "../components/forms/Input";
+import Input from "./forms/Input";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { useData } from "../DataContext";
-import {} from "../DataContext";
 import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -23,26 +21,20 @@ const schema = yup.object().shape({
 });
 
 function Step2() {
-  const { data, setValues } = useData();
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: {
-      email: data.email,
-      password: data.password,
-    },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
-    history.push("/result");
-    setValues(data);
+    
   };
 
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
-        Step 2
+        Signin
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
@@ -63,7 +55,7 @@ function Step2() {
           error={!!errors.password}
           helperText={errors?.password?.message}
         />
-        <PrimaryButton type="submit">Next</PrimaryButton>
+        <PrimaryButton type="submit">Submit</PrimaryButton>
       </Form>
     </MainContainer>
   );

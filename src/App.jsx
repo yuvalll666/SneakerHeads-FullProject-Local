@@ -8,6 +8,7 @@ import About from "./components/About";
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
 import Result from "./components/Result";
+import Signin from "./components/Signin";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/step1" component={Step1} />
           <Route path="/step2" component={Step2} />
           <Route path="/result" component={Result} />
+          <Route path="/Signin" component={Signin} />
         </Switch>
       </main>
       <footer></footer>
