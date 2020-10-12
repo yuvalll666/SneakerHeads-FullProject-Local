@@ -4,11 +4,11 @@ import MainContainer from "./forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
 import Input from "./forms/Input";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { login } from "../services/userService";
+import { login, getCurrentUser } from "../services/userService";
 
 const schema = yup.object().shape({
   email: yup
@@ -42,6 +42,7 @@ function Step2() {
     }
   }
 
+  if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">

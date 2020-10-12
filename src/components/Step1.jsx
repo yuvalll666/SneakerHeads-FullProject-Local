@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 //Components
 import Form from "./forms/Form";
 import MainContainer from "./forms/MainContainer";
@@ -11,6 +11,7 @@ import { useData } from "../DataContext";
 //Dependcies
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { getCurrentUser } from "../services/userService";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -28,7 +29,7 @@ const schema = yup.object().shape({
 });
 
 function Step1() {
-  const {setValues, data}= useData();
+  const { setValues, data } = useData();
   const { register, handleSubmit, errors } = useForm({
     defaultValues: { firstName: data.firstName, lastName: data.lastName },
     mode: "onBlur",
@@ -40,7 +41,7 @@ function Step1() {
     history.push("/step2");
     setValues(data);
   };
-
+  if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">

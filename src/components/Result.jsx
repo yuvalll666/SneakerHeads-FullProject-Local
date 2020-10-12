@@ -4,7 +4,7 @@ import MainContainer from "./forms/MainContainer";
 import { Link } from "react-router-dom";
 import { useData } from "../DataContext";
 import PrimaryButton from "./forms/PrimaryButton";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import http from "../services/httpService";
 import {
   TableContainer,
@@ -15,6 +15,7 @@ import {
   TableCell,
   TableBody,
 } from "@material-ui/core";
+import { getCurrentUser } from "../services/userService";
 
 function Result() {
   const { data } = useData();
@@ -35,7 +36,7 @@ function Result() {
       }
     }
   }
-
+  if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
