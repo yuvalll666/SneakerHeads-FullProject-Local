@@ -74,7 +74,12 @@ function Navbar({ user }) {
               <React.Fragment>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/product-page">
-                    <i className="fas fa-shopping-cart"></i>
+                    <i className="fas fa-upload fa-2x"></i>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/product-page">
+                    <i className="fas fa-shopping-cart fa-2x"></i>
                   </NavLink>
                 </li>
                 <li className="nav-item dropdown">
@@ -89,9 +94,6 @@ function Navbar({ user }) {
                     {user.firstName + " " + user.lastName}
                   </Link>
                   <div className="dropdown-menu" aria-labelledby="dropdown04">
-                    <Link className="dropdown-item" to="/create-product">
-                      <i className="fas fa-caret-square-up"></i> Add Product
-                    </Link>
                     <Link className="dropdown-item" to="/user-page">
                       <i className="fas fa-cog"></i> Settings
                     </Link>

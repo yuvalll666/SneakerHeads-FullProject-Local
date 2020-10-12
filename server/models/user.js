@@ -55,10 +55,12 @@ userSchema.methods.generateAuthToken = function (options = null) {
   const token = jwt.sign(
     {
       _id: this.id,
-      confirmed: true,
+      confirmed: this.confirmed,
       firstName: this.firstName,
       lastName: this.lastName,
       role: this.role,
+      email: this.email,
+      password: this.password,
     },
     //----->>TODO: change Private Key
     process.env.JWT_TOKEN_KEY,

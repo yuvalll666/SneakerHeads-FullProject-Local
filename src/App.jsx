@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { getCurrentUser } from "./services/userService";
 import "./App.css";
@@ -13,6 +13,10 @@ import Result from "./components/Result";
 import Signin from "./components/Signin";
 import Logout from "./components/Logout";
 import Footer from "./components/Footer";
+import UserPage from "./components/UserPage";
+import ProductPage from "./components/ProductPage";
+
+export const UserContext = createContext(null);
 
 function App() {
   const [user, SetUser] = useState({});
@@ -36,6 +40,11 @@ function App() {
           <Route path="/result" component={Result} />
           <Route path="/Signin" component={Signin} />
           <Route path="/logout" component={Logout} />
+          <Route path="/product-page" component={ProductPage} />
+
+          <UserContext.Provider value={user}>
+            <Route path="/user-page" component={UserPage} />
+          </UserContext.Provider>
         </Switch>
       </main>
       <footer>

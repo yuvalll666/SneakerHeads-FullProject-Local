@@ -25,7 +25,7 @@ const schema = yup.object().shape({
     .matches(/^([^0-9]*)$/, "Last name should not contain numbers")
     .required("Last name is required")
     .min(2, "Last name should be a minimum 2 charcters long")
-    .max(30, "First name most be shorter then 30 charcters"),
+    .max(30, "Last name most be shorter then 30 charcters"),
 });
 
 function Step1() {
