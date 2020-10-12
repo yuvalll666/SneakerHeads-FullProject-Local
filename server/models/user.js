@@ -1,6 +1,7 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const userRole = {
   NORMAL: 0,
@@ -59,7 +60,8 @@ userSchema.methods.generateAuthToken = function (options = null) {
       lastName: this.lastName,
       role: this.role,
     },
-    //Todo - add an procces.env with unique TOKEN_KEY
+    //----->>TODO: change Private Key
+    process.env.JWT_TOKEN_KEY,
     options
   );
 

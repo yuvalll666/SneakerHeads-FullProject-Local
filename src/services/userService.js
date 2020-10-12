@@ -11,4 +11,6 @@ export async function login(email, password) {
   localStorage.setItem(tokenKey, data.token);
 }
 
-export default {};
+export default {
+  login,
+};
