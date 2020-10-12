@@ -10,6 +10,7 @@ import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
 import Result from "./components/Result";
 import Signin from "./components/Signin";
+import Logout from "./components/logout";
 
 function App() {
   const [user,SetUser] = useState({})
@@ -33,6 +34,8 @@ function App() {
           <Route path="/step2" component={Step2} />
           <Route path="/result" component={Result} />
           <Route path="/Signin" component={Signin} />
+          <Route path="/logout" component={Logout} />
+          
         </Switch>
       </main>
       <footer></footer>
