@@ -72,8 +72,6 @@ userSchema.methods.generateAuthToken = function (options = null) {
 
 const User = mongoose.model("User", userSchema);
 
-//exepts user object and check if inputs as required
-//return validate user
 function validateUser(user) {
   const schema = Joi.object({
     firstName: Joi.string()
@@ -101,8 +99,27 @@ function validatePassword(pass) {
   return schema.validate(pass, { abortEarly: false });
 }
 
+function validateEditedUser(user) {
+  const schema = Joi.object({
+    firstName: Joi.string()
+      .min(2)
+      .max(30)
+      .required()
+      .pattern(/^([^0-9]*)$/),
+    lastName: Joi.string()
+      .min(2)
+      .max(30)
+      .required()
+      .pattern(/^([^0-9]*)$/),
+    email: Joi.string().required().email(),
+  });
+  return schema.validate(user, { abortEarly: false });
+}
+
 module.exports = {
   User,
   validateUser,
   userRole,
+  validatePassword,
+  validateEditedUser,
 };
