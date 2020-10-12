@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Switch, Route } from "react-router-dom";
+import {getCurrentUser} from "./services/userService";
 
 //Components
 import Navbar from "./components/Navbar";
@@ -11,10 +12,18 @@ import Result from "./components/Result";
 import Signin from "./components/Signin";
 
 function App() {
+  const [user,SetUser] = useState({})
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    SetUser(user)
+  }, [])
+
+
   return (
     <React.Fragment>
       <header>
-        <Navbar />
+        <Navbar user={user}/>
       </header>
       <main className="container-fluid flex-fill">
         <Switch>

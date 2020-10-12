@@ -23,4 +23,5 @@ export async function login(email, password) {
 
 export default {
   login,
+  getCurrentUser
 };

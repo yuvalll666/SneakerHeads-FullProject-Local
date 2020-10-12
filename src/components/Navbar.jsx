@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ user }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow">
       <div className="container">
@@ -56,47 +56,52 @@ function Navbar() {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
-            <React.Fragment>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="signin">
-                  Signin
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="step1">
-                  Signup
-                </NavLink>
-              </li>
-            </React.Fragment>
-
-            <React.Fragment>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/product-page">
-                  <i className="fas fa-shopping-cart"></i>
-                </NavLink>
-              </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="#"
-                  id="dropdown04"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                ></Link>
-                <div className="dropdown-menu" aria-labelledby="dropdown04">
-                  <Link className="dropdown-item" to="/create-product">
-                    <i className="fas fa-caret-square-up"></i> Add Product
+            {!user && (
+              <React.Fragment>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="signin">
+                    Signin
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="step1">
+                    Signup
+                  </NavLink>
+                </li>
+              </React.Fragment>
+            )}
+            {user && (
+              <React.Fragment>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/product-page">
+                    <i className="fas fa-shopping-cart"></i>
+                  </NavLink>
+                </li>
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="#"
+                    id="dropdown04"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {user.firstName + " " + user.lastName}
                   </Link>
-                  <Link className="dropdown-item" to="/user-page">
-                    <i className="fas fa-cog"></i> Settings
-                  </Link>
-                  <Link className="dropdown-item" to="logout">
-                    <i className="fas fa-sign-out-alt"></i> Logout
-                  </Link>
-                </div>
-              </li>
-            </React.Fragment>
+                  <div className="dropdown-menu" aria-labelledby="dropdown04">
+                    <Link className="dropdown-item" to="/create-product">
+                      <i className="fas fa-caret-square-up"></i> Add Product
+                    </Link>
+                    <Link className="dropdown-item" to="/user-page">
+                      <i className="fas fa-cog"></i> Settings
+                    </Link>
+                    <Link className="dropdown-item" to="logout">
+                      <i className="fas fa-sign-out-alt"></i> Logout
+                    </Link>
+                  </div>
+                </li>
+              </React.Fragment>
+            )}
           </ul>
         </div>
       </div>
