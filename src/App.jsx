@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import {getCurrentUser} from "./services/userService";
+import { getCurrentUser } from "./services/userService";
+import "./App.css";
 
 //Components
 import Navbar from "./components/Navbar";
@@ -10,21 +11,21 @@ import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
 import Result from "./components/Result";
 import Signin from "./components/Signin";
-import Logout from "./components/logout";
+import Logout from "./components/Logout";
+import Footer from "./components/Footer";
 
 function App() {
-  const [user,SetUser] = useState({})
+  const [user, SetUser] = useState({});
 
   useEffect(() => {
     const user = getCurrentUser();
-    SetUser(user)
-  }, [])
-
+    SetUser(user);
+  }, []);
 
   return (
     <React.Fragment>
       <header>
-        <Navbar user={user}/>
+        <Navbar user={user} />
       </header>
       <main className="container-fluid flex-fill">
         <Switch>
@@ -35,10 +36,11 @@ function App() {
           <Route path="/result" component={Result} />
           <Route path="/Signin" component={Signin} />
           <Route path="/logout" component={Logout} />
-          
         </Switch>
       </main>
-      <footer></footer>
+      <footer>
+        <Footer></Footer>
+      </footer>
     </React.Fragment>
   );
 }

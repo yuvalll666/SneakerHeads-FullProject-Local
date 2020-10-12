@@ -4,7 +4,7 @@ import MainContainer from "./forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
 import Input from "./forms/Input";
 import { useForm } from "react-hook-form";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -22,7 +22,6 @@ const schema = yup.object().shape({
 });
 
 function Step2() {
-  const history = useHistory();
   const [error, setError] = useState("");
   const { register, handleSubmit, errors } = useForm({
     mode: "onBlur",
