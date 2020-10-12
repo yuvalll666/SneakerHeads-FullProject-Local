@@ -89,8 +89,16 @@ function validateUser(user) {
     email: Joi.string().required().email(),
     password: Joi.string().min(6).max(1024).required(),
   });
-
   return schema.validate(user, { abortEarly: false });
+}
+
+function validatePassword(pass) {
+  const schema = Joi.object({
+    oldPassword: Joi.string().min(6).max(1024).required(),
+    newPassword: Joi.string().min(6).max(1024).required(),
+    confirmPassword: Joi.string().min(6).max(1024).required(),
+  });
+  return schema.validate(pass, { abortEarly: false });
 }
 
 module.exports = {
