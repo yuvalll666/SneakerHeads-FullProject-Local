@@ -60,19 +60,19 @@ const UserPage = () => {
     delete formData.changePass;
 
     if (oldPassword && newPassword !== confirmPassword) {
-      setError({confirmPassword: "Passwords most be the same"})
+      setError({ confirmPassword: "Passwords most be the same" });
     } else {
       try {
         const { data } = await http.patch(
           `${apiUrl}/users/${user._id}`,
           formData
         );
-
         localStorage.setItem("token", data.token);
-
         window.location = "/";
       } catch (error) {
-        setError({ oldPassword: error.response.data });
+        if (error.response && error.response.status === 400) {
+          setError({ oldPassword: error.response.data });
+        }
       }
     }
   };
