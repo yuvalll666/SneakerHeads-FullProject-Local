@@ -1,6 +1,12 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { User, validateUser, userRole } = require("../models/user");
+const {
+  User,
+  validateUser,
+  userRole,
+  validatePassword,
+  validateEditedUser,
+} = require("../models/user");
 const router = express.Router();
 const _ = require("lodash");
 const Joi = require("@hapi/joi");
@@ -8,8 +14,19 @@ const auth = require("../middleware/auth");
 
 //Edit
 router.patch("/:id", async (req, res) => {
-  // const { error } = validateUser(req.body);
-  // if (error) return res.status(400).send({ error: "Input validation problem" });
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+
+  if (
+    !oldPassword &&
+    !newPassword &&
+    !confirmPassword
+  ) {
+    const { error } = validateEditedUser(req.body);
+    if (error) {
+      return res.status(400).send({ error: "Inputs validation error" });
+    }
+  }
+  
   let user = await User.findOneAndUpdate(
     {
       _id: req.params.id,
@@ -17,10 +34,14 @@ router.patch("/:id", async (req, res) => {
     req.body,
     { new: true }
   );
-  //TODO: password required validation function 
-  if (req.body.oldPassword) {
+
+  if (oldPassword && newPassword === confirmPassword) {
+    const { error } = validatePassword();
+    if (error) {
+      return res.status(400).send({ error: "Inputs validation error" });
+    }
     let validPassword = await bcrypt.compare(
-      req.body.oldPassword,
+      oldPassword,
       user.password
     );
     if (!validPassword) {
