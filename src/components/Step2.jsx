@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "../components/forms/Form";
 import MainContainer from "../components/forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
@@ -21,9 +21,14 @@ const schema = yup.object().shape({
     .string()
     .min(6, "Passwrod should be a minimum of 6 charcters long")
     .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .min(6, "Passwrod should be a minimum of 6 charcters long")
+    .required("Password is required"),
 });
 
 function Step2() {
+  const [error, setError] = useState({});
   const { data, setValues } = useData();
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
@@ -36,8 +41,14 @@ function Step2() {
   });
 
   const onSubmit = (data) => {
-    history.push("/result");
-    setValues(data);
+    const { password, confirmPassword } = data;
+    if (password !== confirmPassword) {
+      setError({ confirmPassword: "Passwords most be the same" });
+    } else {
+      delete data.confirmPassword;
+      history.push("/result");
+      setValues(data);
+    }
   };
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
@@ -63,6 +74,15 @@ function Step2() {
           required
           error={!!errors.password}
           helperText={errors?.password?.message}
+        />
+        <Input
+          ref={register}
+          type="password"
+          label="Confirm Password"
+          name="confirmPassword"
+          required
+          error={!!errors.confirmPassword || !!error.confirmPassword}
+          helperText={errors?.confirmPassword?.message || error?.confirmPassword}
         />
         <PrimaryButton type="submit">Next</PrimaryButton>
       </Form>

@@ -4,11 +4,12 @@ import MainContainer from "./forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
 import Input from "./forms/Input";
 import { useForm } from "react-hook-form";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { login, getCurrentUser } from "../services/userService";
+import { Button } from "@material-ui/core";
 
 const schema = yup.object().shape({
   email: yup
@@ -66,8 +67,10 @@ function Step2() {
           error={!!errors.password || !!error}
           helperText={errors?.password?.message || error}
         />
+        <Link to="/step1">Don't have account?</Link>
         <PrimaryButton type="submit">Submit</PrimaryButton>
       </Form>
+      
     </MainContainer>
   );
 }

@@ -12,6 +12,14 @@ const _ = require("lodash");
 const Joi = require("@hapi/joi");
 const auth = require("../middleware/auth");
 
+//Delete
+router.delete("/:id", async (req, res) => {
+  const user = await User.findOneAndDelete({
+    _id: req.params.id,
+  }).select("-password");
+  res.send(user);
+});
+
 //Edit
 router.patch("/:id", async (req, res) => {
   const { oldPassword, newPassword, confirmPassword } = req.body;

@@ -11,6 +11,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
+import { Button } from "@material-ui/core";
+
+const tokenKey = "token";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -43,7 +46,7 @@ const schema = yup.object().shape({
 const UserPage = () => {
   const [error, setError] = useState({});
   const user = useContext(UserContext);
-  const { firstName, lastName, email, password } = user;
+  const { firstName, lastName, email } = user;
   const { register, handleSubmit, watch, errors } = useForm({
     defaultValues: {
       firstName: firstName,
@@ -67,7 +70,7 @@ const UserPage = () => {
           `${apiUrl}/users/${user._id}`,
           formData
         );
-        localStorage.setItem("token", data.token);
+        localStorage.setItem(tokenKey, data.token);
         window.location = "/";
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -76,6 +79,21 @@ const UserPage = () => {
       }
     }
   };
+
+  const deleteUser = async () => {
+    if (window.confirm("ARE YOU SURE YOU WANT TO DELETE THIS ACCOUNT? \n Note: this action can not be reversed")) {
+      try {
+        await http.delete(`${apiUrl}/users/${user._id}`);
+        localStorage.removeItem(tokenKey);
+        window.location = "/signin";
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("canceled");
+    }
+  };
+
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
@@ -125,7 +143,7 @@ const UserPage = () => {
               label="Old Passwrod"
               required
               error={Boolean(errors.oldPassword) || !!error.oldPassword}
-              helperText={errors?.oldPassword?.message || error.oldPassword}
+              helperText={errors?.oldPassword?.message || error?.oldPassword}
             />
             <Input
               ref={register}
@@ -144,13 +162,22 @@ const UserPage = () => {
               required
               error={Boolean(errors.confirmPassword) || !!error.confirmPassword}
               helperText={
-                errors?.confirmPassword?.message || error.confirmPassword
+                errors?.confirmPassword?.message || error?.confirmPassword
               }
             />
           </React.Fragment>
         )}
         <PrimaryButton type="submit">Submit</PrimaryButton>
       </Form>
+      <Button
+        style={{ marginTop: "100px" }}
+        color="secondary"
+        variant="outlined"
+        size="small"
+        onClick={deleteUser}
+      >
+        Delete Account
+      </Button>
     </MainContainer>
   );
 };
