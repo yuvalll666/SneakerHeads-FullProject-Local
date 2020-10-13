@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 const tokenKey = "token";
 
 export function getJwt() {
+  const tokenKey = "token";
   return localStorage.getItem(tokenKey);
 }
 
