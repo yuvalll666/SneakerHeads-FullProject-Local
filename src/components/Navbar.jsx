@@ -73,7 +73,7 @@ function Navbar({ user }) {
             {user && (
               <React.Fragment>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/product-page">
+                  <NavLink className="nav-link" to="/upload-product">
                     <i className="fas fa-upload fa-2x"></i>
                   </NavLink>
                 </li>

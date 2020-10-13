@@ -46,6 +46,7 @@ const schema = yup.object().shape({
 const UserPage = () => {
   const [error, setError] = useState({});
   const user = useContext(UserContext);
+  
   const { firstName, lastName, email } = user;
   const { register, handleSubmit, watch, errors } = useForm({
     defaultValues: {
