@@ -13,15 +13,16 @@ const Joi = require("@hapi/joi");
 const auth = require("../middleware/auth");
 
 //Delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   const user = await User.findOneAndDelete({
     _id: req.params.id,
+    _id: req.user._id,
   }).select("-password");
   res.send(user);
 });
 
 //Edit
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
   const { oldPassword, newPassword, confirmPassword } = req.body;
   if (!oldPassword && !newPassword && !confirmPassword) {
     const { error } = validateEditedUser(req.body);
@@ -38,7 +39,7 @@ router.patch("/:id", async (req, res) => {
     if (error) {
       return res.status(400).send({ error: "Inputs validation error" });
     }
-    let user = await User.findById({ _id: req.params.id });
+    let user = await User.findById({ _id: req.params.id, _id: req.user._id });
     let validPassword = await bcrypt.compare(oldPassword, user.password);
     if (!validPassword) {
       return res.status(400).send("Invalid password");
@@ -48,9 +49,13 @@ router.patch("/:id", async (req, res) => {
     req.body["password"] = await bcrypt.hash(newPassword, salt);
     arr.forEach((key) => delete req.body[key]);
   }
-  let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true,
-  });
+  let user = await User.findOneAndUpdate(
+    { _id: req.params.id, _id: req.user._id },
+    req.body,
+    {
+      new: true,
+    }
+  );
   user = await user.save();
   if (!user)
     return res.status(404).send("The user with the given ID was not found");

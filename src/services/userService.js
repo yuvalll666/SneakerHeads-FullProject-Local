@@ -4,6 +4,10 @@ import jwtDecode from "jwt-decode";
 
 const tokenKey = "token";
 
+export function getJwt() {
+  return localStorage.getItem(tokenKey);
+}
+
 export function logout() {
   localStorage.removeItem(tokenKey);
 }
@@ -28,5 +32,6 @@ export async function login(email, password) {
 export default {
   login,
   getCurrentUser,
-  logout
+  logout,
+  getJwt,
 };
