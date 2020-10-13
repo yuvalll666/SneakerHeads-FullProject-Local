@@ -27,7 +27,7 @@ function Result() {
   async function onSubmit() {
     try {
       await http.post(`http://localhost:3900/api/users`, data);
-      history.push("/step1");
+      history.push("/signin");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data.error);

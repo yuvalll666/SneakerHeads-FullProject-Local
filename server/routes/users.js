@@ -5,7 +5,7 @@ const {
   validateUser,
   userRole,
   validateEditedUser,
-  validatePassAndUser
+  validatePassAndUser,
 } = require("../models/user");
 const router = express.Router();
 const _ = require("lodash");
@@ -21,38 +21,32 @@ router.patch("/:id", async (req, res) => {
       return res.status(400).send({ error: "Inputs validation error" });
     }
   }
+
   if (oldPassword && newPassword !== confirmPassword) {
-      return res.status(400).send({ error: "Passwords most be the same" });
+    return res.status(400).send({ error: "Passwords most be the same" });
   }
   if (oldPassword && newPassword === confirmPassword) {
-    const {error} = validatePassAndUser()
-  if (error) {
-    return res.status(400).send({ error: "Inputs validation error" });
+    const { error } = validatePassAndUser(req.body);
+    if (error) {
+      return res.status(400).send({ error: "Inputs validation error" });
+    }
+    let user = await User.findById({ _id: req.params.id });
+    let validPassword = await bcrypt.compare(oldPassword, user.password);
+    if (!validPassword) {
+      return res.status(400).send("Invalid password");
+    }
+    let arr = ["oldPassword", "newPassword", "confirmPassword"];
+    const salt = await bcrypt.genSalt(10);
+    req.body["password"] = await bcrypt.hash(newPassword, salt);
+    arr.forEach((key) => delete req.body[key]);
   }
-}
-
-  let user = await User.findById({ _id: req.params.id });
-
-  let validPassword = await bcrypt.compare(oldPassword, user.password);
-  if (!validPassword) {
-    return res.status(400).send("Invalid password");
-  }
-
-  user = await User.findOneAndUpdate(
-    {
-      _id: req.params.id,
-    },
-    req.body,
-    { new: true }
-  );
-
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(newPassword, salt);
-
+  let user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+    new: true,
+  });
   user = await user.save();
   if (!user)
     return res.status(404).send("The user with the given ID was not found");
-  res.send({ token: user.generateAuthToken()});
+  res.send({ token: user.generateAuthToken() });
 });
 
 //Login
