@@ -41,6 +41,7 @@ const schema = yup.object().shape({
 });
 
 const UserPage = () => {
+  const [error, setError] = useState({});
   const user = useContext(UserContext);
   const { firstName, lastName, email, password } = user;
   const { register, handleSubmit, watch, errors } = useForm({
@@ -54,19 +55,25 @@ const UserPage = () => {
   });
   const changePass = watch("changePass");
 
-  const onSubmit = async (data) => {
-    delete data.changePass;
-    console.log(data);
-    if (data.oldPassword && data.newPassword !== data.confirmPassword) {
-      return console.log("password confirmation false");
-    }
-    console.log("asdaslkhdkasjhda");
-    try {
-      console.log(user._id);
-      await http.patch(`${apiUrl}/users/${user._id}`, data);
-      console.log("i did it ");
-    } catch (error) {
-      console.log(error.response.data);
+  const onSubmit = async (formData) => {
+    const { oldPassword, newPassword, confirmPassword } = formData;
+    delete formData.changePass;
+
+    if (oldPassword && newPassword !== confirmPassword) {
+      setError({confirmPassword: "Passwords most be the same"})
+    } else {
+      try {
+        const { data } = await http.patch(
+          `${apiUrl}/users/${user._id}`,
+          formData
+        );
+
+        localStorage.setItem("token", data.token);
+
+        window.location = "/";
+      } catch (error) {
+        setError({ oldPassword: error.response.data });
+      }
     }
   };
   return (
@@ -117,8 +124,8 @@ const UserPage = () => {
               type="password"
               label="Old Passwrod"
               required
-              error={Boolean(errors.oldPassword)}
-              helperText={errors?.oldPassword?.message}
+              error={Boolean(errors.oldPassword) || !!error.oldPassword}
+              helperText={errors?.oldPassword?.message || error.oldPassword}
             />
             <Input
               ref={register}
@@ -135,37 +142,16 @@ const UserPage = () => {
               type="password"
               label="Confirm Passwrod"
               required
-              error={Boolean(errors.confirmPassword)}
-              helperText={errors?.confirmPassword?.message}
+              error={Boolean(errors.confirmPassword) || !!error.confirmPassword}
+              helperText={
+                errors?.confirmPassword?.message || error.confirmPassword
+              }
             />
           </React.Fragment>
         )}
         <PrimaryButton type="submit">Submit</PrimaryButton>
       </Form>
     </MainContainer>
-
-    // <div className="container">
-    //   <div className="row">
-    //     <div className="col-12 mt-4 text-center">
-    //       <div className="display-4">Hello, {user.firstName}</div>
-    //       <p>Here you can edit your account</p>
-    //     </div>
-    //   </div>
-    //   <div className="row justify-content-center">
-    //     <div className="col-lg-4 mt-4 ">
-    //       <ul>
-    //         <li>{user._id}</li>
-    //         <li>Confirmed: {JSON.stringify(user.confirmed)}</li>
-    //         <li>
-    //           {user.firstName + " " + user.lastName}
-    //         </li>
-    //         <li>
-    //           Role: {user.role}
-    //         </li>
-    //       </ul>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

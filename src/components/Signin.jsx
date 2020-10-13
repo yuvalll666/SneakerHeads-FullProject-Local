@@ -4,7 +4,7 @@ import MainContainer from "./forms/MainContainer";
 import Typography from "@material-ui/core/Typography";
 import Input from "./forms/Input";
 import { useForm } from "react-hook-form";
-import { Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -63,7 +63,7 @@ function Step2() {
           label="Password"
           name="password"
           required
-          error={!!errors.password}
+          error={!!errors.password || !!error}
           helperText={errors?.password?.message || error}
         />
         <PrimaryButton type="submit">Submit</PrimaryButton>

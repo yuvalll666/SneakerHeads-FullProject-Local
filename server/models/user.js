@@ -90,15 +90,6 @@ function validateUser(user) {
   return schema.validate(user, { abortEarly: false });
 }
 
-function validatePassword(pass) {
-  const schema = Joi.object({
-    oldPassword: Joi.string().min(6).max(1024).required(),
-    newPassword: Joi.string().min(6).max(1024).required(),
-    confirmPassword: Joi.string().min(6).max(1024).required(),
-  });
-  return schema.validate(pass, { abortEarly: false });
-}
-
 function validateEditedUser(user) {
   const schema = Joi.object({
     firstName: Joi.string()
@@ -116,10 +107,30 @@ function validateEditedUser(user) {
   return schema.validate(user, { abortEarly: false });
 }
 
+function validatePassAndUser(data) {
+  const schema = Joi.object({
+    firstName: Joi.string()
+      .min(2)
+      .max(30)
+      .required()
+      .pattern(/^([^0-9]*)$/),
+    lastName: Joi.string()
+      .min(2)
+      .max(30)
+      .required()
+      .pattern(/^([^0-9]*)$/),
+    email: Joi.string().required().email(),
+    oldPassword: Joi.string().min(6).max(1024).required(),
+    newPassword: Joi.string().min(6).max(1024).required(),
+    confirmPassword: Joi.string().min(6).max(1024).required(),
+  });
+  return schema.validate(data, { abortEarly: false });
+}
+
 module.exports = {
   User,
   validateUser,
   userRole,
-  validatePassword,
   validateEditedUser,
+  validatePassAndUser,
 };

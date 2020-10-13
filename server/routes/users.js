@@ -4,8 +4,8 @@ const {
   User,
   validateUser,
   userRole,
-  validatePassword,
   validateEditedUser,
+  validatePassAndUser
 } = require("../models/user");
 const router = express.Router();
 const _ = require("lodash");
@@ -15,19 +15,30 @@ const auth = require("../middleware/auth");
 //Edit
 router.patch("/:id", async (req, res) => {
   const { oldPassword, newPassword, confirmPassword } = req.body;
-
-  if (
-    !oldPassword &&
-    !newPassword &&
-    !confirmPassword
-  ) {
+  if (!oldPassword && !newPassword && !confirmPassword) {
     const { error } = validateEditedUser(req.body);
     if (error) {
       return res.status(400).send({ error: "Inputs validation error" });
     }
   }
-  
-  let user = await User.findOneAndUpdate(
+  if (oldPassword && newPassword !== confirmPassword) {
+      return res.status(400).send({ error: "Passwords most be the same" });
+  }
+  if (oldPassword && newPassword === confirmPassword) {
+    const {error} = validatePassAndUser()
+  if (error) {
+    return res.status(400).send({ error: "Inputs validation error" });
+  }
+}
+
+  let user = await User.findById({ _id: req.params.id });
+
+  let validPassword = await bcrypt.compare(oldPassword, user.password);
+  if (!validPassword) {
+    return res.status(400).send("Invalid password");
+  }
+
+  user = await User.findOneAndUpdate(
     {
       _id: req.params.id,
     },
@@ -35,25 +46,13 @@ router.patch("/:id", async (req, res) => {
     { new: true }
   );
 
-  if (oldPassword && newPassword === confirmPassword) {
-    const { error } = validatePassword();
-    if (error) {
-      return res.status(400).send({ error: "Inputs validation error" });
-    }
-    let validPassword = await bcrypt.compare(
-      oldPassword,
-      user.password
-    );
-    if (!validPassword) {
-      return res.status(400).send("Invalid password");
-    }
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-  }
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(newPassword, salt);
+
   user = await user.save();
   if (!user)
     return res.status(404).send("The user with the given ID was not found");
-  res.send(user);
+  res.send({ token: user.generateAuthToken()});
 });
 
 //Login
