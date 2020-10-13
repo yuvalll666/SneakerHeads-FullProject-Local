@@ -19,6 +19,7 @@ app.use(require("morgan")("dev"));
 app.use(express.json());
 
 app.use("/api/users", require("./routes/users"));
+app.use("/api/products", require("./routes/products"));
 
 const port = 3900;
 http.listen(port, () => console.log(`Listening on port ${port}...`));
