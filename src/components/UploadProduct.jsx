@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import MainContainer from "./forms/MainContainer";
 import Form from "./forms/Form";
 import Input from "./forms/Input";
@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { useForm } from "react-hook-form";
 import FileUpload from "./utils/FileUpload";
 import { makeStyles } from "@material-ui/core/styles";
+import { UserContext } from "../App";
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((them) => ({
 }));
 
 function UploadProduct() {
+  const user = useContext(UserContext);
   const styles = useStyles();
 
   const brands = [

@@ -42,10 +42,10 @@ function App() {
           <Route path="/Signin" component={Signin} />
           <Route path="/logout" component={Logout} />
           <Route path="/product-page" component={ProductPage} />
-          <Route path="/upload-product" component={UploadProduct} />
 
           <UserContext.Provider value={user}>
             <Route path="/user-page" component={UserPage} />
+            <Route path="/upload-product" component={UploadProduct} />
           </UserContext.Provider>
         </Switch>
       </main>
