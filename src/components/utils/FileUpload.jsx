@@ -40,9 +40,13 @@ function FileUpload(props) {
 
   return (
     <div className="container d-lg-flex justify-content-center">
-      <div className="row">
-        <div className="mr-4">
-          <Dropzone onDrop={onDrop} multiple={false} maxSize={800000}>
+      <div className="row justify-content-center">
+        <div className="mr-4 mb-2 ">
+          <Dropzone
+            onDrop={onDrop}
+            multiple={false}
+            maxSize={800000}
+          >
             {({ getRootProps, getInputProps }) => (
               <div
                 style={{

@@ -6,8 +6,17 @@ import PrimaryButton from "./forms/PrimaryButton";
 import Typography from "@material-ui/core/Typography";
 import { useForm } from "react-hook-form";
 import FileUpload from "./utils/FileUpload";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((them) => ({
+  root: {
+    marginTop: them.spacing(0),
+  },
+}));
 
 function UploadProduct() {
+  const styles = useStyles();
+
   const brands = [
     { key: 1, value: "NIKE" },
     { key: 2, value: "ADIDAS" },
@@ -34,7 +43,7 @@ function UploadProduct() {
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FileUpload refreshFunction={updateImages} />
-        <MainContainer maxWidth="sm">
+        <MainContainer className={styles.root} maxWidth="sm">
           <Input name="title" label="Title" id="title" ref={register} />
           <textarea
             className="form-control"
