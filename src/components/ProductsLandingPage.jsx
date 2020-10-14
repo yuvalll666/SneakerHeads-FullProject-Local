@@ -6,7 +6,7 @@ function ProductsLandingPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    http.post(`${apiUrl}/products/getProducts`).then((response) => {
+    http.get(`${apiUrl}/products/getProducts`).then((response) => {
       if (response.data.success) {
         setProducts(response.data.products);
 

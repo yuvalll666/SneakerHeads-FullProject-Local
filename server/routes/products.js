@@ -7,6 +7,15 @@ const auth = require("../middleware/auth");
 const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
+router.get("/getProducts", auth, async (req, res) => {
+  Product.find().exec((error, products) => {
+    if (error) {
+      return res.status(400).send({ success: false, error });
+    }
+    res.send({ success: true, product });
+  });
+});
+
 router.post("/uploadProduct", auth, async (req, res) => {
   const { error } = validateProduct(req.body);
   if (error) {
