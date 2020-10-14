@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import FileUpload from "./utils/FileUpload";
 import { makeStyles } from "@material-ui/core/styles";
 import { UserContext } from "../App";
+import http from "../services/httpService"
+import {apiUrl} from "../config.json"
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -35,7 +37,19 @@ function UploadProduct() {
     setImages(newImages);
   };
   const onSubmit = (data) => {
-    console.log(data);
+    const productInfo = {
+      writer: user._id,
+      images: images,
+      ...data,
+    };
+
+    try{
+      await http.post(`${apiUrl}/products/uploadProduct`, productInfo)
+    } catch (error){ 
+      if(error.response && error.response.status === 400){
+        console.log("this is a catch error")
+      }
+    }
   };
 
   return (
