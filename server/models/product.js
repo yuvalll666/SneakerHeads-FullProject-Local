@@ -42,7 +42,7 @@ const productSchema = new Schema(
   { timestamps: true }
 );
 
-const Prod = mongoose.model("Prod", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 function validateProduct(product) {
   const schema = Joi.object({
@@ -57,5 +57,5 @@ function validateProduct(product) {
   return schema.validate(product, { abortEarly: false });
 }
 
-exports.Prod = Prod;
+exports.Product = Product;
 exports.validateProduct = validateProduct;

@@ -10,6 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { UserContext } from "../App";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
+import { useHistory } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -20,6 +23,7 @@ const useStyles = makeStyles((them) => ({
 function UploadProduct() {
   const user = useContext(UserContext);
   const styles = useStyles();
+  const history = useHistory();
 
   const brands = [
     { key: 1, value: "NIKE" },
@@ -28,15 +32,19 @@ function UploadProduct() {
     { key: 4, value: "CONVERS" },
     { key: 5, value: "NB" },
   ];
-
-  const { register, handleSubmit } = useForm();
-
+  const { register, handleSubmit, errors } = useForm({
+    mode: "onBlur",
+  });
   const [images, setImages] = useState([]);
-
   const updateImages = (newImages) => {
     setImages(newImages);
   };
+
   const onSubmit = async (data) => {
+    const { title, description, price, brand } = data;
+    if (!title || !description || !price || !brand || !images) {
+      return alert("Please fill of fields first!");
+    }
     const productInfo = {
       writer: user._id,
       images: images,
@@ -44,10 +52,14 @@ function UploadProduct() {
     };
 
     try {
+      console.log("aaaaaa");
       await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
+      console.log("bbbbbb");
+      alert("Product uploaded successfuly");
+      history.push("/");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        console.log("this is a catch error");
+        alert(error.response.data.error);
       }
     }
   };

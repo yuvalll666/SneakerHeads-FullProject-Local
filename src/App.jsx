@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import UserPage from "./components/UserPage";
 import ProductPage from "./components/ProductPage";
 import UploadProduct from "./components/UploadProduct";
+import ProductsLandingPage from "./components/ProductsLandingPage";
 
 export const UserContext = createContext(null);
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/Signin" component={Signin} />
           <Route path="/logout" component={Logout} />
           <Route path="/product-page" component={ProductPage} />
+          <Route path="/products" component={ProductsLandingPage} />
 
           <UserContext.Provider value={user}>
             <Route path="/user-page" component={UserPage} />

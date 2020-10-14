@@ -5,6 +5,22 @@ const Joi = require("@hapi/joi");
 const multer = require("multer");
 const auth = require("../middleware/auth");
 const path = require("path");
+const { Product, validateProduct } = require("../models/product");
+
+router.post("/uploadProduct", auth, async (req, res) => {
+  const { error } = validateProduct(req.body);
+  if (error) {
+    return res.status(400).send({ error: "Inputs validation problem" });
+  }
+  const product = await new Product(req.body);
+  await product.save();
+  if (!product) {
+    return res
+      .status(500)
+      .send({ error: "Unexpected error, could not save product to database" });
+  }
+  res.send(product);
+});
 
 const storage = multer.diskStorage({
   destination: "../public/uploads/",
