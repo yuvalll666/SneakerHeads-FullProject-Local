@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Checkbox, Collapse } from "antd";
 const { Panel } = Collapse;
 
@@ -25,7 +25,7 @@ const brands = [
   },
 ];
 
-function CheckBox() {
+function CheckBox({ handleFilters }) {
   const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => {
@@ -39,6 +39,8 @@ function CheckBox() {
     }
 
     setChecked(newChecked);
+
+    handleFilters(newChecked);
   };
 
   return (
@@ -50,7 +52,7 @@ function CheckBox() {
               <Checkbox
                 onChange={() => handleToggle(brand._id)}
                 type="checkbox"
-                checked
+                checked={checked.indexOf(brand._id) === -1 ? false : true}
               />
               <span>{brand.name}</span>
             </React.Fragment>

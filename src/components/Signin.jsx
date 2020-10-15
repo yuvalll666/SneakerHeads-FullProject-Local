@@ -9,7 +9,6 @@ import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { login, getCurrentUser } from "../services/userService";
-import { Button } from "@material-ui/core";
 
 const schema = yup.object().shape({
   email: yup

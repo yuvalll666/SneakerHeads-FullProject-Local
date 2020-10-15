@@ -11,8 +11,7 @@ import { UserContext } from "../App";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import { useHistory } from "react-router-dom";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -32,7 +31,7 @@ function UploadProduct() {
     { key: 4, value: "CONVERS" },
     { key: 5, value: "NB" },
   ];
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onBlur",
   });
   const [images, setImages] = useState([]);

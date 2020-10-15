@@ -7,12 +7,15 @@ import { Col, Row, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import CheckBox from "../components/utils/CheckBox";
 
-
 function ProductsLandingPage() {
   const [products, setProducts] = useState([]);
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(8);
   const [postSize, setPostSize] = useState(0);
+  const [Filters, setFilter] = useState({
+    brand: [],
+    price: [],
+  });
 
   useEffect(() => {
     const variables = {
@@ -26,7 +29,12 @@ function ProductsLandingPage() {
   const getProducts = (variables) => {
     http.post(`${apiUrl}/products/getProducts`, variables).then((response) => {
       if (response.data.success) {
-        setProducts([...products, ...response.data.products]);
+        if (variables.loadMore) {
+          setProducts([...products, ...response.data.products]);
+        } else {
+          setProducts(response.data.products);
+        }
+
         setPostSize(response.data.postSize);
       } else {
         alert("Faild to fetch products data");
@@ -34,17 +42,43 @@ function ProductsLandingPage() {
     });
   };
 
+  console.log("prods: ", products);
+  console.log("postSize : ", postSize);
+
   const onLoadMore = () => {
     let skipLimit = skip + limit;
 
     const variables = {
       skip: skipLimit,
       limit: limit,
+      loadMore: true,
     };
 
     getProducts(variables);
 
     setSkip(skipLimit);
+  };
+
+  const filteredResults = (filters) => {
+    const variables = {
+      skip: 0,
+      limit: limit,
+      filters: filters,
+    };
+    getProducts(variables);
+    setSkip(0);
+  };
+
+  const handleFilters = (filters, category) => {
+    const newFilter = { ...Filters };
+
+    newFilter[category] = filters;
+
+    if (category === "price") {
+    }
+
+    filteredResults(newFilter);
+    setFilter(newFilter);
   };
 
   const renderCards = products.map((prod, index) => {
@@ -70,7 +104,7 @@ function ProductsLandingPage() {
         </div>
       </div>
 
-      <CheckBox />
+      <CheckBox handleFilters={(filters) => handleFilters(filters, "brand")} />
 
       {/* fiter */}
 
