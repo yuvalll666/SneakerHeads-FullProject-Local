@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckBox, Collapse } from "antd";
+import { Checkbox, Collapse } from "antd";
 const { Panel } = Collapse;
 
 const brands = [
@@ -32,7 +32,7 @@ function CheckBox() {
         <Panel header key="1">
           {brands.map((brand, index) => {
             <React.Fragment>
-              <CheckBox key={index} onChange type="checkbox" checked />
+              <Checkbox key={index} onChange type="checkbox" checked />
               <span>{brand.name}</span>
             </React.Fragment>;
           })}
