@@ -50,11 +50,10 @@ function UploadProduct() {
       images: images,
       ...data,
     };
+    console.log(productInfo);
 
     try {
-      console.log("aaaaaa");
       await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
-      console.log("bbbbbb");
       alert("Product uploaded successfuly");
       history.push("/");
     } catch (error) {

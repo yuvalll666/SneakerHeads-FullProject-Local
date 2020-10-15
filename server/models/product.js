@@ -48,7 +48,7 @@ function validateProduct(product) {
   const schema = Joi.object({
     title: Joi.string().required().min(2).max(255),
     description: Joi.string().required().min(2).max(1024),
-    price: Joi.number().required().min(2).max(255),
+    price: Joi.number().required(),
     writer: Joi.string(),
     brand: Joi.number(),
     images: Joi.array().required(),

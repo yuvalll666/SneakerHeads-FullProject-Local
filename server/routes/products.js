@@ -12,7 +12,7 @@ router.get("/getProducts", auth, async (req, res) => {
     if (error) {
       return res.status(400).send({ success: false, error });
     }
-    res.send({ success: true, product });
+    res.send({ success: true, products });
   });
 });
 
