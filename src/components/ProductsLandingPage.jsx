@@ -5,7 +5,7 @@ import PrimaryButton from "./forms/PrimaryButton";
 import ImageSlider from "../components/utils/ImageSlider";
 import { Col, Row, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
-import CheckBox
+import CheckBox from "../components/utils/CheckBox";
 
 
 function ProductsLandingPage() {
@@ -69,6 +69,10 @@ function ProductsLandingPage() {
           <h2 className="text-center">View Our Products!</h2>
         </div>
       </div>
+
+      <CheckBox />
+
+      {/* fiter */}
 
       {products.length === 0 ? (
         <div className="row justify-content-center">

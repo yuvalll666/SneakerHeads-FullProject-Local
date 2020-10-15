@@ -26,16 +26,35 @@ const brands = [
 ];
 
 function CheckBox() {
+  const [checked, setChecked] = useState([]);
+
+  const handleToggle = (value) => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
   return (
     <div>
       <Collapse defaultActiveKey={["0"]}>
         <Panel header key="1">
-          {brands.map((brand, index) => {
-            <React.Fragment>
-              <Checkbox key={index} onChange type="checkbox" checked />
+          {brands.map((brand, index) => (
+            <React.Fragment key={index}>
+              <Checkbox
+                onChange={() => handleToggle(brand._id)}
+                type="checkbox"
+                checked
+              />
               <span>{brand.name}</span>
-            </React.Fragment>;
-          })}
+            </React.Fragment>
+          ))}
         </Panel>
       </Collapse>
     </div>
