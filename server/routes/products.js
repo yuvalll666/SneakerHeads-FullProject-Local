@@ -37,7 +37,6 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}_${file.originalname}`);
   },
 });
-
 const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {

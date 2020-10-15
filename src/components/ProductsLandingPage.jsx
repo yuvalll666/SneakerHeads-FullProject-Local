@@ -44,15 +44,19 @@ function ProductsLandingPage() {
             >
               <h2>Loading Post...</h2>
             </div>
-          ) : (
-            products.map((prod, index) => {
-              return (
-                <div key={index} className="col-lg-3 col-md-4 col-sm-12 mb-4">
-                  <ProductCard product={prod} />
-                </div>
-              );
-            })
-          )}
+          ) : 
+
+          <div></div>
+          // (
+          //   products.map((prod, index) => {
+          //     return (
+          //       <div key={index} className="col-lg-3 col-md-4 col-sm-12 mb-4">
+          //         <ProductCard product={prod} />
+          //       </div>
+          //     );
+          //   })
+          // )
+          }
         </div>
       </div>
 

@@ -33,9 +33,9 @@ function ProductCard({ product }) {
           <Typography gutterBottom variant="h5" component="h2">
             {product.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          {/* <Typography variant="body2" color="textSecondary" component="p">
             {product.description}
-          </Typography>
+          </Typography> */}
           <p>Brand: {product.brand}</p>
           <p>Price: {product.price}</p>
         </CardContent>
