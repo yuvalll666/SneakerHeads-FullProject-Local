@@ -2,69 +2,96 @@ import React, { useState, useEffect } from "react";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import PrimaryButton from "./forms/PrimaryButton";
-import ProductCard from "./utils/ProductCard";
-import ProductPage from "./ProductPage";
+import ImageSlider from "../components/utils/ImageSlider";
+import { Col, Row, Card } from "antd";
+import Meta from "antd/lib/card/Meta";
 
 function ProductsLandingPage() {
   const [products, setProducts] = useState([]);
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(8);
+  const [postSize, setPostSize] = useState(0);
 
   useEffect(() => {
-    http.get(`${apiUrl}/products/getProducts`).then((response) => {
-      if (response.data.success) {
-        setProducts(response.data.products);
+    const variables = {
+      skip: skip,
+      limit: limit,
+    };
 
-        console.log(response.data.products);
+    getProducts(variables);
+  }, []);
+
+  const getProducts = (variables) => {
+    http.post(`${apiUrl}/products/getProducts`, variables).then((response) => {
+      if (response.data.success) {
+        setProducts([...products, ...response.data.products]);
+        setPostSize(response.data.postSize);
       } else {
         alert("Faild to fetch products data");
       }
     });
-  }, []);
+  };
 
-  // const renderProducts = products.map((prod, index) => {
-  //   return (
-  //     <div key={index} className="col-lg-3 col-md-4 col-sm-12">
-  //       <ProductCard />
-  //     </div>
-  //   );
-  // });
+  const onLoadMore = () => {
+    let skipLimit = skip + limit;
+
+    const variables = {
+      skip: skipLimit,
+      limit: limit,
+    };
+
+    getProducts(variables);
+
+    setSkip(skipLimit);
+  };
+
+  const renderCards = products.map((prod, index) => {
+    return (
+      <Col lg={6} md={8} xs={12} key={index}>
+        <Card
+          style={{ backgroundColor: "#fafafa" }}
+          bordered={false}
+          hoverable={true}
+          cover={<ImageSlider images={prod.images} />}
+        >
+          <Meta title={prod.title} description={`$${prod.price}`} />
+        </Card>
+      </Col>
+    );
+  });
 
   return (
-    <div className="container-fluid">
-      <div className="row justify-content-center">
-        <div className="col-lg-8 col-md-10 col-sm-12 m-4">
+    <div className="container">
+      <div className="row">
+        <div className="col-12 m-4">
           <h2 className="text-center">View Our Products!</h2>
         </div>
       </div>
-      <div className="container">
+
+      {products.length === 0 ? (
         <div className="row justify-content-center">
-          {products.length === 0 ? (
-            <div
-              style={{ height: "300px" }}
-              className="d-flex justify-content-center align-items-center"
-            >
-              <h2>Loading Post...</h2>
-            </div>
-          ) : 
-
-          <div></div>
-          // (
-          //   products.map((prod, index) => {
-          //     return (
-          //       <div key={index} className="col-lg-3 col-md-4 col-sm-12 mb-4">
-          //         <ProductCard product={prod} />
-          //       </div>
-          //     );
-          //   })
-          // )
-          }
+          <div
+            style={{ height: "300px" }}
+            className="d-flex justify-content-center align-items-center"
+          >
+            <h2>Loading Post...</h2>
+          </div>
         </div>
-      </div>
-
-      <div className="row justify-content-center">
+      ) : (
         <div>
-          <PrimaryButton fullWidth={false}>Load More</PrimaryButton>
+          <Row gutter={[16, 16]}>{renderCards}</Row>
         </div>
-      </div>
+      )}
+
+      {postSize >= limit && (
+        <div className="row justify-content-center">
+          <div>
+            <PrimaryButton onClick={onLoadMore} fullWidth={false}>
+              Load More
+            </PrimaryButton>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

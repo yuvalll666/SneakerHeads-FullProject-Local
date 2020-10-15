@@ -11,6 +11,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "popper.js/dist/popper";
 import "bootstrap/dist/js/bootstrap";
 import { BrowserRouter } from "react-router-dom";
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
