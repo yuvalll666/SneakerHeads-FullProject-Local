@@ -5,21 +5,20 @@ import PrimaryButton from "./forms/PrimaryButton";
 import ImageSlider from "../components/utils/ImageSlider";
 import { Col, Row, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
-import CheckBox from "../components/utils/CheckBox";
+import CheckBox from "./utils/CheckBox";
 
 function ProductsLandingPage() {
-  const [products, setProducts] = useState([]);
-  const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(8);
-  const [postSize, setPostSize] = useState(0);
+  const [Products, setProducts] = useState([]);
+  const [limit, setLimit] = useState(12);
+  const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilter] = useState({
     brand: [],
     price: [],
   });
+  const [lastId, setLastId] = useState("");
 
   useEffect(() => {
     const variables = {
-      skip: skip,
       limit: limit,
     };
 
@@ -29,44 +28,47 @@ function ProductsLandingPage() {
   const getProducts = (variables) => {
     http.post(`${apiUrl}/products/getProducts`, variables).then((response) => {
       if (response.data.success) {
-        if (variables.loadMore) {
-          setProducts([...products, ...response.data.products]);
-        } else {
-          setProducts(response.data.products);
+        const { products, postSize } = response.data;
+        if (!products.length) {
+          setPostSize(0);
         }
 
-        setPostSize(response.data.postSize);
+        if (variables.loadMore) {
+          setProducts([...Products, ...products]);
+        } else {
+          setProducts(products);
+        }
+
+        let lastIndex = products.length - 1;
+
+        setPostSize(postSize);
+        if (products[lastIndex] && products[lastIndex]._id) {
+          setLastId(products[lastIndex]._id);
+        }
       } else {
         alert("Faild to fetch products data");
       }
     });
   };
 
-  console.log("prods: ", products);
-  console.log("postSize : ", postSize);
-
   const onLoadMore = () => {
-    let skipLimit = skip + limit;
-
     const variables = {
-      skip: skipLimit,
+      lastId: lastId,
       limit: limit,
       loadMore: true,
     };
 
     getProducts(variables);
-
-    setSkip(skipLimit);
   };
 
   const filteredResults = (filters) => {
     const variables = {
-      skip: 0,
+      // skip: 0,
       limit: limit,
       filters: filters,
     };
     getProducts(variables);
-    setSkip(0);
+    // setSkip(0);
   };
 
   const handleFilters = (filters, category) => {
@@ -81,7 +83,7 @@ function ProductsLandingPage() {
     setFilter(newFilter);
   };
 
-  const renderCards = products.map((prod, index) => {
+  const renderCards = Products.map((prod, index) => {
     return (
       <Col lg={6} md={8} xs={12} key={index}>
         <Card
@@ -108,7 +110,7 @@ function ProductsLandingPage() {
 
       {/* fiter */}
 
-      {products.length === 0 ? (
+      {Products.length === 0 ? (
         <div className="row justify-content-center">
           <div
             style={{ height: "300px" }}
@@ -123,7 +125,7 @@ function ProductsLandingPage() {
         </div>
       )}
 
-      {postSize >= limit && (
+      {PostSize >= limit && (
         <div className="row justify-content-center">
           <div>
             <PrimaryButton onClick={onLoadMore} fullWidth={false}>

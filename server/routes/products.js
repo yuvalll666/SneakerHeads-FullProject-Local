@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 const _ = require("lodash");
 const Joi = require("@hapi/joi");
@@ -8,10 +9,10 @@ const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
 router.post("/getProducts", auth, async (req, res) => {
-  let order = req.body.order ? req.body.order : "desc";
-  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  // let order = req.body.order ? req.body.order : "desc";
+  // let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
-  let skip = parseInt(req.body.skip);
+  let lastId = req.body.lastId ? req.body.lastId : null;
 
   let findArgs = {};
   for (let key in req.body.filters) {
@@ -23,16 +24,25 @@ router.post("/getProducts", auth, async (req, res) => {
     }
   }
 
-  Product.find(findArgs)
-    .populate("writer")
-    .sort([[sortBy, order]])
-    .skip(skip)
+  let x = Product.find(findArgs);
+  if (lastId) {
+    let ObjectId = require("mongodb").ObjectID;
+    console.log(lastId);
+    x = x.find({ _id: { $gt: ObjectId(lastId) } });
+  }
+
+  x.populate("writer")
     .limit(limit)
     .exec((error, products) => {
       if (error) {
+        console.log(error);
         return res.status(400).send({ success: false, error });
       }
-      res.send({ success: true, products, postSize: products.length });
+      res.send({
+        success: true,
+        products,
+        postSize: products.length,
+      });
     });
 });
 
