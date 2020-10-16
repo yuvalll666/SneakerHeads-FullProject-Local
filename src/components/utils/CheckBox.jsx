@@ -46,7 +46,7 @@ function CheckBox({ handleFilters }) {
   return (
     <div>
       <Collapse defaultActiveKey={["0"]}>
-        <Panel header key="1">
+        <Panel header="Choose a brand" key="1">
           {brands.map((brand, index) => (
             <React.Fragment key={index}>
               <Checkbox

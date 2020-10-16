@@ -6,6 +6,7 @@ import ImageSlider from "../components/utils/ImageSlider";
 import { Col, Row, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import CheckBox from "./utils/CheckBox";
+import RadioBox from "./utils/RadioBox";
 
 function ProductsLandingPage() {
   const [Products, setProducts] = useState([]);
@@ -75,6 +76,7 @@ function ProductsLandingPage() {
     const newFilter = { ...Filters };
 
     newFilter[category] = filters;
+    console.log(newFilter);
 
     if (category === "price") {
     }
@@ -106,9 +108,22 @@ function ProductsLandingPage() {
         </div>
       </div>
 
-      <CheckBox handleFilters={(filters) => handleFilters(filters, "brand")} />
+      {/* Filter */}
 
-      {/* fiter */}
+      <div className="row mb-4">
+        <div className="col-lg-6 col-md-6">
+          <CheckBox
+            handleFilters={(filters) => handleFilters(filters, "brand")}
+          />
+        </div>
+        <div className="col-lg-6 col-md-6">
+          <RadioBox
+            handleFilters={(filters) => handleFilters(filters, "price")}
+          />
+        </div>
+      </div>
+
+      {/* Search */}
 
       {Products.length === 0 ? (
         <div className="row justify-content-center">
