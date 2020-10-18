@@ -8,13 +8,24 @@ const auth = require("../middleware/auth");
 const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
-router.get("/products_by_id", auth, async (req, res) => {
+router.get("/products_by_id", async (req, res) => {
+  let type = req.query.type;
+  let productIds = req.query.id;
 
-})
+  if (type === "array") {
+  }
 
+  await Product.findById({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((error, product) => {
+      if (error) {
+        return res.status(400).send({error: error})
+      }
+      return res.send(product)
+    });
+});
 
 router.post("/getProducts", async (req, res) => {
-  
   // let order = req.body.order ? req.body.order : "desc";
   // let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
