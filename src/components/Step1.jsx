@@ -47,7 +47,7 @@ function Step1() {
       <Typography component="h2" variant="h5">
         Step 1
       </Typography>
-      <Form onSubmit={handleSubmit(onSubmit)} >
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           ref={register}
           name="firstName"
@@ -57,6 +57,7 @@ function Step1() {
           error={Boolean(errors.firstName)}
           helperText={errors?.firstName?.message}
         />
+        
         <Input
           ref={register}
           name="lastName"

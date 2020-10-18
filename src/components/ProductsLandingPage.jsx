@@ -7,20 +7,23 @@ import { Col, Row, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import CheckBox from "./utils/CheckBox";
 import RadioBox from "./utils/RadioBox";
+import { brands, price } from "../datas";
+import SearchFeature from "./utils/SearchFeature";
 
 function ProductsLandingPage() {
+  const [SearchValue, setSearchValue] = useState("");
   const [Products, setProducts] = useState([]);
-  const [limit, setLimit] = useState(12);
+  const [Limit, setLimit] = useState(12);
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilter] = useState({
     brand: [],
     price: [],
   });
-  const [lastId, setLastId] = useState("");
+  const [LastId, setLastId] = useState("");
 
   useEffect(() => {
     const variables = {
-      limit: limit,
+      limit: Limit,
     };
 
     getProducts(variables);
@@ -54,8 +57,8 @@ function ProductsLandingPage() {
 
   const onLoadMore = () => {
     const variables = {
-      lastId: lastId,
-      limit: limit,
+      lastId: LastId,
+      limit: Limit,
       loadMore: true,
     };
 
@@ -64,25 +67,48 @@ function ProductsLandingPage() {
 
   const filteredResults = (filters) => {
     const variables = {
-      // skip: 0,
-      limit: limit,
+      limit: Limit,
       filters: filters,
     };
     getProducts(variables);
-    // setSkip(0);
+  };
+
+  const handlePrice = (value) => {
+    let array = [];
+
+    for (let key in price) {
+      if (price[key]._id === parseInt(value, 10)) {
+        array = price[key].array;
+      }
+    }
+
+    return array;
   };
 
   const handleFilters = (filters, category) => {
     const newFilter = { ...Filters };
 
-    newFilter[category] = filters;
-    console.log(newFilter);
-
     if (category === "price") {
+      let priceValue = handlePrice(filters);
+      newFilter[category] = priceValue;
+    } else {
+      newFilter[category] = filters;
     }
 
     filteredResults(newFilter);
     setFilter(newFilter);
+  };
+
+  const updateSearchValues = (newSearchTerm) => {
+    const variables = {
+      limit: Limit,
+      filters: Filters,
+      searchTerm: newSearchTerm,
+    };
+
+    setSearchValue(newSearchTerm);
+
+    getProducts(variables);
   };
 
   const renderCards = Products.map((prod, index) => {
@@ -110,20 +136,25 @@ function ProductsLandingPage() {
 
       {/* Filter */}
 
-      <div className="row mb-4">
+      <div className="row mb-2">
         <div className="col-lg-6 col-md-6">
           <CheckBox
+            brands={brands}
             handleFilters={(filters) => handleFilters(filters, "brand")}
           />
         </div>
         <div className="col-lg-6 col-md-6">
           <RadioBox
+            price={price}
             handleFilters={(filters) => handleFilters(filters, "price")}
           />
         </div>
       </div>
 
       {/* Search */}
+      <div className="d-flex justify-content-end">
+        <SearchFeature refreshFunction={updateSearchValues} />
+      </div>
 
       {Products.length === 0 ? (
         <div className="row justify-content-center">
@@ -140,7 +171,7 @@ function ProductsLandingPage() {
         </div>
       )}
 
-      {PostSize >= limit && (
+      {PostSize >= Limit && (
         <div className="row justify-content-center">
           <div>
             <PrimaryButton onClick={onLoadMore} fullWidth={false}>

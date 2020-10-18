@@ -9,25 +9,34 @@ const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
 router.post("/getProducts", auth, async (req, res) => {
+  
   // let order = req.body.order ? req.body.order : "desc";
   // let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let lastId = req.body.lastId ? req.body.lastId : null;
+  let term = req.body.searchTerm ? req.body.searchTerm : null;
 
   let findArgs = {};
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
+        findArgs[key] = {
+          $gte: req.body.filters[key][0],
+          $lte: req.body.filters[key][1],
+        };
       } else {
         findArgs[key] = req.body.filters[key];
       }
     }
   }
+  console.log(term);
 
   let x = Product.find(findArgs);
+  if (term) {
+    x = x.find({ $text: { $search: term } });
+  }
   if (lastId) {
     let ObjectId = require("mongodb").ObjectID;
-    console.log(lastId);
     x = x.find({ _id: { $gt: ObjectId(lastId) } });
   }
 
