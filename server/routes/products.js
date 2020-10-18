@@ -8,7 +8,12 @@ const auth = require("../middleware/auth");
 const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
-router.post("/getProducts", auth, async (req, res) => {
+router.get("/products_by_id", auth, async (req, res) => {
+
+})
+
+
+router.post("/getProducts", async (req, res) => {
   
   // let order = req.body.order ? req.body.order : "desc";
   // let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
@@ -29,7 +34,6 @@ router.post("/getProducts", auth, async (req, res) => {
       }
     }
   }
-  console.log(term);
 
   let x = Product.find(findArgs);
   if (term) {

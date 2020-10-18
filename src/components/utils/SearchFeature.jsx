@@ -16,7 +16,7 @@ function SearchFeature(props) {
       <Search
         value={SearchValue}
         onChange={onChangeSearch}
-        placeHolder="Search..."
+        placeholder="Search..."
       />
     </div>
   );

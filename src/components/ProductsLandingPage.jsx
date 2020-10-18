@@ -118,7 +118,7 @@ function ProductsLandingPage() {
           style={{ backgroundColor: "#fafafa" }}
           bordered={false}
           hoverable={true}
-          cover={<ImageSlider images={prod.images} />}
+          cover={<a href={`/products/${prod._id}`}><ImageSlider images={prod.images} /> </a>}
         >
           <Meta title={prod.title} description={`$${prod.price}`} />
         </Card>

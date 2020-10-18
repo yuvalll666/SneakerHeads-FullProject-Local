@@ -59,12 +59,12 @@ function Navbar({ user }) {
             {!user && (
               <React.Fragment>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="signin">
+                  <NavLink className="nav-link" to="/signin">
                     Signin
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="step1">
+                  <NavLink className="nav-link" to="/step1">
                     Signup
                   </NavLink>
                 </li>
@@ -97,7 +97,7 @@ function Navbar({ user }) {
                     <Link className="dropdown-item" to="/user-page">
                       <i className="fas fa-cog"></i> Settings
                     </Link>
-                    <Link className="dropdown-item" to="logout">
+                    <Link className="dropdown-item" to="/logout">
                       <i className="fas fa-sign-out-alt"></i> Logout
                     </Link>
                   </div>

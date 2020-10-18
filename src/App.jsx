@@ -35,15 +35,15 @@ function App() {
       </header>
       <main className="container-fluid flex-fill">
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/step1" component={Step1} />
           <Route path="/step2" component={Step2} />
           <Route path="/result" component={Result} />
           <Route path="/Signin" component={Signin} />
           <Route path="/logout" component={Logout} />
-          <Route path="/product-page" component={ProductPage} />
-          <Route path="/products" component={ProductsLandingPage} />
+          <Route path="/products/:productId" component={ProductPage} />
+          <Route exact path="/products" component={ProductsLandingPage} />
 
           <UserContext.Provider value={user}>
             <Route path="/user-page" component={UserPage} />

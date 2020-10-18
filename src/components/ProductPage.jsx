@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import http from "../services/httpService";
+import { apiUrl } from "../config.json";
 
-const ProductPage = () => {
+const ProductPage = (props) => {
+  const productId = props.match.params.productId
+
+  useEffect(() => {
+    http.get(`${apiUrl}/products/product_by_id?id=${productId}&type=single`).then(response =>{ 
+
+    })
+
+
+  }, []);
+
   return (
     <div className="container">
       <div className="row mt-4">
@@ -28,7 +40,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
-      <div className="row mt-4">
+      {/* <div className="row mt-4">
         <div className="col-12 mt-4 rounded border">
           <h2>Reviews</h2>
           <div className="review">
@@ -95,7 +107,7 @@ const ProductPage = () => {
             add a review
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
