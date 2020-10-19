@@ -11,7 +11,9 @@ const { Product, validateProduct } = require("../models/product");
 router.get("/product_by_id", (req, res) => {
   let type = req.query.type;
   let productIds = req.query.id;
+
   if (type === "array") {
+    productIds = req.query.id.split(",");
   }
 
   Product.find({ _id: { $in: productIds } })
