@@ -1,45 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
+import ProductCarousel from "./productDetails/ProductCarousel";
+import ProductInfo from "./productDetails/ProductInfo";
+import { Typography } from "@material-ui/core";
 
 const ProductPage = (props) => {
-  const productId = props.match.params.productId
+  const productId = props.match.params.productId;
+  const [Product, setProduct] = useState([]);
 
   useEffect(() => {
-    http.get(`${apiUrl}/products/product_by_id?id=${productId}&type=single`).then(response =>{ 
-
-    })
-
-
+    http
+      .get(`${apiUrl}/products/product_by_id?id=${productId}&type=single`)
+      .then((response) => {
+        setProduct(response.data[0]);
+      });
   }, []);
+
+  const addToCartHandler = (productId) => {};
 
   return (
     <div className="container">
-      <div className="row mt-4">
-        <div className="col-lg-6">
-          <h1>Image carusel</h1>
-        </div>
-        <div className="col-lg-6 d-flex flex-column align-items-center">
-          <div className="col-8">
-            <div>
-              <h1>Product Name</h1>
-              <p>(product tags)</p>
-              <h3>product description:</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-                dolor laboriosam ipsa, vitae nisi cum labore. Totam dolore est
-                facere aperiam harum officia eaque ipsam! Assumenda tenetur
-                quisquam aspernatur vitae!
-              </p>
-            </div>
-            <div>
-              <h2>Price: 300$</h2>
-              <button className="btn btn-secondary">+ Add To Cart</button>
-              <button className="btn btn-primary ml-2">Buy Now</button>
-            </div>
+      <div className="row justify-content-center">
+        {Product.tags && (
+          <div className="mt-4 col-10">
+            {Product.tags.join(" / ")}
           </div>
+        )}
+        <div className="col-12 text-center">
+          <Typography className="mt-4" component="h1" variant="h3">
+            {Product.title}
+          </Typography>
         </div>
       </div>
+      <div className="row mt-4">
+        <div className="col-lg-12">
+          <ProductCarousel product={Product} />
+        </div>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <ProductInfo addToCart={addToCartHandler} product={Product} />
+      </div>
+
       {/* <div className="row mt-4">
         <div className="col-12 mt-4 rounded border">
           <h2>Reviews</h2>

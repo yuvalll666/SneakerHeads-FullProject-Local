@@ -37,6 +37,9 @@ const productSchema = new Schema(
       type: Number,
       default: 1,
     },
+    tags: {
+      type:Array
+    },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
@@ -52,6 +55,7 @@ function validateProduct(product) {
     writer: Joi.string(),
     brand: Joi.number(),
     images: Joi.array().required(),
+    tags: Joi.array()
   });
 
   return schema.validate(product, { abortEarly: false });

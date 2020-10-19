@@ -8,20 +8,21 @@ const auth = require("../middleware/auth");
 const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
-router.get("/products_by_id", async (req, res) => {
+router.get("/product_by_id", (req, res) => {
   let type = req.query.type;
   let productIds = req.query.id;
-
   if (type === "array") {
   }
 
-  await Product.findById({ _id: { $in: productIds } })
+  Product.find({ _id: { $in: productIds } })
     .populate("writer")
     .exec((error, product) => {
       if (error) {
-        return res.status(400).send({error: error})
+        console.log(error);
+        return res.status(400).send({ error: error });
       }
-      return res.send(product)
+      console.log(product);
+      return res.send(product);
     });
 });
 

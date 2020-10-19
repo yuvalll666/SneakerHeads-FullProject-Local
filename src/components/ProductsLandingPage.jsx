@@ -5,10 +5,10 @@ import PrimaryButton from "./forms/PrimaryButton";
 import ImageSlider from "../components/utils/ImageSlider";
 import { Col, Row, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
-import CheckBox from "./utils/CheckBox";
-import RadioBox from "./utils/RadioBox";
+import CheckBox from "./productDetails/CheckBox";
+import RadioBox from "./productDetails/RadioBox";
 import { brands, price } from "../datas";
-import SearchFeature from "./utils/SearchFeature";
+import SearchFeature from "./productDetails/SearchFeature";
 
 function ProductsLandingPage() {
   const [SearchValue, setSearchValue] = useState("");

@@ -11,7 +11,7 @@ import { UserContext } from "../App";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import { useHistory } from "react-router-dom";
-
+import ChipInput from "material-ui-chip-input";
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -23,6 +23,8 @@ function UploadProduct() {
   const user = useContext(UserContext);
   const styles = useStyles();
   const history = useHistory();
+  const [Chips, setChips] = useState([])
+  const [images, setImages] = useState([]);
 
   const brands = [
     { key: 1, value: "NIKE" },
@@ -34,22 +36,21 @@ function UploadProduct() {
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
   });
-  const [images, setImages] = useState([]);
   const updateImages = (newImages) => {
     setImages(newImages);
   };
 
   const onSubmit = async (data) => {
     const { title, description, price, brand } = data;
-    if (!title || !description || !price || !brand || !images) {
-      return alert("Please fill of fields first!");
-    }
+    // if (!title || !description || !price || !brand || !images) {
+    //   return alert("Please fill of fields first!");
+    // }
     const productInfo = {
       writer: user._id,
       images: images,
+      tags:Chips,
       ...data,
     };
-    console.log(productInfo);
 
     try {
       await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
@@ -60,6 +61,10 @@ function UploadProduct() {
         alert(error.response.data.error);
       }
     }
+  };
+
+  const handleChange = (chips) => {
+    setChips(chips)
   };
 
   return (
@@ -100,6 +105,13 @@ function UploadProduct() {
             id="price"
             placeholder="Product Price ( $ )"
             type="number"
+            ref={register}
+          />
+          <ChipInput
+            fullWidth
+            placeholder="+Add_Tag"
+            onChange={(chips) => handleChange(chips)}
+            className="mt-2"
             ref={register}
           />
           <PrimaryButton type="submit">Submit</PrimaryButton>
