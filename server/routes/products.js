@@ -18,10 +18,8 @@ router.get("/product_by_id", (req, res) => {
     .populate("writer")
     .exec((error, product) => {
       if (error) {
-        console.log(error);
         return res.status(400).send({ error: error });
       }
-      console.log(product);
       return res.send(product);
     });
 });

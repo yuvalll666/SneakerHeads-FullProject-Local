@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Badge from "@material-ui/core/Badge";
 
 function Navbar({ user }) {
   return (
@@ -78,8 +79,10 @@ function Navbar({ user }) {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/product-page">
-                    <i className="fas fa-shopping-cart fa-2x"></i>
+                  <NavLink className="nav-link" to="/cart">
+                    <Badge badgeContent={4} color="secondary">
+                      <i className="fas fa-shopping-cart fa-2x"></i>
+                    </Badge>
                   </NavLink>
                 </li>
                 <li className="nav-item dropdown">

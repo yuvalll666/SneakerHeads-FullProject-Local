@@ -38,7 +38,8 @@ const productSchema = new Schema(
       default: 1,
     },
     tags: {
-      type:Array
+      type:Array,
+      default: []
     },
     createdAt: { type: Date, default: Date.now },
   },

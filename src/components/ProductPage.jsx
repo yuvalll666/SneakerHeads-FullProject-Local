@@ -17,15 +17,20 @@ const ProductPage = (props) => {
       });
   }, []);
 
-  const addToCartHandler = (productId) => {};
+  const addToCartHandler = (productId) => {
+    http
+      .post(`${apiUrl}/users/addToCart`, { productId })
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+      })
+      .catch((err) => console.log("err : ", err));
+  };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         {Product.tags && (
-          <div className="mt-4 col-10">
-            {Product.tags.join(" / ")}
-          </div>
+          <div className="mt-4 col-10">{Product.tags.join(" / ")}</div>
         )}
         <div className="col-12 text-center">
           <Typography className="mt-4" component="h1" variant="h3">

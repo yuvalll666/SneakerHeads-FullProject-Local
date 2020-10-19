@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    cart: {
+      type: Array,
+      default: [],
+    },
     role: {
       type: Number,
       required: true,
@@ -61,6 +65,7 @@ userSchema.methods.generateAuthToken = function (options = null) {
       role: this.role,
       email: this.email,
       password: this.password,
+      cart: this.cart,
     },
     //----->>TODO: change Private Key
     process.env.JWT_TOKEN_KEY,

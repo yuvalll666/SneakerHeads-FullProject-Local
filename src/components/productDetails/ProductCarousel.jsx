@@ -8,7 +8,6 @@ function ProductCarousel(props) {
   // console.log(product);
   useEffect(() => {
     if (product.images && product.images.length > 0) {
-      console.log("kasjfkljaskfjba");
       let images = [];
    
       product.images.map((item) => {

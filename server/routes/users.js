@@ -11,6 +11,56 @@ const router = express.Router();
 const _ = require("lodash");
 const Joi = require("@hapi/joi");
 const auth = require("../middleware/auth");
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
+
+router.post("/addToCart", auth, async (req, res) => {
+  const { productId } = req.body;
+
+  await User.findOne({ _id: req.user._id }, (err, user) => {
+    let duplicate = false;
+    user.cart.forEach((item) => {
+      if (item._id == productId) {
+        duplicate = true;
+      }
+    });
+
+    if (duplicate) {
+      User.findOneAndUpdate(
+        { _id: req.user._id, "cart._id": ObjectId(productId) },
+        { $inc: { "cart.$.quantity": 1 } },
+        { new: true },
+        (err, user) => {
+          console.log();
+          if (err) {
+            return res.status(400).send({ success: false, err });
+          }
+          res.send({ token: user.generateAuthToken() });
+        }
+      );
+    } else {
+      User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+          $push: {
+            cart: {
+              _id: ObjectId(productId),
+              quantity: 1,
+              date: Date.now(),
+            },
+          },
+        },
+        { new: true },
+        (err, user) => {
+          if (err) {
+            return res.send({ success: false, err });
+          }
+          res.send({ token: user.generateAuthToken() });
+        }
+      );
+    }
+  });
+});
 
 //Delete
 router.delete("/:id", auth, async (req, res) => {

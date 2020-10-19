@@ -37,7 +37,7 @@ function ProductInfo(props) {
 
           <div className="d-flex flex-column">
             <Button onClick={addToCartHandler} variant="contained" color="default">
-              <i class="fas fa-plus mr-2"></i> Add to cart
+              <i className="fas fa-plus mr-2"></i> Add to cart
             </Button>
             <Button className="mt-2" variant="contained" color="primary">
               Buy now

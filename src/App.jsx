@@ -17,6 +17,7 @@ import UserPage from "./components/UserPage";
 import ProductPage from "./components/ProductPage";
 import UploadProduct from "./components/UploadProduct";
 import ProductsLandingPage from "./components/ProductsLandingPage";
+import Cart from "./components/Cart";
 
 export const UserContext = createContext(null);
 
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/products" component={ProductsLandingPage} />
 
           <UserContext.Provider value={user}>
+            <Route path="/cart" component={Cart} />
             <Route path="/user-page" component={UserPage} />
             <Route path="/upload-product" component={UploadProduct} />
           </UserContext.Provider>
