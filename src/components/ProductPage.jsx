@@ -4,6 +4,7 @@ import { apiUrl } from "../config.json";
 import ProductCarousel from "./productDetails/ProductCarousel";
 import ProductInfo from "./productDetails/ProductInfo";
 import { Typography } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 
 const ProductPage = (props) => {
   const productId = props.match.params.productId;
@@ -17,13 +18,15 @@ const ProductPage = (props) => {
       });
   }, []);
 
-  const addToCartHandler = (productId) => {
-    http
+  const addToCartHandler = async (productId) => {
+    await http
       .post(`${apiUrl}/users/addToCart`, { productId })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
       })
       .catch((err) => console.log("err : ", err));
+
+    window.location = "/cart";
   };
 
   return (

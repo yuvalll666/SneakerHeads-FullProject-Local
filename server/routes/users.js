@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const { Product } = require("../models/product");
 const {
   User,
   validateUser,
@@ -13,6 +14,29 @@ const Joi = require("@hapi/joi");
 const auth = require("../middleware/auth");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
+
+router.get("/removeFromCart", auth, (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $pull: { cart: { _id: ObjectId(req.query._id) } } },
+    { new: true },
+    (err, user) => {
+      const { cart } = user;
+      let array = cart.map((item) => {
+        return item;
+      });
+
+      Product.find({ _id: { $in: array } })
+        .populate("writer")
+        .exec((err, products) => {
+          if (err) {
+            return res.status(400).send({ error: err });
+          }
+          return res.send({ cart, products, token: user.generateAuthToken() });
+        });
+    }
+  );
+});
 
 router.post("/addToCart", auth, async (req, res) => {
   const { productId } = req.body;
@@ -31,7 +55,6 @@ router.post("/addToCart", auth, async (req, res) => {
         { $inc: { "cart.$.quantity": 1 } },
         { new: true },
         (err, user) => {
-          console.log();
           if (err) {
             return res.status(400).send({ success: false, err });
           }
