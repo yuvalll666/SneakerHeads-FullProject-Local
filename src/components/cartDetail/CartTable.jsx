@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "../App";
-import http from "../services/httpService";
-import { apiUrl } from "../config.json";
+import React, { useContext } from "react";
+import { UserContext } from "../../App";
 import {
-  Typography,
   TableContainer,
   Paper,
   Table,
@@ -16,8 +13,6 @@ import {
   Button,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import MainContainer from "./forms/MainContainer";
-import { Empty, Result } from "antd";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -26,8 +21,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-
-const useStyles = makeStyles((them) => ({
+const useStyles = makeStyles((theme) => ({
   productImage: {
     width: "100px",
   },
@@ -38,16 +32,19 @@ const useStyles = makeStyles((them) => ({
   },
 }));
 
-function CartTable(props) {
-
+function CartTable({ ProductsInfo, removeFromCart }) {
   const styles = useStyles();
   const user = useContext(UserContext);
-  const { cart } = user;
-  const [ProductsInfo, setProductsInfo] = useState([]);
-  const [TotalPrice, setTotalPrice] = useState(0);
+
+  const renderCartImage = (images) => {
+    if (images.length > 0) {
+      let image = images[0];
+      return `http://localhost:3000/${image}`;
+    }
+  };
 
   return (
-          <TableContainer component={Paper}>
+    <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
@@ -77,6 +74,7 @@ function CartTable(props) {
                   </TableCell>
                   <TableCell align="right">
                     <Button
+                      onClick={() => removeFromCart(prod._id)}
                       variant="contained"
                       color="secondary"
                       startIcon={<DeleteIcon />}
@@ -89,7 +87,7 @@ function CartTable(props) {
             </TableBody>
           </Table>
         </TableContainer>
-  )
+  );
 }
 
-export default CartTable
+export default CartTable;

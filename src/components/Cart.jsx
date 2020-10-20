@@ -2,42 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
-import {
-  Typography,
-  TableContainer,
-  Paper,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  makeStyles,
-  withStyles,
-  Button,
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Typography, makeStyles } from "@material-ui/core";
 import MainContainer from "./forms/MainContainer";
 import { Empty, Result } from "antd";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: "#3f51b5",
-    color: theme.palette.common.white,
-  },
-}))(TableCell);
+import CartTable from "./cartDetail/CartTable";
 
 const useStyles = makeStyles((them) => ({
   total: {
     alignSelf: "start",
     marginTop: them.spacing(4),
-  },
-  productImage: {
-    width: "100px",
-  },
-  numbers: {
-    fontSize: "1.1em",
-    fontFamily: "tahoma",
-    fontWeight: 600,
   },
 }));
 
@@ -47,6 +20,7 @@ function Cart() {
   const { cart } = user;
   const [ProductsInfo, setProductsInfo] = useState([]);
   const [TotalPrice, setTotalPrice] = useState(0);
+  const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItemsIds = [];
@@ -115,8 +89,6 @@ function Cart() {
       .catch((err) => console.log("err : ", err));
   };
 
-  console.log(ProductsInfo);
-
   return (
     <div>
       <MainContainer maxWidth="md">
@@ -126,54 +98,24 @@ function Cart() {
           </span>{" "}
           My Cart
         </Typography>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="left">Product Image</StyledTableCell>
-                <StyledTableCell align="center">Quantity</StyledTableCell>
-                <StyledTableCell align="right">Price</StyledTableCell>
-                <StyledTableCell align="right">
-                  Remove From Cart
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {ProductsInfo.map((prod, index) => (
-                <TableRow key={index}>
-                  <TableCell align="left">
-                    <img
-                      src={renderCartImage(prod.images)}
-                      alt="productImage"
-                      className={styles.productImage}
-                    />
-                  </TableCell>
-                  <TableCell className={styles.numbers} align="center">
-                    {prod.quantity}
-                  </TableCell>
-                  <TableCell className={styles.numbers} align="right">
-                    ${prod.price}
-                  </TableCell>
-                  <TableCell align="right">
-                    <Button
-                      onClick={() => removeFromCart(prod._id)}
-                      variant="contained"
-                      color="secondary"
-                      startIcon={<DeleteIcon />}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Typography className={styles.total} component="h2" variant="h5">
-          Total Amount: ${TotalPrice}
-        </Typography>
-        <Result status="success" title="Successfully Purchased Items"></Result>
-        <Empty description="No Items In Cart"></Empty>
+
+        <CartTable
+          ProductsInfo={ProductsInfo}
+          removeFromCart={removeFromCart}
+        />
+
+        {TotalPrice > 0 ? (
+          <Typography className={styles.total} component="h2" variant="h5">
+            Total Amount: ${TotalPrice}
+          </Typography>
+        ) : ShowSuccess ? (
+          <Result
+            status="success"
+            title="Successfully Purchased Items"
+          ></Result>
+        ) : (
+          <Empty className="mt-4" description="No Items In Cart"></Empty>
+        )}
       </MainContainer>
     </div>
   );
