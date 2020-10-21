@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    history: {
+      type: Array,
+      default: [],
+    },
     role: {
       type: Number,
       required: true,
