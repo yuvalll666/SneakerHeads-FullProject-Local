@@ -7,8 +7,7 @@ import MainContainer from "./forms/MainContainer";
 import { Empty, Result } from "antd";
 import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
-import ProductInfo from "./productDetails/ProductInfo";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((them) => ({
   total: {
@@ -27,7 +26,6 @@ function Cart() {
   const { cart } = user;
   const [ProductsInfo, setProductsInfo] = useState([]);
   const [TotalPrice, setTotalPrice] = useState(0);
-  const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItemsIds = [];
@@ -96,8 +94,7 @@ function Cart() {
     http.post(`${apiUrl}/users/successBuy`, variables).then((response) => {
       if (response.data.success) {
         console.log(response.data);
-        localStorage.setItem("token", response.data.token);
-        setShowSuccess(true);
+        localStorage.setItem("token", response.data.token); 
         history.push("/thank-you");
       } else {
         alert("Failed to purchase item/s");
@@ -142,11 +139,6 @@ function Cart() {
               />
             </div>
           </React.Fragment>
-        ) : ShowSuccess ? (
-          <Result
-            status="success"
-            title="Successfully Purchased Items"
-          ></Result>
         ) : (
           <Empty className="mt-4" description="No Items In Cart"></Empty>
         )}
