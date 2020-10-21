@@ -19,6 +19,7 @@ import UploadProduct from "./components/UploadProduct";
 import ProductsLandingPage from "./components/ProductsLandingPage";
 import Cart from "./components/Cart";
 import ThankYou from "./components/utils/ThankYou";
+import HistoryPage from "./components/HistoryPage";
 
 export const UserContext = createContext(null);
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/products/:productId" component={ProductPage} />
           <Route exact path="/products" component={ProductsLandingPage} />
           <Route exact path="/thank-you" component={ThankYou} />
+          <Route exact path="/history" component={HistoryPage} />
 
           <UserContext.Provider value={user}>
             <Route path="/cart" component={Cart} />

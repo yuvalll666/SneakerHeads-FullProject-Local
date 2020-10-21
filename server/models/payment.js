@@ -7,7 +7,7 @@ const paymentSchema = new Schema(
       type: Array,
       default: [],
     },
-    data: {
+    paymentData: {
       type: Array,
       default: [],
     },

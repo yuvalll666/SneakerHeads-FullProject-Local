@@ -94,8 +94,8 @@ function Cart() {
     http.post(`${apiUrl}/users/successBuy`, variables).then((response) => {
       if (response.data.success) {
         console.log(response.data);
-        localStorage.setItem("token", response.data.token); 
-        history.push("/thank-you");
+        localStorage.setItem("token", response.data.token);
+        window.location = "/thank-you";
       } else {
         alert("Failed to purchase item/s");
       }

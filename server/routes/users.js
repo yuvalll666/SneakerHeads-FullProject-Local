@@ -16,6 +16,17 @@ const auth = require("../middleware/auth");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
+router.get("/getHistory", auth, (req, res) => {
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    let history = user.history;
+    if (err) {
+      return res.status(400).send({ error: err });
+    }
+
+    return res.send({ success: true, history });
+  });
+});
+
 router.post("/successBuy", auth, (req, res) => {
   let history = [];
   let transactionData = {};

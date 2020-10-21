@@ -73,6 +73,7 @@ function Navbar({ user }) {
             )}
             {user && (
               <React.Fragment>
+               
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/upload-product">
                     <i className="fas fa-upload fa-2x"></i>
@@ -97,6 +98,10 @@ function Navbar({ user }) {
                     {user.firstName + " " + user.lastName}
                   </Link>
                   <div className="dropdown-menu" aria-labelledby="dropdown04">
+                    
+                    <Link className="dropdown-item" to="/history">
+                    <i class="fas fa-history"></i> History
+                    </Link>
                     <Link className="dropdown-item" to="/user-page">
                       <i className="fas fa-cog"></i> Settings
                     </Link>
