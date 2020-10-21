@@ -32,7 +32,6 @@ function Cart() {
 
     if (user && cart) {
       if (cart && cart.length > 0) {
-        console.log("in");
         cart.forEach((item) => {
           cartItemsIds.push(item._id);
         });
