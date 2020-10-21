@@ -102,7 +102,7 @@ function Navbar({ user }) {
                     <i className="fas fa-upload fa-2x"></i>
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item mr-4">
                   <NavLink className="nav-link" to="/cart">
                     <Badge
                       badgeContent={user.cart && user.cart.length}
@@ -111,7 +111,7 @@ function Navbar({ user }) {
                       <i className="fas fa-shopping-cart fa-2x"></i>
                     </Badge>
                   </NavLink>
-                </li>
+                </li >
                 
               </React.Fragment>
             )}

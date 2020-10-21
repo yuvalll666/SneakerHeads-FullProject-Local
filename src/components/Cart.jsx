@@ -2,30 +2,34 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
-import { Typography, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  makeStyles,
+  CardContent,
+  Card,
+  CardActions,
+} from "@material-ui/core";
 import MainContainer from "./forms/MainContainer";
-import { Empty, Result } from "antd";
+import { Empty } from "antd";
 import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((them) => ({
-  total: {
+  card: {
     alignSelf: "start",
-    marginTop: them.spacing(4),
-  },
-  paypal: {
-    alignSelf: "start",
+    marginTop: them.spacing(2),
+    background: "whitesmoke",
   },
 }));
 
 function Cart() {
   const styles = useStyles();
   const user = useContext(UserContext);
-  const history = useHistory();
   const { cart } = user;
   const [ProductsInfo, setProductsInfo] = useState([]);
   const [TotalPrice, setTotalPrice] = useState(0);
+  const [Quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     let cartItemsIds = [];
@@ -39,6 +43,13 @@ function Cart() {
         http
           .get(`${apiUrl}/products/product_by_id?id=${cartItemsIds}&type=array`)
           .then((response) => {
+            let arr = cart.map((item) => {
+              return item.quantity;
+            });
+
+            let reducedNum = arr.reduce((a, b) => a + b, 0);
+            setQuantity(reducedNum);
+
             cart.forEach((cartItem) => {
               response.data.forEach((product, index) => {
                 if (cartItem._id === product._id) {
@@ -113,11 +124,13 @@ function Cart() {
   return (
     <div>
       <MainContainer maxWidth="md">
-        <Typography className="mb-4" component="h1" variant="h3">
-          <span role="img" aria-label="clipboard">
-            📋
-          </span>{" "}
-          My Cart
+        <Typography
+          style={{ alignSelf: "start" }}
+          className="mb-4"
+          component="h1"
+          variant="h3"
+        >
+          Shopping cart 
         </Typography>
 
         <CartTable
@@ -126,19 +139,50 @@ function Cart() {
         />
 
         {TotalPrice > 0 ? (
-          <React.Fragment>
-            <Typography className={styles.total} component="h2" variant="h5">
-              Total Amount: ${TotalPrice}
-            </Typography>
-            <div className={styles.paypal}>
+          <Card className={styles.card}>
+            <CardContent>
+              <Typography
+                className="d-flex justify-content-between"
+                variant="body1"
+                component="p"
+              >
+                <span>
+                  Subtotal (
+                  {Quantity > 1 ? (
+                    <span>{Quantity} items</span>
+                  ) : (
+                    <span>{Quantity} item</span>
+                  )}
+                  )
+                </span>{" "}
+                <span>US ${TotalPrice}</span>
+              </Typography>
+              <Typography
+                className="d-flex justify-content-between"
+                variant="body1"
+                component="p"
+              >
+                Shipping <span>Free</span>
+              </Typography>
+              <hr />
+              <div className="d-flex justify-content-between">
+                <Typography variant="h5" component="h2">
+                  Order total
+                </Typography>
+                <Typography variant="h6" component="h2">
+                  US ${TotalPrice}
+                </Typography>
+              </div>
+            </CardContent>
+            <CardActions>
               <Paypal
                 totalPrice={TotalPrice}
                 onSuccess={transactionSuccess}
                 transactionError={transactionError}
                 transactionCanceled={transactionCanceled}
               />
-            </div>
-          </React.Fragment>
+            </CardActions>
+          </Card>
         ) : (
           <Empty className="mt-4" description="No Items In Cart"></Empty>
         )}
