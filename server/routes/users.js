@@ -15,6 +15,36 @@ const auth = require("../middleware/auth");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
+router.post("/successBuy", auth, (req, res) => {
+  let history = [];
+  let transactionData = {};
+
+  const { cartDetail, paymentData } = req.body;
+
+  cartDetail.forEach((item) => {
+    const { title, _id, price, quantity } = item;
+    history.push({
+      dateOfPurchase: Date.now(),
+      name: title,
+      _id: _id,
+      price: price,
+      quantity: quantity,
+      paymentId: paymentData.paymentID,
+    });
+  });
+
+  const { _id, firstName, lastName, email } = req.user;
+  transactionData.user = {
+    _id: _id,
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+  };
+
+  transactionData.data = paymentData;
+  transactionData.product = history;
+});
+
 router.get("/removeFromCart", auth, (req, res) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
