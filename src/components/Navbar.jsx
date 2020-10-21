@@ -5,7 +5,7 @@ import Badge from "@material-ui/core/Badge";
 function Navbar({ user }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow">
-      <div className="container">
+      <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           Shop App
         </Link>
@@ -72,20 +72,8 @@ function Navbar({ user }) {
               </React.Fragment>
             )}
             {user && (
+              
               <React.Fragment>
-               
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/upload-product">
-                    <i className="fas fa-upload fa-2x"></i>
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/cart">
-                    <Badge badgeContent={4} color="secondary">
-                      <i className="fas fa-shopping-cart fa-2x"></i>
-                    </Badge>
-                  </NavLink>
-                </li>
                 <li className="nav-item dropdown">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -98,9 +86,8 @@ function Navbar({ user }) {
                     {user.firstName + " " + user.lastName}
                   </Link>
                   <div className="dropdown-menu" aria-labelledby="dropdown04">
-                    
                     <Link className="dropdown-item" to="/history">
-                    <i class="fas fa-history"></i> History
+                      <i className="fas fa-history"></i> History
                     </Link>
                     <Link className="dropdown-item" to="/user-page">
                       <i className="fas fa-cog"></i> Settings
@@ -110,6 +97,22 @@ function Navbar({ user }) {
                     </Link>
                   </div>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/upload-product">
+                    <i className="fas fa-upload fa-2x"></i>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/cart">
+                    <Badge
+                      badgeContent={user.cart && user.cart.length}
+                      color="secondary"
+                    >
+                      <i className="fas fa-shopping-cart fa-2x"></i>
+                    </Badge>
+                  </NavLink>
+                </li>
+                
               </React.Fragment>
             )}
           </ul>
