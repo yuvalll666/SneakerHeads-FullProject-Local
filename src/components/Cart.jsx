@@ -6,11 +6,15 @@ import { Typography, makeStyles } from "@material-ui/core";
 import MainContainer from "./forms/MainContainer";
 import { Empty, Result } from "antd";
 import CartTable from "./cartDetail/CartTable";
+import Paypal from "./utils/Paypal";
 
 const useStyles = makeStyles((them) => ({
   total: {
     alignSelf: "start",
     marginTop: them.spacing(4),
+  },
+  paypal: {
+    alignSelf: "start",
   },
 }));
 
@@ -89,6 +93,16 @@ function Cart() {
       .catch((err) => console.log("err : ", err));
   };
 
+  const transactionSuccess = () => {};
+
+  const transactionError = () => {
+    console.log("Paypal error");
+  };
+
+  const transactionCanceled = () => {
+    console.log("Transaction canceled");
+  };
+
   return (
     <div>
       <MainContainer maxWidth="md">
@@ -116,6 +130,15 @@ function Cart() {
         ) : (
           <Empty className="mt-4" description="No Items In Cart"></Empty>
         )}
+
+        <div className={styles.paypal}>
+          <Paypal
+            totalPrice={TotalPrice}
+            onSuccess={transactionSuccess}
+            transactionError={transactionError}
+            transactionCanceled={transactionCanceled}
+          />
+        </div>
       </MainContainer>
     </div>
   );
