@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { Product } = require("../models/product");
+const { Payment } = require("../models/payment");
 const {
   User,
   validateUser,
@@ -33,16 +34,36 @@ router.post("/successBuy", auth, (req, res) => {
     });
   });
 
-  const { _id, firstName, lastName, email } = req.user;
+  const { firstName, lastName, email } = req.user;
   transactionData.user = {
-    _id: _id,
+    _id: req.user._id,
     firstName: firstName,
     lastName: lastName,
     email: email,
   };
 
-  transactionData.data = paymentData;
+  transactionData.paymentData = paymentData;
   transactionData.product = history;
+
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $push: { history: history }, $set: { cart: [] } },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        return res.status(400).send({ success: false, err });
+      }
+
+      const payment = new Payment(transactionData);
+      payment.save((err, doc) => {
+        if (err) {
+          return res.send({ success: false, err });
+        }
+
+        res.send({ success: true, token: user.generateAuthToken() });
+      });
+    }
+  );
 });
 
 router.get("/removeFromCart", auth, (req, res) => {

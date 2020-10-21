@@ -8,6 +8,7 @@ import { Empty, Result } from "antd";
 import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
 import ProductInfo from "./productDetails/ProductInfo";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((them) => ({
   total: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((them) => ({
 function Cart() {
   const styles = useStyles();
   const user = useContext(UserContext);
+  const history = useHistory();
   const { cart } = user;
   const [ProductsInfo, setProductsInfo] = useState([]);
   const [TotalPrice, setTotalPrice] = useState(0);
@@ -58,13 +60,6 @@ function Cart() {
     }
   }, [ProductsInfo]);
 
-  const renderCartImage = (images) => {
-    if (images.length > 0) {
-      let image = images[0];
-      return `http://localhost:3000/${image}`;
-    }
-  };
-
   const totalSum = (productsInfo) => {
     let total = 0;
     productsInfo.map((item) => {
@@ -86,7 +81,6 @@ function Cart() {
             }
           });
         });
-
         localStorage.setItem("token", response.data.token);
         window.location = "/cart";
       })
@@ -99,15 +93,16 @@ function Cart() {
       paymentData: data,
     };
 
-    http
-      .post(`${apiUrl}/users/successBuy`, variables)
-      .then((response) => {
-        if (response.data.success){
-
-        } else {
-          alert("Failed to purchase item/s")
-        }
-      });
+    http.post(`${apiUrl}/users/successBuy`, variables).then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
+        localStorage.setItem("token", response.data.token);
+        setShowSuccess(true);
+        history.push("/thank-you");
+      } else {
+        alert("Failed to purchase item/s");
+      }
+    });
   };
 
   const transactionError = () => {
@@ -134,9 +129,19 @@ function Cart() {
         />
 
         {TotalPrice > 0 ? (
-          <Typography className={styles.total} component="h2" variant="h5">
-            Total Amount: ${TotalPrice}
-          </Typography>
+          <React.Fragment>
+            <Typography className={styles.total} component="h2" variant="h5">
+              Total Amount: ${TotalPrice}
+            </Typography>
+            <div className={styles.paypal}>
+              <Paypal
+                totalPrice={TotalPrice}
+                onSuccess={transactionSuccess}
+                transactionError={transactionError}
+                transactionCanceled={transactionCanceled}
+              />
+            </div>
+          </React.Fragment>
         ) : ShowSuccess ? (
           <Result
             status="success"
@@ -145,15 +150,6 @@ function Cart() {
         ) : (
           <Empty className="mt-4" description="No Items In Cart"></Empty>
         )}
-
-        <div className={styles.paypal}>
-          <Paypal
-            totalPrice={TotalPrice}
-            onSuccess={transactionSuccess}
-            transactionError={transactionError}
-            transactionCanceled={transactionCanceled}
-          />
-        </div>
       </MainContainer>
     </div>
   );
