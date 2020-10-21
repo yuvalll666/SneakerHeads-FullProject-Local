@@ -8,18 +8,23 @@ import {
   CardContent,
   Card,
   CardActions,
+  Button,
 } from "@material-ui/core";
 import MainContainer from "./forms/MainContainer";
 import { Empty } from "antd";
 import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import PageHeader from "./utils/PageHeader";
 
 const useStyles = makeStyles((them) => ({
   card: {
     alignSelf: "start",
     marginTop: them.spacing(2),
-    background: "whitesmoke",
+    background: "linear-gradient(#e5e5e5, #f5f5f5, #f5f5f5, #f5f5f5)",
+  },
+  link: {
+    fontSize: "3em",
   },
 }));
 
@@ -122,72 +127,85 @@ function Cart() {
   };
 
   return (
-    <div>
-      <MainContainer maxWidth="md">
-        <Typography
-          style={{ alignSelf: "start" }}
-          className="mb-4"
-          component="h1"
-          variant="h3"
-        >
-          Shopping cart 
-        </Typography>
+    <React.Fragment>
+      <PageHeader>Shopping Cart</PageHeader>
 
-        <CartTable
-          ProductsInfo={ProductsInfo}
-          removeFromCart={removeFromCart}
-        />
+      <div className="container">
+        <div className="row">
+          <MainContainer maxWidth="lg">
+            <CartTable
+              ProductsInfo={ProductsInfo}
+              removeFromCart={removeFromCart}
+            />
 
-        {TotalPrice > 0 ? (
-          <Card className={styles.card}>
-            <CardContent>
-              <Typography
-                className="d-flex justify-content-between"
-                variant="body1"
-                component="p"
-              >
-                <span>
-                  Subtotal (
-                  {Quantity > 1 ? (
-                    <span>{Quantity} items</span>
-                  ) : (
-                    <span>{Quantity} item</span>
-                  )}
-                  )
-                </span>{" "}
-                <span>US ${TotalPrice}</span>
-              </Typography>
-              <Typography
-                className="d-flex justify-content-between"
-                variant="body1"
-                component="p"
-              >
-                Shipping <span>Free</span>
-              </Typography>
-              <hr />
-              <div className="d-flex justify-content-between">
-                <Typography variant="h5" component="h2">
-                  Order total
-                </Typography>
-                <Typography variant="h6" component="h2">
-                  US ${TotalPrice}
-                </Typography>
-              </div>
-            </CardContent>
-            <CardActions>
-              <Paypal
-                totalPrice={TotalPrice}
-                onSuccess={transactionSuccess}
-                transactionError={transactionError}
-                transactionCanceled={transactionCanceled}
-              />
-            </CardActions>
-          </Card>
-        ) : (
-          <Empty className="mt-4" description="No Items In Cart"></Empty>
-        )}
-      </MainContainer>
-    </div>
+            {TotalPrice > 0 ? (
+              <Card className={styles.card}>
+                <CardContent>
+                  <Typography
+                    className="d-flex justify-content-between"
+                    variant="body1"
+                    component="p"
+                  >
+                    <span>
+                      Subtotal (
+                      {Quantity > 1 ? (
+                        <span>{Quantity} items</span>
+                      ) : (
+                        <span>{Quantity} item</span>
+                      )}
+                      )
+                    </span>{" "}
+                    <span>US ${TotalPrice}</span>
+                  </Typography>
+                  <Typography
+                    className="d-flex justify-content-between"
+                    variant="body1"
+                    component="p"
+                  >
+                    Shipping <span>Free</span>
+                  </Typography>
+                  <hr />
+                  <div className="d-flex justify-content-between">
+                    <Typography variant="h5" component="h2">
+                      Order total
+                    </Typography>
+                    <Typography variant="h6" component="h2">
+                      US ${TotalPrice}
+                    </Typography>
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <Paypal
+                    totalPrice={TotalPrice}
+                    onSuccess={transactionSuccess}
+                    transactionError={transactionError}
+                    transactionCanceled={transactionCanceled}
+                  />
+                </CardActions>
+              </Card>
+            ) : (
+              <React.Fragment>
+                <Empty className="mt-4" description="No Items In Cart"></Empty>
+                <div className="mt-4 col-6">
+                  <Link to="/products">
+                    <Button
+                      te
+                      fullWidth
+                      size="large"
+                      color="primary"
+                      variant="outlined"
+                    >
+                      {" "}
+                      Shop Now{" "}
+                    </Button>
+                  </Link>
+                </div>
+              </React.Fragment>
+            )}
+          </MainContainer>
+        </div>
+      </div>
+    </React.Fragment>
   );
 }
 

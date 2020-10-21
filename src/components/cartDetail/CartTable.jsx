@@ -18,6 +18,8 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: "#3f51b5",
     color: theme.palette.common.white,
+    fontSize:"1.1em",
+    fontWeight:500
   },
 }))(TableCell);
 
@@ -27,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
   numbers: {
     fontSize: "1.1em",
-    fontFamily: "tahoma",
     fontWeight: 600,
   },
 }));
@@ -75,7 +76,7 @@ function CartTable({ ProductsInfo, removeFromCart }) {
                   <TableCell align="right">
                     <Button
                       onClick={() => removeFromCart(prod._id)}
-                      variant="contained"
+                      variant="outlined"
                       color="secondary"
                       startIcon={<DeleteIcon />}
                     >

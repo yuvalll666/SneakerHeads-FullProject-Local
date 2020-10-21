@@ -9,6 +9,8 @@ import CheckBox from "./productDetails/CheckBox";
 import RadioBox from "./productDetails/RadioBox";
 import { brands, price } from "../datas";
 import SearchFeature from "./productDetails/SearchFeature";
+import "../css/ProductLandingPage.css";
+import { CircularProgress } from "@material-ui/core";
 
 function ProductsLandingPage() {
   const [SearchValue, setSearchValue] = useState("");
@@ -118,7 +120,11 @@ function ProductsLandingPage() {
           style={{ backgroundColor: "#fafafa" }}
           bordered={false}
           hoverable={true}
-          cover={<a href={`/products/${prod._id}`}><ImageSlider images={prod.images} /> </a>}
+          cover={
+            <a href={`/products/${prod._id}`}>
+              <ImageSlider images={prod.images} />{" "}
+            </a>
+          }
         >
           <Meta title={prod.title} description={`$${prod.price}`} />
         </Card>
@@ -128,13 +134,17 @@ function ProductsLandingPage() {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-12 m-4">
-          <h2 className="text-center">View Our Products!</h2>
+      <div className="d-none d-sm-none d-md-block">
+        <div className="col-12 mb-4 d-flex flex-column align-items-end product-landingpage-header-container">
+          <div className="d-flex mt-2 flex-column text-box">
+            <h1>Sneakers</h1>
+            <p>
+              Air Jordan, adidas,
+              Nike, Yeezy and more! Buy all the latest sneakers & shoes right here on SneakerHeads.
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* Filter */}
 
       <div className="row mb-2">
         <div className="col-lg-6 col-md-6">
@@ -149,24 +159,21 @@ function ProductsLandingPage() {
             handleFilters={(filters) => handleFilters(filters, "price")}
           />
         </div>
+        <div className="mt-lg-2 d-flex justify-content-end col-lg-12 col-md-12">
+          <SearchFeature refreshFunction={updateSearchValues} />
+        </div>
       </div>
-
-      {/* Search */}
-      <div className="d-flex justify-content-end">
-        <SearchFeature refreshFunction={updateSearchValues} />
-      </div>
-
       {Products.length === 0 ? (
         <div className="row justify-content-center">
           <div
             style={{ height: "300px" }}
             className="d-flex justify-content-center align-items-center"
           >
-            <h2>Loading Post...</h2>
+            <CircularProgress />
           </div>
         </div>
       ) : (
-        <div>
+        <div className="mt-2">
           <Row gutter={[16, 16]}>{renderCards}</Row>
         </div>
       )}
@@ -174,7 +181,11 @@ function ProductsLandingPage() {
       {PostSize >= Limit && (
         <div className="row justify-content-center">
           <div>
-            <PrimaryButton onClick={onLoadMore} fullWidth={false}>
+            <PrimaryButton
+              variant="outlined"
+              onClick={onLoadMore}
+              fullWidth={false}
+            >
               Load More
             </PrimaryButton>
           </div>

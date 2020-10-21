@@ -12,6 +12,8 @@ import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import { useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
+import { CloudUploadOutlined } from "@material-ui/icons";
+import PageHeader from "./utils/PageHeader";
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -23,7 +25,7 @@ function UploadProduct() {
   const user = useContext(UserContext);
   const styles = useStyles();
   const history = useHistory();
-  const [Chips, setChips] = useState([])
+  const [Chips, setChips] = useState([]);
   const [images, setImages] = useState([]);
 
   const brands = [
@@ -48,7 +50,7 @@ function UploadProduct() {
     const productInfo = {
       writer: user._id,
       images: images,
-      tags:Chips,
+      tags: Chips,
       ...data,
     };
 
@@ -64,14 +66,15 @@ function UploadProduct() {
   };
 
   const handleChange = (chips) => {
-    setChips(chips)
+    setChips(chips);
   };
 
   return (
     <div>
-      <Typography className="text-center mt-4 mb-4" component="h2" variant="h5">
-        Upload Product
-      </Typography>
+      <PageHeader>
+        Upload Product <CloudUploadOutlined fontSize="inherit" />
+      </PageHeader>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FileUpload refreshFunction={updateImages} />
         <MainContainer className={styles.root} maxWidth="sm">

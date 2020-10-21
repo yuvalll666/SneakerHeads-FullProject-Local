@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import { Button } from "@material-ui/core";
+import PageHeader from "./utils/PageHeader";
 
 const tokenKey = "token";
 
@@ -46,7 +47,7 @@ const schema = yup.object().shape({
 const UserPage = () => {
   const [error, setError] = useState({});
   const user = useContext(UserContext);
-  
+
   const { firstName, lastName, email } = user;
   const { register, handleSubmit, watch, errors } = useForm({
     defaultValues: {
@@ -82,7 +83,11 @@ const UserPage = () => {
   };
 
   const deleteUser = async () => {
-    if (window.confirm("ARE YOU SURE YOU WANT TO DELETE THIS ACCOUNT? \n Note: this action can not be reversed")) {
+    if (
+      window.confirm(
+        "ARE YOU SURE YOU WANT TO DELETE THIS ACCOUNT? \n Note: this action can not be reversed"
+      )
+    ) {
       try {
         await http.delete(`${apiUrl}/users/${user._id}`);
         localStorage.removeItem(tokenKey);
@@ -96,90 +101,95 @@ const UserPage = () => {
   };
 
   return (
-    <MainContainer>
-      <Typography component="h2" variant="h5">
-        Edit Account
-      </Typography>
-      <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
-        <Input
-          ref={register}
-          name="firstName"
-          type="text"
-          label="First Name"
-          required
-          error={Boolean(errors.firstName)}
-          helperText={errors?.firstName?.message}
-        />
-        <Input
-          ref={register}
-          name="lastName"
-          type="text"
-          label="Last Name"
-          required
-          error={Boolean(errors.lastName)}
-          helperText={errors?.lastName?.message}
-        />
-        <Input
-          ref={register}
-          name="email"
-          type="email"
-          label="Email"
-          required
-          error={Boolean(errors.email)}
-          helperText={errors?.email?.message}
-        />
+    <React.Fragment>
+      <PageHeader>
+        <div className="text-center">Edit Account</div>
+      </PageHeader>
 
-        <FormControlLabel
-          control={
-            <Checkbox color="primary" inputRef={register} name="changePass" />
-          }
-          label="Would you like to change password ?"
-        />
-        {changePass && (
-          <React.Fragment>
-            <Input
-              ref={register}
-              name="oldPassword"
-              type="password"
-              label="Old Passwrod"
-              required
-              error={Boolean(errors.oldPassword) || !!error.oldPassword}
-              helperText={errors?.oldPassword?.message || error?.oldPassword}
-            />
-            <Input
-              ref={register}
-              name="newPassword"
-              type="password"
-              label="New Passwrod"
-              required
-              error={Boolean(errors.newPassword)}
-              helperText={errors?.newPassword?.message}
-            />
-            <Input
-              ref={register}
-              name="confirmPassword"
-              type="password"
-              label="Confirm Passwrod"
-              required
-              error={Boolean(errors.confirmPassword) || !!error.confirmPassword}
-              helperText={
-                errors?.confirmPassword?.message || error?.confirmPassword
-              }
-            />
-          </React.Fragment>
-        )}
-        <PrimaryButton type="submit">Submit</PrimaryButton>
-      </Form>
-      <Button
-        style={{ marginTop: "100px" }}
-        color="secondary"
-        variant="outlined"
-        size="small"
-        onClick={deleteUser}
-      >
-        Delete Account
-      </Button>
-    </MainContainer>
+      <MainContainer>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            ref={register}
+            name="firstName"
+            type="text"
+            label="First Name"
+            required
+            error={Boolean(errors.firstName)}
+            helperText={errors?.firstName?.message}
+          />
+          <Input
+            ref={register}
+            name="lastName"
+            type="text"
+            label="Last Name"
+            required
+            error={Boolean(errors.lastName)}
+            helperText={errors?.lastName?.message}
+          />
+          <Input
+            ref={register}
+            name="email"
+            type="email"
+            label="Email"
+            required
+            error={Boolean(errors.email)}
+            helperText={errors?.email?.message}
+          />
+
+          <FormControlLabel
+            control={
+              <Checkbox color="primary" inputRef={register} name="changePass" />
+            }
+            label="Would you like to change password ?"
+          />
+          {changePass && (
+            <React.Fragment>
+              <Input
+                ref={register}
+                name="oldPassword"
+                type="password"
+                label="Old Passwrod"
+                required
+                error={Boolean(errors.oldPassword) || !!error.oldPassword}
+                helperText={errors?.oldPassword?.message || error?.oldPassword}
+              />
+              <Input
+                ref={register}
+                name="newPassword"
+                type="password"
+                label="New Passwrod"
+                required
+                error={Boolean(errors.newPassword)}
+                helperText={errors?.newPassword?.message}
+              />
+              <Input
+                ref={register}
+                name="confirmPassword"
+                type="password"
+                label="Confirm Passwrod"
+                required
+                error={
+                  Boolean(errors.confirmPassword) || !!error.confirmPassword
+                }
+                helperText={
+                  errors?.confirmPassword?.message || error?.confirmPassword
+                }
+              />
+            </React.Fragment>
+          )}
+          <PrimaryButton type="submit">Submit</PrimaryButton>
+        </Form>
+        <Button
+          style={{ marginTop: "100px" }}
+          color="secondary"
+          variant="outlined"
+          size="small"
+          onClick={deleteUser}
+        >
+          Delete Account
+        </Button>
+      </MainContainer>
+    </React.Fragment>
   );
 };
 

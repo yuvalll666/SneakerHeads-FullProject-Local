@@ -60,7 +60,7 @@ function FileUpload(props) {
                 {...getRootProps()}
               >
                 <input {...getInputProps()} />
-                <i className="fas fa-plus" style={{ fontSize: "3rem" }}></i>
+                <i className="fas fa-plus" style={{ fontSize: "4rem" }}></i>
               </div>
             )}
           </Dropzone>
@@ -70,10 +70,11 @@ function FileUpload(props) {
           className="ml-4"
           style={{
             display: "flex",
-            width: "350px",
-            height: "240px",
+            width: "351px",
+            height: "241px",
             overflowX: "auto",
             overflowY: "hidden",
+            border:"1px solid lightgrey"
           }}
         >
           {images.map((image, index) => (

@@ -11,6 +11,7 @@ import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { getCurrentUser } from "../services/userService";
+import PageHeader from "./utils/PageHeader"
 
 const schema = yup.object().shape({
   email: yup
@@ -52,10 +53,13 @@ function Step2() {
   };
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
+    <React.Fragment>
+      <PageHeader
+  >
+    <div className="text-center">Step 2</div>
+  </PageHeader>
+    
     <MainContainer>
-      <Typography component="h2" variant="h5">
-        Step 2
-      </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           ref={register}
@@ -87,6 +91,7 @@ function Step2() {
         <PrimaryButton type="submit">Next</PrimaryButton>
       </Form>
     </MainContainer>
+    </React.Fragment>
   );
 }
 

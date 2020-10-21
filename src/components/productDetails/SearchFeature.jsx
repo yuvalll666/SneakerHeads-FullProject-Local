@@ -8,17 +8,19 @@ function SearchFeature(props) {
   const onChangeSearch = (e) => {
     setSearchValue(e.target.value);
 
-    props.refreshFunction(e.target.value)
+    props.refreshFunction(e.target.value);
   };
 
   return (
-    <div className="mb-2">
+  
       <Search
+        style={{ width: "100%" }}
+        size="large"
         value={SearchValue}
         onChange={onChangeSearch}
         placeholder="Search..."
       />
-    </div>
+ 
   );
 }
 

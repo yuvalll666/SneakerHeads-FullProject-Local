@@ -12,6 +12,13 @@ import {
   Button,
 } from "@material-ui/core";
 
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    color: theme.palette.common.white,
+  },
+}))(TableCell);
+
+
 function HistoryTable({ history }) {
   const getDate = (date) => {
     let newDate = new Date(date);
@@ -42,11 +49,11 @@ function HistoryTable({ history }) {
         <Table>
           <TableHead>
             <TableRow className="bg-success">
-              <TableCell align="left">Payment ID</TableCell>
-              <TableCell align="left">Product Name</TableCell>
-              <TableCell align="left">Quantity</TableCell>
-              <TableCell align="left">Price / per 1</TableCell>
-              <TableCell align="left">Date Of Purchase</TableCell>
+              <StyledTableCell align="left">Payment ID</StyledTableCell>
+              <StyledTableCell align="left">Product Name</StyledTableCell>
+              <StyledTableCell align="left">Quantity</StyledTableCell>
+              <StyledTableCell align="left">Price / per 1</StyledTableCell>
+              <StyledTableCell align="left">Date Of Purchase</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import HistoryTable from "./utils/HistoryTable";
-import MainContainer from "./forms/MainContainer";
+import PageHeader from "./utils/PageHeader"
 
 function HistoryPage() {
   const [History, setHistory] = useState([]);
@@ -18,11 +18,15 @@ function HistoryPage() {
   }, []);
 
   return (
-    <div>
-      <MainContainer maxWidth="md">
+    <React.Fragment>
+    <PageHeader>
+    Purchase History
+  </PageHeader>
+      <div className="container">
         <HistoryTable history={History}/>
-      </MainContainer>
-    </div>
+      </div>
+
+    </React.Fragment>
   );
 }
 

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((them) => ({
   root: {
-    marginTop: them.spacing(4),
+    marginTop: them.spacing(0),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

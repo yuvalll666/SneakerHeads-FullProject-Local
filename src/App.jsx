@@ -36,7 +36,7 @@ function App() {
       <header>
         <Navbar user={user} />
       </header>
-      <main className="container-fluid flex-fill">
+      <main className=" flex-fill">
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />

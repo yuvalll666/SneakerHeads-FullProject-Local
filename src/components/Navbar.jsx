@@ -4,10 +4,10 @@ import Badge from "@material-ui/core/Badge";
 
 function Navbar({ user }) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light shadow">
+    <nav className="navbar navbar-expand-lg navbar-light shadow-sm">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          Shop App
+        <Link className="navbar-brand mb-0 h1" to="/">
+          SneakerHeads
         </Link>
         <button
           className="navbar-toggler"
@@ -41,17 +41,20 @@ function Navbar({ user }) {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Categories
+                Brands
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
                 <Link className="dropdown-item" to="#">
-                  Action
+                  Air Jordan
                 </Link>
                 <Link className="dropdown-item" to="#">
-                  Another action
+                  Nike
                 </Link>
                 <Link className="dropdown-item" to="#">
-                  Something else here
+                  Yeezy
+                </Link>
+                <Link className="dropdown-item" to="#">
+                  Adidas
                 </Link>
               </div>
             </li>
