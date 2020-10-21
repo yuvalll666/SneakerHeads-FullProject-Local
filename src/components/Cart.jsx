@@ -7,6 +7,7 @@ import MainContainer from "./forms/MainContainer";
 import { Empty, Result } from "antd";
 import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
+import ProductInfo from "./productDetails/ProductInfo";
 
 const useStyles = makeStyles((them) => ({
   total: {
@@ -93,7 +94,22 @@ function Cart() {
       .catch((err) => console.log("err : ", err));
   };
 
-  const transactionSuccess = () => {};
+  const transactionSuccess = (data) => {
+    const variables = {
+      cartDetail: ProductsInfo,
+      paymentData: data,
+    };
+
+    http
+      .post(`${apiUrl}/users/successBuy`, variables)
+      .then((response) => {
+        if (response.data.success){
+
+        } else {
+          alert("Failed to purchase item/s")
+        }
+      });
+  };
 
   const transactionError = () => {
     console.log("Paypal error");
