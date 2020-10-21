@@ -22,7 +22,7 @@ function HistoryPage() {
     <PageHeader>
     Purchase History
   </PageHeader>
-      <div className="container">
+      <div className="container-lg container-md">
         <HistoryTable history={History}/>
       </div>
 

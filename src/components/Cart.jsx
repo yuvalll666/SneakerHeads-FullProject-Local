@@ -129,17 +129,20 @@ function Cart() {
   return (
     <React.Fragment>
       <PageHeader>Shopping Cart</PageHeader>
-
-      <div className="container">
+      <div className="container-lg container-md">
         <div className="row">
-          <MainContainer maxWidth="lg">
+          <div className="col-12">
             <CartTable
               ProductsInfo={ProductsInfo}
               removeFromCart={removeFromCart}
             />
+          </div>
+        </div>
 
+        <div className="row">
+          <div className="col-12">
             {TotalPrice > 0 ? (
-              <Card className={styles.card}>
+              <Card style={{ display: "inline-block" }} className={styles.card}>
                 <CardContent>
                   <Typography
                     className="d-flex justify-content-between"
@@ -202,7 +205,7 @@ function Cart() {
                 </div>
               </React.Fragment>
             )}
-          </MainContainer>
+          </div>
         </div>
       </div>
     </React.Fragment>

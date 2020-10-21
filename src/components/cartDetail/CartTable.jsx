@@ -18,8 +18,8 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: "#3f51b5",
     color: theme.palette.common.white,
-    fontSize:"1.1em",
-    fontWeight:500
+    fontSize: "1.1em",
+    fontWeight: 500,
   },
 }))(TableCell);
 
@@ -45,49 +45,49 @@ function CartTable({ ProductsInfo, removeFromCart }) {
   };
 
   return (
-    <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="left">Product Image</StyledTableCell>
-                <StyledTableCell align="center">Quantity</StyledTableCell>
-                <StyledTableCell align="right">Price</StyledTableCell>
-                <StyledTableCell align="right">
-                  Remove From Cart
-                </StyledTableCell>
+    
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="left">Product Image</StyledTableCell>
+              <StyledTableCell align="center">Quantity</StyledTableCell>
+              <StyledTableCell align="right">Price</StyledTableCell>
+              <StyledTableCell align="right">Remove From Cart</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {ProductsInfo.map((prod, index) => (
+              <TableRow key={index}>
+                <TableCell align="left">
+                  <img
+                    src={renderCartImage(prod.images)}
+                    alt="productImage"
+                    className={styles.productImage}
+                  />
+                </TableCell>
+                <TableCell className={styles.numbers} align="center">
+                  {prod.quantity}
+                </TableCell>
+                <TableCell className={styles.numbers} align="right">
+                  ${prod.price}
+                </TableCell>
+                <TableCell align="right">
+                  <Button
+                    onClick={() => removeFromCart(prod._id)}
+                    variant="outlined"
+                    color="secondary"
+                    startIcon={<DeleteIcon />}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {ProductsInfo.map((prod, index) => (
-                <TableRow key={index}>
-                  <TableCell align="left">
-                    <img
-                      src={renderCartImage(prod.images)}
-                      alt="productImage"
-                      className={styles.productImage}
-                    />
-                  </TableCell>
-                  <TableCell className={styles.numbers} align="center">
-                    {prod.quantity}
-                  </TableCell>
-                  <TableCell className={styles.numbers} align="right">
-                    ${prod.price}
-                  </TableCell>
-                  <TableCell align="right">
-                    <Button
-                      onClick={() => removeFromCart(prod._id)}
-                      variant="outlined"
-                      color="secondary"
-                      startIcon={<DeleteIcon />}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+  
   );
 }
 
