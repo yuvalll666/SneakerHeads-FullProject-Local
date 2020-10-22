@@ -189,19 +189,20 @@ function Cart() {
             ) : (
               <React.Fragment>
                 <Empty className="mt-4" description="No Items In Cart"></Empty>
-                <div className="mt-4 col-6">
-                  <Link to="/products">
-                    <Button
-                      te
-                      fullWidth
-                      size="large"
-                      color="primary"
-                      variant="outlined"
-                    >
-                      {" "}
-                      Shop Now{" "}
-                    </Button>
-                  </Link>
+                <div className="row justify-content-center">
+                  <div className="mt-4 justify-content-center col-6">
+                    <Link to="/products">
+                      <Button
+                        fullWidth
+                        size="large"
+                        color="primary"
+                        variant="outlined"
+                      >
+                        {" "}
+                        Shop Now{" "}
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </React.Fragment>
             )}

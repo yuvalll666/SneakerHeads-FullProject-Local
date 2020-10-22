@@ -1,11 +1,14 @@
-import PageHeader from "./utils/PageHeader"
+import PageHeader from "./utils/PageHeader";
 import React from "react";
+import "../css/HomePage.css";
 
 function Home() {
   return (
-    <PageHeader>
-    SneakerHeads
-  </PageHeader>
+    // <div>
+    //   <PageHeader>SneakerHeads</PageHeader>
+    // </div>
+
+    <div className="home-page-header"></div>
   );
 }
 

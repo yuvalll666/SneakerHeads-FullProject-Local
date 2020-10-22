@@ -38,7 +38,7 @@ function App() {
       </header>
       <main className=" flex-fill">
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/step1" component={Step1} />
           <Route path="/step2" component={Step2} />
@@ -46,9 +46,9 @@ function App() {
           <Route path="/Signin" component={Signin} />
           <Route path="/logout" component={Logout} />
           <Route path="/products/:productId" component={ProductPage} />
-          <Route exact path="/products" component={ProductsLandingPage} />
-          <Route exact path="/thank-you" component={ThankYou} />
-          <Route exact path="/history" component={HistoryPage} />
+          <Route path="/products" exact component={ProductsLandingPage} />
+          <Route path="/thank-you" exact component={ThankYou} />
+          <Route path="/history" exact component={HistoryPage} />
 
           <UserContext.Provider value={user}>
             <Route path="/cart" component={Cart} />

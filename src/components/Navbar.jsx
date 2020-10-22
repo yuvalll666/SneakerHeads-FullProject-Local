@@ -45,16 +45,20 @@ function Navbar({ user }) {
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
                 <Link className="dropdown-item" to="#">
-                  Air Jordan
+                <strong className="mr-2">Jordan</strong>
+                  <img width="30px" src="/images/JumpMan.png"></img>
                 </Link>
                 <Link className="dropdown-item" to="#">
-                  Nike
+                  <strong className="mr-2">Nike</strong>
+                  <img width="40px" src="/images/nikeSwoosh.png"></img>
                 </Link>
                 <Link className="dropdown-item" to="#">
-                  Yeezy
+                <strong className="mr-2">Yeezy</strong>
+                  <img width="40px" src="/images/yeezyLogo.png"></img>
                 </Link>
                 <Link className="dropdown-item" to="#">
-                  Adidas
+                  <strong className="mr-2">Adidas</strong>
+                  <img width="30px" src="/images/adidasLogo.png"></img>
                 </Link>
               </div>
             </li>
@@ -75,7 +79,6 @@ function Navbar({ user }) {
               </React.Fragment>
             )}
             {user && (
-              
               <React.Fragment>
                 <li className="nav-item dropdown">
                   <Link
@@ -114,8 +117,7 @@ function Navbar({ user }) {
                       <i className="fas fa-shopping-cart fa-2x"></i>
                     </Badge>
                   </NavLink>
-                </li >
-                
+                </li>
               </React.Fragment>
             )}
           </ul>
