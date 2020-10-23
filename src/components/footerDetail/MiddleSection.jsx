@@ -1,25 +1,24 @@
 import React from "react";
 import "../../css/Footer.css";
 import { Link } from "react-router-dom";
-
-function FooterNavbar() {
+function MiddleSection() {
   return (
-    <div className="navbar-container mr-4">
+       <div className="navbar-container">
       <nav className="footer-navbar">
-        <h5 className="section-headline">Collection</h5>
+        <h5 className="section-headline">Brands</h5>
         <div>
           <ul>
             <li>
-              <Link className="links" to="/">Home Page</Link>
+              <Link className="links" to="/">Air Jordan</Link>
             </li>
             <li>
-              <Link className="links" to="/products">Browse</Link>
+              <Link className="links" to="/products">Nike</Link>
             </li>
             <li>
-              <Link className="links" to="/cart">My Cart</Link>
+              <Link className="links" to="/cart">Adidas</Link>
             </li>
             <li>
-              <Link className="links" to="/user-page">Settings</Link>
+              <Link className="links" to="/user-page">Yeezy</Link>
             </li>
             <li>
               <Link className="links" to=""> </Link>
@@ -28,7 +27,7 @@ function FooterNavbar() {
         </div>
       </nav>
     </div>
-  );
+  )
 }
 
-export default FooterNavbar;
+export default MiddleSection

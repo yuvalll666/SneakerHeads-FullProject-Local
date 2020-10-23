@@ -1,21 +1,25 @@
 import React from "react";
 import "../css/Footer.css";
 import FooterNavbar from "./footerDetail/FooterNavbar";
+import MiddleSection from "./footerDetail/MiddleSection";
+import ContactUs from "./footerDetail/ContactUs";
 
 function Footer() {
   return (
     <div className="footer-container">
       <div className="top-stripe-container col-12">
         <div className="container-fluid">
-          <div className="row mt-4">
-            <div className="d-flex justify-content-center col-4">
+          <div className="row mt-4 d-flex justify-content-center">
+            <div className="col-4 sections">
               <FooterNavbar />
             </div>
-            <div className="d-flex justify-content-center col-4 text-white">
-              middle
+
+            <div className="col-4 sections">
+              <MiddleSection />
             </div>
-            <div className="d-flex justify-content-center col-4 text-white">
-              end
+
+            <div className="col-4 sections">
+              <ContactUs />
             </div>
           </div>
         </div>
