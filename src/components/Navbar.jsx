@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 
 function Navbar({ user }) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light shadow-sm">
+    <nav className="navbar navbar-expand-md navbar-light shadow">
       <div className="container-fluid">
         <Link className="navbar-brand mb-0 h1" to="/">
           SneakerHeads
@@ -45,7 +45,7 @@ function Navbar({ user }) {
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
                 <Link className="dropdown-item" to="#">
-                <strong className="mr-2">Jordan</strong>
+                  <strong className="mr-2">Jordan</strong>
                   <img width="30px" src="/images/JumpMan.png"></img>
                 </Link>
                 <Link className="dropdown-item" to="#">
@@ -53,7 +53,7 @@ function Navbar({ user }) {
                   <img width="40px" src="/images/nikeSwoosh.png"></img>
                 </Link>
                 <Link className="dropdown-item" to="#">
-                <strong className="mr-2">Yeezy</strong>
+                  <strong className="mr-2">Yeezy</strong>
                   <img width="40px" src="/images/yeezyLogo.png"></img>
                 </Link>
                 <Link className="dropdown-item" to="#">
@@ -108,7 +108,7 @@ function Navbar({ user }) {
                     <i className="fas fa-upload fa-2x"></i>
                   </NavLink>
                 </li>
-                <li className="nav-item mr-4">
+                <li className="nav-item">
                   <NavLink className="nav-link" to="/cart">
                     <Badge
                       badgeContent={user.cart && user.cart.length}

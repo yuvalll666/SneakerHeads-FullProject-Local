@@ -14,15 +14,27 @@ router.get("/product_by_id", (req, res) => {
 
   if (type === "array") {
     productIds = req.query.id.split(",");
+    Product.find({ _id: { $in: productIds } })
+      .populate("writer")
+      .exec((error, product) => {
+        if (error) {
+          return res.status(400).send({ error: error });
+        }
+        return res.send(product);
+      });
   }
 
-  Product.find({ _id: { $in: productIds } })
+  Product.findOneAndUpdate(
+    { _id: productIds },
+    { $inc: { views: 1 } },
+    { new: true }
+  )
     .populate("writer")
     .exec((error, product) => {
       if (error) {
         return res.status(400).send({ error: error });
       }
-      return res.send(product);
+      return res.send([product]);
     });
 });
 

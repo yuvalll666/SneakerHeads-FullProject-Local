@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useParams } from "react-router-dom";
 import { getCurrentUser } from "./services/userService";
 import "./App.css";
 
@@ -24,6 +24,7 @@ import HistoryPage from "./components/HistoryPage";
 export const UserContext = createContext(null);
 
 function App() {
+ 
   const [user, SetUser] = useState({});
 
   useEffect(() => {

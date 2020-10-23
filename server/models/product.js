@@ -38,8 +38,12 @@ const productSchema = new Schema(
       default: 1,
     },
     tags: {
-      type:Array,
-      default: []
+      type: Array,
+      default: [],
+    },
+    views: {
+      type: Number,
+      default:0,
     },
     createdAt: { type: Date, default: Date.now },
   },
@@ -56,7 +60,8 @@ function validateProduct(product) {
     writer: Joi.string(),
     brand: Joi.number(),
     images: Joi.array().required(),
-    tags: Joi.array()
+    tags: Joi.array(),
+    views: Joi.number(),
   });
 
   return schema.validate(product, { abortEarly: false });
