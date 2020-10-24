@@ -38,6 +38,7 @@ function ProductsLandingPage() {
         if (!products.length) {
           setPostSize(0);
         }
+        
 
         if (variables.loadMore) {
           setProducts([...Products, ...products]);
@@ -173,9 +174,11 @@ function ProductsLandingPage() {
           </div>
         </div>
       ) : (
+
         <div className="mt-2">
           <Row gutter={[16, 16]}>{renderCards}</Row>
         </div>
+        
       )}
 
       {PostSize >= Limit && (

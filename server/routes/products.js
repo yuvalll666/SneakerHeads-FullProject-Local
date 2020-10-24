@@ -8,11 +8,23 @@ const auth = require("../middleware/auth");
 const path = require("path");
 const { Product, validateProduct } = require("../models/product");
 
-router.get("/product_by_id", (req, res) => {
+router.post("/getMostViews", (req, res) => {
+  let limit = req.body.limit;
+  console.log(limit);
+  Product.find({})
+    .sort({ views: -1 })
+    .limit(limit)
+    .exec((error, products) => {
+      if (error) {
+        return res.status(400).send({ success: false, error });
+      }
+      res.send({ success: true, products });
+    });
+});
+
+router.get("/products_by_id", (req, res) => {
   let type = req.query.type;
   let productIds = req.query.id;
-
-  if (type === "array") {
     productIds = req.query.id.split(",");
     Product.find({ _id: { $in: productIds } })
       .populate("writer")
@@ -22,25 +34,25 @@ router.get("/product_by_id", (req, res) => {
         }
         return res.send(product);
       });
-  }
-
-  Product.findOneAndUpdate(
-    { _id: productIds },
-    { $inc: { views: 1 } },
-    { new: true }
-  )
-    .populate("writer")
-    .exec((error, product) => {
-      if (error) {
-        return res.status(400).send({ error: error });
-      }
-      return res.send([product]);
-    });
+});
+router.get("/product_by_id", (req, res) => {
+  let productIds = req.query.id;
+    Product.findOneAndUpdate(
+      { _id: productIds },
+      { $inc: { views: 1 } },
+      { new: true }
+    )
+      .populate("writer")
+      .exec((error, product) => {
+        if (error) {
+          console.log("three");
+          return res.status(400).send({ error: error });
+        }
+        return res.status(200).send([product]);
+      });
 });
 
 router.post("/getProducts", async (req, res) => {
-  // let order = req.body.order ? req.body.order : "desc";
-  // let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let lastId = req.body.lastId ? req.body.lastId : null;
   let term = req.body.searchTerm ? req.body.searchTerm : null;

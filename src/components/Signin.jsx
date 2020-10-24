@@ -34,7 +34,6 @@ function Step2() {
       const { email, password } = data;
       await login(email, password);
       window.location = "/";
-      // history.push("/")
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data);

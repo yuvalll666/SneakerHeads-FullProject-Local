@@ -16,6 +16,7 @@ import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
 import { Link } from "react-router-dom";
 import PageHeader from "./utils/PageHeader";
+import Axios from "axios";
 
 const useStyles = makeStyles((them) => ({
   card: {
@@ -46,7 +47,7 @@ function Cart() {
         });
 
         http
-          .get(`${apiUrl}/products/product_by_id?id=${cartItemsIds}&type=array`)
+          .get(`${apiUrl}/products/products_by_id?id=${cartItemsIds}&type=array`)
           .then((response) => {
             let arr = cart.map((item) => {
               return item.quantity;

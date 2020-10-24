@@ -12,7 +12,7 @@ const ProductPage = (props) => {
 
   useEffect(() => {
     http
-      .get(`${apiUrl}/products/product_by_id?id=${productId}&type=single`)
+      .get(`${apiUrl}/products/product_by_id?id=${productId}`)
       .then((response) => {
         console.log(response.data)
         setProduct(response.data[0]);
@@ -27,7 +27,7 @@ const ProductPage = (props) => {
       })
       .catch((err) => console.log("err : ", err));
 
-    window.location = "/cart";
+    window.location = "/cart"; 
   };
 
   return (
