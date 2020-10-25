@@ -9,13 +9,14 @@ import { Typography } from "@material-ui/core";
 import ImageSlider from "./utils/ImageSlider";
 import { useToasts } from "react-toast-notifications";
 import PageHeader from "./utils/PageHeader";
+import PopularBrands from "./HomePageDetail/PopularBrands";
 
 function Home() {
   const { addToast } = useToasts();
   const [ViewsProducts, setViewsProducts] = useState([]);
 
   useEffect(() => {
-    const limit = 4;
+    const limit = 8;
     http.post(`${apiUrl}/products/getMostViews`, { limit }).then((response) => {
       if (response.data.success) {
         setViewsProducts(response.data.products);
@@ -35,7 +36,7 @@ function Home() {
             backgroundColor: "#fafafa",
             overflow: "hidden",
           }}
-          bordered={false}
+          bordered={true}
           hoverable={true}
           cover={
             <a href={`/products/${prod._id}`}>
@@ -60,66 +61,7 @@ function Home() {
         {/* stripe image */}
       </div>
       <div className="container">
-        <div className="row mt-4">
-          <div className="col-8">
-            <h2 className="mb-0 row-title">Popular Brands</h2>
-          </div>
-          <div className="col-4 d-flex align-items-end justify-content-end">
-            <Typography component="h5">
-              <Link className="see-all text-success" to="/products">
-                See All
-              </Link>
-            </Typography>
-          </div>
-        </div>
-
-        <div className="row scroll" style={{ overflowX: "auto" }}>
-          <div className="col-12 d-flex">
-            <div className="p-2 brands-container ">
-              <Link to="/brands/jordan">
-                <img
-                  src="http://localhost:3000/images/000-air-jordan.jpg"
-                  alt=""
-                  className="brands"
-                />
-                <div className="side-image-container jordan" />
-              </Link>
-            </div>
-            <div className="p-2 brands-container">
-              <Link to="/brands/nike">
-                <img
-                  width="250px"
-                  src="http://localhost:3000/images/001-nike.jpg"
-                  alt=""
-                  className="brands"
-                />
-                <div className="side-image-container nike" />
-              </Link>
-            </div>
-            <div className="p-2 brands-container ">
-              <Link to="/brands/yeezy">
-                <img
-                  width="250px"
-                  src="http://localhost:3000/images/002-yeezy.jpg"
-                  alt=""
-                  className="brands"
-                />
-                <div className="side-image-container yeezy" />
-              </Link>
-            </div>
-            <div className="p-2 brands-container ">
-              <Link to="/brands/adidas">
-                <img
-                  width="250px"
-                  src="http://localhost:3000/images/003-adidas.jpg"
-                  alt=""
-                  className="brands"
-                />
-                <div className="side-image-container adidas" />
-              </Link>
-            </div>
-          </div>
-        </div>
+        <PopularBrands />
 
         <div className="row mt-4">
           <div className="col-8">
@@ -133,7 +75,10 @@ function Home() {
             </Typography>
           </div>
         </div>
-        <Row gutter={[16, 16]}>{renderCards}</Row>
+        <div className="mt-2">
+          <Row gutter={[30, 16]}>{renderCards}</Row>
+        </div>
+
         {/*Eaxmples!!!!!!!!!!!!!!!!!! */}
         <div className="row">
           <div className="col-12 mt-4">

@@ -122,8 +122,8 @@ function ProductsLandingPage() {
     return (
       <Col lg={6} md={8} xs={12} key={index}>
         <Card
-          style={{ backgroundColor: "#fafafa" }}
-          bordered={false}
+          style={{ backgroundColor: "#fafafa",overflow: "hidden", }}
+          bordered={true}
           hoverable={true}
           cover={
             <a href={`/products/${prod._id}`}>
@@ -168,7 +168,7 @@ function ProductsLandingPage() {
               handleFilters={(filters) => handleFilters(filters, "price")}
             />
           </div>
-          <div className="mt-lg-2 d-flex justify-content-end col-lg-12 col-md-12">
+          <div className="mt-lg-2 d-flex justify-content-end col-lg-4 col-md-12">
             <SearchFeature refreshFunction={updateSearchValues} />
           </div>
         </div>
@@ -183,7 +183,7 @@ function ProductsLandingPage() {
           </div>
         ) : (
           <div className="mt-2">
-            <Row gutter={[16, 16]}>{renderCards}</Row>
+            <Row gutter={[30, 16]}>{renderCards}</Row>
           </div>
         )}
 
