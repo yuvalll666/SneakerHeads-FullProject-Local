@@ -4,8 +4,11 @@ const http = require("http").Server(app);
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+
+// "mongodb+srv://yuval:Aza315569533@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority"
+
 mongoose
-  .connect("mongodb://localhost/online-shop", {
+  .connect("mongodb+srv://yuval:Aza315569533@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

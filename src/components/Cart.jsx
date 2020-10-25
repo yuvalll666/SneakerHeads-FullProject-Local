@@ -10,13 +10,12 @@ import {
   CardActions,
   Button,
 } from "@material-ui/core";
-import MainContainer from "./forms/MainContainer";
 import { Empty } from "antd";
 import CartTable from "./cartDetail/CartTable";
 import Paypal from "./utils/Paypal";
 import { Link } from "react-router-dom";
 import PageHeader from "./utils/PageHeader";
-import Axios from "axios";
+import { useToasts } from "react-toast-notifications";
 
 const useStyles = makeStyles((them) => ({
   card: {
@@ -30,6 +29,7 @@ const useStyles = makeStyles((them) => ({
 }));
 
 function Cart() {
+  const { addToast } = useToasts();
   const styles = useStyles();
   const user = useContext(UserContext);
   const { cart } = user;
@@ -47,7 +47,9 @@ function Cart() {
         });
 
         http
-          .get(`${apiUrl}/products/products_by_id?id=${cartItemsIds}&type=array`)
+          .get(
+            `${apiUrl}/products/products_by_id?id=${cartItemsIds}&type=array`
+          )
           .then((response) => {
             let arr = cart.map((item) => {
               return item.quantity;
@@ -114,7 +116,7 @@ function Cart() {
         localStorage.setItem("token", response.data.token);
         window.location = "/thank-you";
       } else {
-        alert("Failed to purchase item/s");
+        addToast("Failed to purchase item/s", { appearance: "error" });
       }
     });
   };

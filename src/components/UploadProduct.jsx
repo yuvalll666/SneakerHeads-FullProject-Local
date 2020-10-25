@@ -3,7 +3,6 @@ import MainContainer from "./forms/MainContainer";
 import Form from "./forms/Form";
 import Input from "./forms/Input";
 import PrimaryButton from "./forms/PrimaryButton";
-import Typography from "@material-ui/core/Typography";
 import { useForm } from "react-hook-form";
 import FileUpload from "./utils/FileUpload";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,6 +13,9 @@ import { useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 import { CloudUploadOutlined } from "@material-ui/icons";
 import PageHeader from "./utils/PageHeader";
+import { brands } from "../datas";
+import {useToasts} from "react-toast-notifications"
+
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -22,19 +24,13 @@ const useStyles = makeStyles((them) => ({
 }));
 
 function UploadProduct() {
+  const { addToast } = useToasts()
   const user = useContext(UserContext);
   const styles = useStyles();
   const history = useHistory();
   const [Chips, setChips] = useState([]);
   const [images, setImages] = useState([]);
 
-  const brands = [
-    { key: 1, value: "NIKE" },
-    { key: 2, value: "ADIDAS" },
-    { key: 3, value: "VANS" },
-    { key: 4, value: "CONVERS" },
-    { key: 5, value: "NB" },
-  ];
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
   });
@@ -44,9 +40,15 @@ function UploadProduct() {
 
   const onSubmit = async (data) => {
     const { title, description, price, brand } = data;
-    // if (!title || !description || !price || !brand || !images) {
-    //   return alert("Please fill of fields first!");
-    // }
+
+    if (!title || !description || !price || !brand || !images) {
+      // return toast.error("Please fill of fields first!");
+   return addToast("Please fill all of the fields first!", {
+        appearance: 'error',
+      })
+      // "Please fill of fields first!"
+    }
+
     const productInfo = {
       writer: user._id,
       images: images,
@@ -56,11 +58,15 @@ function UploadProduct() {
 
     try {
       await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
-      alert("Product uploaded successfuly");
+      addToast("Product uploaded successfuly", {
+        appearance:'success'
+      });
       history.push("/");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert(error.response.data.error);
+        addToast(error.response.data.error, {
+          appearance:'success'
+        });
       }
     }
   };

@@ -35,6 +35,7 @@ router.get("/products_by_id", (req, res) => {
         return res.send(product);
       });
 });
+
 router.get("/product_by_id", (req, res) => {
   let productIds = req.query.id;
     Product.findOneAndUpdate(

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import HistoryTable from "./utils/HistoryTable";
-import PageHeader from "./utils/PageHeader"
+import PageHeader from "./utils/PageHeader";
+import { useToasts } from "react-toast-notifications";
 
 function HistoryPage() {
+  const { addToast } = useToasts();
   const [History, setHistory] = useState([]);
 
   useEffect(() => {
@@ -12,20 +14,17 @@ function HistoryPage() {
       if (response.data.success) {
         setHistory(response.data.history);
       } else {
-        alert("Failed to get History");
+        addToast("Failed to get History", { appearance: "error" });
       }
     });
   }, []);
 
   return (
     <React.Fragment>
-    <PageHeader>
-    Purchase History
-  </PageHeader>
+      <PageHeader>Purchase History</PageHeader>
       <div className="container-lg container-md">
-        <HistoryTable history={History}/>
+        <HistoryTable history={History} />
       </div>
-
     </React.Fragment>
   );
 }

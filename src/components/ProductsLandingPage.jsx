@@ -11,8 +11,11 @@ import { brands, price } from "../datas";
 import SearchFeature from "./productDetails/SearchFeature";
 import "../css/ProductLandingPage.css";
 import { CircularProgress } from "@material-ui/core";
+import { useToasts } from "react-toast-notifications";
+import PageHeader from "./utils/PageHeader";
 
 function ProductsLandingPage() {
+  const { addToast } = useToasts();
   const [SearchValue, setSearchValue] = useState("");
   const [Products, setProducts] = useState([]);
   const [Limit, setLimit] = useState(12);
@@ -38,7 +41,6 @@ function ProductsLandingPage() {
         if (!products.length) {
           setPostSize(0);
         }
-        
 
         if (variables.loadMore) {
           setProducts([...Products, ...products]);
@@ -53,7 +55,9 @@ function ProductsLandingPage() {
           setLastId(products[lastIndex]._id);
         }
       } else {
-        alert("Faild to fetch products data");
+        addToast("Faild to fetch products data", {
+          appearance: "error",
+        });
       }
     });
   };
@@ -134,67 +138,70 @@ function ProductsLandingPage() {
   });
 
   return (
-    <div className="container">
-      <div className="d-none d-sm-none d-md-block">
-        <div className="col-12 mb-4 d-flex flex-column align-items-end product-landingpage-header-container">
-          <div className="d-flex mt-2 flex-column text-box">
-            <h1>Sneakers</h1>
-            <p>
-              Air Jordan, adidas,
-              Nike, Yeezy and more! Buy all the latest sneakers & shoes right here on SneakerHeads.
-            </p>
+    <React.Fragment>
+      <div className="d-sm-block d-md-none">
+        <PageHeader>Browse</PageHeader>
+      </div>
+      <div className="container">
+        <div className="d-none d-sm-none d-md-block">
+          <div className="col-12 d-flex flex-column align-items-end product-landingpage-header-container">
+            <div className="d-flex mt-2 flex-column text-box">
+              <h1>Sneakers</h1>
+              <p>
+                Air Jordan, adidas, Nike, Yeezy and more! Buy all the latest
+                sneakers & shoes right here on SneakerHeads.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="row mb-2">
-        <div className="col-lg-6 col-md-6">
-          <CheckBox
-            brands={brands}
-            handleFilters={(filters) => handleFilters(filters, "brand")}
-          />
-        </div>
-        <div className="col-lg-6 col-md-6">
-          <RadioBox
-            price={price}
-            handleFilters={(filters) => handleFilters(filters, "price")}
-          />
-        </div>
-        <div className="mt-lg-2 d-flex justify-content-end col-lg-12 col-md-12">
-          <SearchFeature refreshFunction={updateSearchValues} />
-        </div>
-      </div>
-      {Products.length === 0 ? (
-        <div className="row justify-content-center">
-          <div
-            style={{ height: "300px" }}
-            className="d-flex justify-content-center align-items-center"
-          >
-            <CircularProgress />
+        <div className="row mb-2 mt-4">
+          <div className="col-lg-6 col-md-6">
+            <CheckBox
+              brands={brands}
+              handleFilters={(filters) => handleFilters(filters, "brand")}
+            />
+          </div>
+          <div className="col-lg-6 col-md-6">
+            <RadioBox
+              price={price}
+              handleFilters={(filters) => handleFilters(filters, "price")}
+            />
+          </div>
+          <div className="mt-lg-2 d-flex justify-content-end col-lg-12 col-md-12">
+            <SearchFeature refreshFunction={updateSearchValues} />
           </div>
         </div>
-      ) : (
-
-        <div className="mt-2">
-          <Row gutter={[16, 16]}>{renderCards}</Row>
-        </div>
-        
-      )}
-
-      {PostSize >= Limit && (
-        <div className="row justify-content-center">
-          <div>
-            <PrimaryButton
-              variant="outlined"
-              onClick={onLoadMore}
-              fullWidth={false}
+        {Products.length === 0 ? (
+          <div className="row justify-content-center">
+            <div
+              style={{ height: "300px" }}
+              className="d-flex justify-content-center align-items-center"
             >
-              Load More
-            </PrimaryButton>
+              <CircularProgress />
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className="mt-2">
+            <Row gutter={[16, 16]}>{renderCards}</Row>
+          </div>
+        )}
+
+        {PostSize >= Limit && (
+          <div className="row justify-content-center">
+            <div>
+              <PrimaryButton
+                variant="outlined"
+                onClick={onLoadMore}
+                fullWidth={false}
+              >
+                Load More
+              </PrimaryButton>
+            </div>
+          </div>
+        )}
+      </div>
+    </React.Fragment>
   );
 }
 

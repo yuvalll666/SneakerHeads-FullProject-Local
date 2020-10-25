@@ -18,3 +18,46 @@
   font-weight: 500;
   height: 35px;
 }
+
+.row-title {
+  font-size: 1.3em;
+}
+
+.brands {
+  width: 260px;
+}
+.brands-container {
+  position: relative;
+  width: 260px;
+  margin-right: 10px;
+}
+
+.side-image {
+  width: 30px;
+}
+.side-image-container {
+  background-color: white;
+  position: absolute;
+  top:0;
+  right:0;
+  width: 50px;
+  height: 50px;
+  
+  background-repeat: no-repeat;
+  background-position: 50% 60%;
+  background-size: 70%;
+}
+
+.jordan{
+  background-image: url("http://localhost:3000/images/JumpMan.png");
+}
+
+.nike{
+  background-image: url("http://localhost:3000/images/nikeSwoosh.png");
+}
+.yeezy{
+  background-image: url("http://localhost:3000/images/yeezyLogo.png");
+}
+.adidas{
+  background-image: url("http://localhost:3000/images/adidasLogo.png");
+}

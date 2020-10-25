@@ -2,6 +2,7 @@
   width: 100%;
   height: 275px;
   position: absolute;
+  margin-top: 50px;
 }
 
 .top-stripe-container {
@@ -26,9 +27,6 @@
   font-size: 1.2em;
 }
 
-.nav-bar-container {
-}
-
 .footer-navbar ul {
   padding: 0;
 }
@@ -47,13 +45,25 @@
 }
 
 .section-headline {
-  color: white;
+  color: rgb(216, 216, 216);
   font-size: 1.2em;
-
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .sections{
   display: flex;
   justify-content: center;
+}
+
+.contact-us{
+  padding: 0;
+  color:lightgrey;
+  letter-spacing: 0.8px;
+   
+}
+
+.contact-us h5{
+  font-size: 1.2em;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
 }

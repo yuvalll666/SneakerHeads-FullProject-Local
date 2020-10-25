@@ -27,6 +27,7 @@
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
+    "react-toast-notifications": "^2.4.0",
     "yup": "^0.29.3"
   },
   "scripts": {

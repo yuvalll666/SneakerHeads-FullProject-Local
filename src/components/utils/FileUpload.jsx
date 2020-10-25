@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
+import { useToasts } from "react-toast-notifications";
 
 function FileUpload(props) {
+  const { addToast } = useToasts();
   const [images, setImages] = useState([]);
 
   const onDrop = async (files) => {
@@ -23,7 +25,9 @@ function FileUpload(props) {
       props.refreshFunction([...images, data.image]);
     } catch (error) {
       if (error.response) {
-        alert("Faild to save the Image in the server");
+        addToast("Faild to save the Image in the server", {
+          appearance: "error",
+        });
       }
     }
   };
@@ -42,11 +46,7 @@ function FileUpload(props) {
     <div className="container d-lg-flex justify-content-center">
       <div className="row justify-content-center">
         <div className="mr-4 mb-2 ">
-          <Dropzone
-            onDrop={onDrop}
-            multiple={false}
-            maxSize={800000}
-          >
+          <Dropzone onDrop={onDrop} multiple={false} maxSize={800000}>
             {({ getRootProps, getInputProps }) => (
               <div
                 style={{
@@ -74,7 +74,7 @@ function FileUpload(props) {
             height: "241px",
             overflowX: "auto",
             overflowY: "hidden",
-            border:"1px solid lightgrey"
+            border: "1px solid lightgrey",
           }}
         >
           {images.map((image, index) => (

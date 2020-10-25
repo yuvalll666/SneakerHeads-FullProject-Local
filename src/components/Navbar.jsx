@@ -23,13 +23,13 @@ function Navbar({ user }) {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/about">
-                About
+              <NavLink className="nav-link" to="/products">
+                Browse
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/products">
-                Products
+              <NavLink className="nav-link" to="/about">
+                About
               </NavLink>
             </li>
             <li className="nav-item dropdown">
@@ -44,19 +44,19 @@ function Navbar({ user }) {
                 Brands
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/brands/jordan">
                   <strong className="mr-2">Jordan</strong>
                   <img width="30px" src="/images/JumpMan.png"></img>
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/brands/nike">
                   <strong className="mr-2">Nike</strong>
                   <img width="40px" src="/images/nikeSwoosh.png"></img>
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/brands/yeezy">
                   <strong className="mr-2">Yeezy</strong>
                   <img width="40px" src="/images/yeezyLogo.png"></img>
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/brands/adidas">
                   <strong className="mr-2">Adidas</strong>
                   <img width="30px" src="/images/adidasLogo.png"></img>
                 </Link>
