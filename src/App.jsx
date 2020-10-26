@@ -2,7 +2,6 @@ import React, { useState, useEffect, createContext } from "react";
 import { Switch, Route, useParams } from "react-router-dom";
 import { getCurrentUser } from "./services/userService";
 import "./App.css";
-import { ToastContainer } from "react-toastify";
 
 //Components
 import Navbar from "./components/Navbar";
@@ -38,7 +37,6 @@ function App() {
 
   return (
     <React.Fragment>
-      <ToastContainer />
       <ToastProvider
         autoDismiss
         autoDismissTimeout={6000}

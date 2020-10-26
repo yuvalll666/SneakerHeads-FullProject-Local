@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import DataProvider from "./DataContext";
 import * as serviceWorker from "./serviceWorker";
-import 'react-toastify/dist/ReactToastify.css';
 
 //Dependencies
 import "bootstrap/dist/css/bootstrap.css";

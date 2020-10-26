@@ -1,6 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+
+const changeLocation = (brandName) => {
+  return (window.location = `/brands/${brandName}`);
+};
 
 function PopularBrands() {
   return (
@@ -20,7 +24,7 @@ function PopularBrands() {
       <div className="row scroll" style={{ overflowX: "auto" }}>
         <div className="col-12 d-flex justify-content-between">
           <div className="p-2 brands-container ">
-            <Link to="/brands/jordan">
+            <Link onClick={() => changeLocation("jordan")}>
               <img
                 src="http://localhost:3000/images/000-air-jordan.jpg"
                 alt=""
@@ -30,7 +34,7 @@ function PopularBrands() {
             </Link>
           </div>
           <div className="p-2 brands-container">
-            <Link to="/brands/nike">
+            <Link onClick={() => changeLocation("nike")}>
               <img
                 width="250px"
                 src="http://localhost:3000/images/001-nike.jpg"
@@ -41,7 +45,7 @@ function PopularBrands() {
             </Link>
           </div>
           <div className="p-2 brands-container ">
-            <Link to="/brands/yeezy">
+            <Link onClick={() => changeLocation("yeezy")}>
               <img
                 width="250px"
                 src="http://localhost:3000/images/002-yeezy.jpg"
@@ -52,7 +56,7 @@ function PopularBrands() {
             </Link>
           </div>
           <div className="p-2 brands-container ">
-            <Link to="/brands/adidas">
+            <Link onClick={() => changeLocation("adidas")}>
               <img
                 width="250px"
                 src="http://localhost:3000/images/003-adidas.jpg"
