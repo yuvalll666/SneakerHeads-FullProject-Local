@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const { sendIt } = require("../middleware/mailer");
 const { Product } = require("../models/product");
 const { Payment } = require("../models/payment");
 const {
@@ -15,6 +16,7 @@ const Joi = require("@hapi/joi");
 const auth = require("../middleware/auth");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
+const jwt = require("jsonwebtoken");
 
 router.get("/getHistory", auth, (req, res) => {
   User.findOne({ _id: req.user._id }, (err, user) => {
@@ -203,8 +205,9 @@ router.post("/login", async (req, res) => {
   if (error) {
     return res.status(400).send({ error: error.details[0].message });
   }
-  //--------------- Todo: add confirmed:true filter ----------------
   let user = await User.findOne({ email: req.body.email });
+  console.log(user);
+
   if (!user) {
     return res.status(400).send("Invalid email or password");
   }
@@ -214,7 +217,15 @@ router.post("/login", async (req, res) => {
     return res.status(400).send("Invalid email or password");
   }
 
-  res.send({ token: user.generateAuthToken() });
+  if (user && !user.confirmed) {
+    return res
+      .status(401)
+      .send(
+        "This user have not been confirmed yet via email. please go to your email inbox and click the confirmation link"
+      );
+  }
+
+  return res.send({ token: user.generateAuthToken() });
 });
 
 function validateLogin(req) {
@@ -225,7 +236,7 @@ function validateLogin(req) {
   return schema.validate(req);
 }
 
-//Signin
+//Signup
 router.post("/", async (req, res) => {
   const { error } = validateUser(req.body);
   if (error) {
@@ -242,6 +253,13 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
   res.send(_.pick(user, ["_id", "firstName", "lastName", "email"]));
+
+  const emailToken = jwt.sign({ _id: user._id }, process.env.EMAIL_SECRET, {
+    expiresIn: "1d",
+  });
+
+  const url = `http://localhost:3900/confirmation/${emailToken}`;
+  sendIt(user, url);
 });
 
 module.exports = router;

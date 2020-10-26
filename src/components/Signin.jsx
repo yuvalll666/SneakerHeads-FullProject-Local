@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Form from "./forms/Form";
 import MainContainer from "./forms/MainContainer";
-import Typography from "@material-ui/core/Typography";
 import Input from "./forms/Input";
 import { useForm } from "react-hook-form";
 import { Redirect, Link } from "react-router-dom";
@@ -10,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { login, getCurrentUser } from "../services/userService";
 import PageHeader from "./utils/PageHeader";
+import {useToasts} from "react-toast-notifications"
 
 const schema = yup.object().shape({
   email: yup
@@ -22,7 +22,8 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
-function Step2() {
+function Signin() {
+  const {addToast} = useToasts()
   const [error, setError] = useState("");
   const { register, handleSubmit, errors } = useForm({
     mode: "onBlur",
@@ -37,6 +38,9 @@ function Step2() {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data);
+      }
+      if(error.response && error.response.status === 401){
+       addToast(error.response.data, {appearance:"warning", autoDismissTimeOut:10000}) 
       }
     }
   }
@@ -77,4 +81,4 @@ function Step2() {
   );
 }
 
-export default Step2;
+export default Signin;
