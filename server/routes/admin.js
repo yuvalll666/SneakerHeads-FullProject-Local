@@ -10,6 +10,19 @@ const jwt = require("jsonwebtoken");
 const { User, userRole } = require("../models/user");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+
+router.post("/all-users/makeNormal", adminAuth, (req,res)=> {
+  const userId = req.query.id
+  User.findOneAndUpdate({ _id: userId }, { role: NORMAL }, { new: true }).exec(
+    (err, user) => {
+      if (err) {
+        return res.status(400).send({ error: err });
+      }
+      return res.send(user);
+    }
+  );
+})
+
 router.post("/all-users/makeEditor", adminAuth, (req, res) => {
   const userId = req.query.id;
   User.findOneAndUpdate({ _id: userId }, { role: EDITOR }, { new: true }).exec(
@@ -42,7 +55,6 @@ router.get("/getAllUsers", adminAuth, (req, res) => {
       if (err) {
         return res.status(400).send({ success: false, err });
       }
-      console.log(users);
       return res.send({ success: true, users });
     });
 });

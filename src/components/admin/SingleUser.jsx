@@ -69,17 +69,29 @@ function SingleUser(props) {
         });
     }
   };
+
   const makeNormal = () => {
-    http
-      .post(`${url}/makeNormal?id=${userId}`)
-      .then((response) => {
-        history.push("admin/all-users");
-        addToast("User have been demoted to NORMAL", { appearance: "success" });
-      })
-      .catch((error) => {
-        addToast("Error: Could't update user");
-      });
+    if (User.role === NORMAL) {
+      return addToast("This user is already a NORMAL user", { appearance: "info" });
+    }
+    const confirmed = window.confirm(
+      "Are you sure you want to make this user a NORMAL user?\nDoing so will take away all of this user authorities!"
+    );
+    if (confirmed) {
+      http
+        .post(`${url}/makeNormal?id=${userId}`)
+        .then((response) => {
+          history.push("/admin/all-users");
+          addToast("User have been demoted to NORMAL", {
+            appearance: "success",
+          });
+        })
+        .catch((error) => {
+          addToast("Error: Could't update user");
+        });
+    }
   };
+
   const handleDelete = () => {
     http.delete(`${url}/deleteUser?id=${userId}`);
   };
