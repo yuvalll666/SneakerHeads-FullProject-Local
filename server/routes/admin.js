@@ -12,6 +12,16 @@ const { User, userRole } = require("../models/user");
 const { Product } = require("../models/product");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+router.post(
+  "/handle-products/undoDelete",
+  adminEditorAuth,
+  async (req, res) => {
+    let product = await new Product(req.body);
+    product.save();
+    return res.send(product);
+  }
+);
+
 router.delete("/handle-products/deleteProduct", adminEditorAuth, (req, res) => {
   const productId = req.query.id;
 
@@ -24,13 +34,15 @@ router.delete("/handle-products/deleteProduct", adminEditorAuth, (req, res) => {
 });
 
 router.get("/handle-products/getAllProducts", adminEditorAuth, (req, res) => {
-  Product.find({}).exec((err, products) => {
-    if (err) {
-      return res.status(400).send({ error: err });
-    }
-    console.log(products);
-    return res.send(products);
-  });
+  Product.find({})
+    .sort({ createdAt: 1 })
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).send({ error: err });
+      }
+      console.log(products);
+      return res.send(products);
+    });
 });
 
 router.post("/all-users/undoDelete", adminAuth, async (req, res) => {

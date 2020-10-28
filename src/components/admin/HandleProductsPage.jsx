@@ -3,7 +3,7 @@ import http from "../../services/httpService";
 import { apiUrl, userRole } from "../../config.json";
 import { UserContext } from "../../App";
 import { useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HandleProductsPage() {
+  const history = useHistory();
   const styles = useStyles();
   const user = useContext(UserContext);
   const [Products, setProducts] = useState([]);
@@ -128,6 +129,7 @@ function HandleProductsPage() {
         });
         setDeletedProduct(false);
         setProducts([...Products, product]);
+        window.location = "/handle-products";
       })
       .catch((error) => {
         addToast("Error: Could't restore Product", { appearance: "error" });
