@@ -71,16 +71,14 @@ function App() {
             <Route path="/brands/yeezy" component={Yeezy} />
             <Route path="/brands/adidas" component={Adidas} />
             <Route path="/confirmation" component={Confirmation} />
-            <UserContext.Provider value={user}>
-              <Route path="/cart" component={Cart} />
-              <Route path="/user-page" component={UserPage} />
-              <Route path="/upload-product" component={UploadProduct} />
-            </UserContext.Provider>
-          </Switch>
-          <Switch>
             <DeletedUserProvider>
-              <Route path="/admin/all-users" exact component={AllUsers} />
-              <Route path="/admin/all-users/:userId" component={SingleUser} />
+              <UserContext.Provider value={user}>
+                <Route path="/admin/all-users" exact component={AllUsers} />
+                <Route path="/admin/all-users/:userId" component={SingleUser} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/user-page" component={UserPage} />
+                <Route path="/upload-product" component={UploadProduct} />
+              </UserContext.Provider>
             </DeletedUserProvider>
           </Switch>
         </main>

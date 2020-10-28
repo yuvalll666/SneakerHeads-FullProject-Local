@@ -20,7 +20,6 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useDeletedUser } from "../../DeletedUserContext";
-import { Delete } from "@material-ui/icons";
 const { ADMIN } = userRole;
 
 const StyledTableCell = withStyles((theme) => ({
@@ -74,8 +73,9 @@ function AllUsers() {
         addToast("Error: Could't restore user", { appearance: "error" });
       });
   };
-
+  console.log(user);
   if (user && user.role !== ADMIN) {
+    console.log("koko");
     return <Redirect to="/" />;
   }
   return (

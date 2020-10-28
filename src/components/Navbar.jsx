@@ -80,32 +80,42 @@ function Navbar({ user }) {
                 </li>
               </React.Fragment>
             )}
+
             {user && (
               <React.Fragment>
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    id="dropdown04"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    C-Panel
-                  </Link>
-                  <div className="dropdown-menu" aria-labelledby="dropdown04">
-                    <Link className="dropdown-item" to="/upload-product">
-                      <i className="fas fa-upload"></i> Upload A Product
-                    </Link>
-                    <Link className="dropdown-item" to="/handle-products">
-                      <i className="fas fa-grip-horizontal"></i> Handle Products
-                    </Link>
-                    <Link className="dropdown-item" to="/admin/all-users">
-                      <i className="far fa-address-book"></i> All Users
-                    </Link>
+                {user.role !== NORMAL && (
+                  <div>
+                    <li className="nav-item dropdown">
+                      <Link
+                        className="nav-link dropdown-toggle"
+                        to="#"
+                        id="dropdown04"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        C-Panel
+                      </Link>
+                      <div
+                        className="dropdown-menu"
+                        aria-labelledby="dropdown04"
+                      >
+                        <Link className="dropdown-item" to="/upload-product">
+                          <i className="fas fa-upload"></i> Upload A Product
+                        </Link>
+                        <Link className="dropdown-item" to="/handle-products">
+                          <i className="fas fa-grip-horizontal"></i> Handle
+                          Products
+                        </Link>
+                        {user.role === ADMIN && (
+                          <Link className="dropdown-item" to="/admin/all-users">
+                            <i className="far fa-address-book"></i> All Users
+                          </Link>
+                        )}
+                      </div>
+                    </li>
                   </div>
-                </li>
-
+                )}
                 <li className="nav-item dropdown">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -128,11 +138,6 @@ function Navbar({ user }) {
                       <i className="fas fa-sign-out-alt"></i> Logout
                     </Link>
                   </div>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/upload-product">
-                    <i className="fas fa-upload fa-2x"></i>
-                  </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/cart">
