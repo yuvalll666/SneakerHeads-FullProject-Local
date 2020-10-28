@@ -73,7 +73,7 @@ function AllUsers() {
         addToast("Error: Could't restore user", { appearance: "error" });
       });
   };
-  console.log(user);
+
   if (user && user.role !== ADMIN) {
     console.log("koko");
     return <Redirect to="/" />;

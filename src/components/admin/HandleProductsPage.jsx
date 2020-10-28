@@ -3,7 +3,7 @@ import http from "../../services/httpService";
 import { apiUrl, userRole } from "../../config.json";
 import { UserContext } from "../../App";
 import { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
@@ -103,17 +103,37 @@ function HandleProductsPage() {
     http
       .delete(`${apiUrl}/admin/handle-products/deleteProduct?id=${productId}`)
       .then((response) => {
-        let indexId = Products.map((item) => {
-          return item._id;
-        }).indexOf(productId);
-        Products.splice(indexId, 1);
-        setDeletedProduct(response.data);
-        addToast("Product deleted successfully", { appearance: "success" });
+        let confirm = window.confirm("Would you like to delete this product?");
+        if (confirm) {
+          let indexId = Products.map((item) => {
+            return item._id;
+          }).indexOf(productId);
+          Products.splice(indexId, 1);
+          setDeletedProduct(response.data);
+          addToast("Product deleted successfully", { appearance: "success" });
+        }
       })
       .catch((error) => {
         addToast("Error: Couldn't delete product", { appearance: "error" });
       });
   };
+
+  const undoDelete = (DeletedProduct) => {
+    http
+      .post(`${apiUrl}/admin/handle-products/undoDelete`, DeletedProduct)
+      .then((response) => {
+        let product = response.data;
+        addToast("Product restored successfully", {
+          appearance: "success",
+        });
+        setDeletedProduct(false);
+        setProducts([...Products, product]);
+      })
+      .catch((error) => {
+        addToast("Error: Could't restore Product", { appearance: "error" });
+      });
+  };
+
   const handleUpdate = () => {};
 
   const buttons = brands.map((brand) => {
@@ -133,7 +153,11 @@ function HandleProductsPage() {
 
       <div className="container-fluid">
         <div className="d-flex justify-content-between mb-4">{buttons}</div>
-
+        {DeletedProduct && DeletedProduct._id && (
+          <Link onClick={() => undoDelete(DeletedProduct)}>
+            <i className="fas fa-exclamation-circle"></i>Undo Delete
+          </Link>
+        )}
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
