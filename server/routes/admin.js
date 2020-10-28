@@ -13,12 +13,14 @@ const { ADMIN, EDITOR, NORMAL } = userRole;
 router.get("/all-users/user_by_id", adminAuth, (req, res) => {
   const userId = req.query.id;
 
-  User.findById({ _id: userId }).select("-password").exec((err, user) => {
-    if (err) {
-      return res.status(400).send({ error: err });
-    }
-    return res.send(user);
-  });
+  User.findById({ _id: userId })
+    .select(["-password", "-cart", "-history", "-__v", "-confirmed"])
+    .exec((err, user) => {
+      if (err) {
+        return res.status(400).send({ error: err });
+      }
+      return res.send(user);
+    });
 });
 
 router.get("/getAllUsers", adminAuth, (req, res) => {
