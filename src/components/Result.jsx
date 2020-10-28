@@ -17,8 +17,9 @@ import {
 } from "@material-ui/core";
 import { getCurrentUser } from "../services/userService";
 import PageHeader from "./utils/PageHeader";
-
+import { useToasts } from "react-toast-notifications";
 function Result() {
+  const { addToast } = useToasts();
   const { data } = useData();
   let entries = Object.entries(data);
   entries.pop();
@@ -29,6 +30,7 @@ function Result() {
     try {
       await http.post(`http://localhost:3900/api/users`, data);
       history.push("/signin");
+      addToast("Please confirm your email", { appearance: "info" });
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data.error);

@@ -259,6 +259,7 @@ router.post("/", async (req, res) => {
   });
 
   const url = `http://localhost:3900/confirmation/${emailToken}`;
+
   sendIt(user, url);
 });
 

@@ -1,3 +1,9 @@
 {
-  "apiUrl": "http://localhost:3900/api"
+  "apiUrl": "http://localhost:3900/api",
+  "userRole": {
+    "NORMAL": 0,
+    "EDITOR": 1,
+    "ADMIN": 2
+      
+  }
 }

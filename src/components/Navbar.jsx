@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
+import { userRole } from "../config.json";
+const { NORMAL, EDITOR, ADMIN } = userRole;
 
 function Navbar({ user }) {
   return (
@@ -80,6 +82,30 @@ function Navbar({ user }) {
             )}
             {user && (
               <React.Fragment>
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="#"
+                    id="dropdown04"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    C-Panel
+                  </Link>
+                  <div className="dropdown-menu" aria-labelledby="dropdown04">
+                    <Link className="dropdown-item" to="/upload-product">
+                      <i className="fas fa-upload"></i> Upload A Product
+                    </Link>
+                    <Link className="dropdown-item" to="/handle-products">
+                      <i className="fas fa-grip-horizontal"></i> Handle Products
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/all-users">
+                      <i className="far fa-address-book"></i> All Users
+                    </Link>
+                  </div>
+                </li>
+
                 <li className="nav-item dropdown">
                   <Link
                     className="nav-link dropdown-toggle"

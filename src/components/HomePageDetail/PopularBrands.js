@@ -24,7 +24,7 @@ function PopularBrands() {
       <div className="row scroll" style={{ overflowX: "auto" }}>
         <div className="col-12 d-flex justify-content-between">
           <div className="p-2 brands-container ">
-            <Link onClick={() => changeLocation("jordan")}>
+            <Link to="#" onClick={() => changeLocation("jordan")}>
               <img
                 src="http://localhost:3000/images/000-air-jordan.jpg"
                 alt=""
@@ -34,7 +34,7 @@ function PopularBrands() {
             </Link>
           </div>
           <div className="p-2 brands-container">
-            <Link onClick={() => changeLocation("nike")}>
+            <Link to="#" onClick={() => changeLocation("nike")}>
               <img
                 width="250px"
                 src="http://localhost:3000/images/001-nike.jpg"
@@ -45,7 +45,7 @@ function PopularBrands() {
             </Link>
           </div>
           <div className="p-2 brands-container ">
-            <Link onClick={() => changeLocation("yeezy")}>
+            <Link to="#" onClick={() => changeLocation("yeezy")}>
               <img
                 width="250px"
                 src="http://localhost:3000/images/002-yeezy.jpg"
@@ -56,7 +56,7 @@ function PopularBrands() {
             </Link>
           </div>
           <div className="p-2 brands-container ">
-            <Link onClick={() => changeLocation("adidas")}>
+            <Link to="#" onClick={() => changeLocation("adidas")}>
               <img
                 width="250px"
                 src="http://localhost:3000/images/003-adidas.jpg"

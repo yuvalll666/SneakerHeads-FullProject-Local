@@ -1,8 +1,3 @@
-import React, { useState, useEffect, createContext } from "react";
-import { Switch, Route, useParams } from "react-router-dom";
-import { getCurrentUser } from "./services/userService";
-import "./App.css";
-
 //Components
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -20,11 +15,21 @@ import ProductsLandingPage from "./components/ProductsLandingPage";
 import Cart from "./components/Cart";
 import ThankYou from "./components/utils/ThankYou";
 import HistoryPage from "./components/HistoryPage";
+//Else
 import { ToastProvider } from "react-toast-notifications";
 import Jordan from "./components/brands/Jordan";
 import Nike from "./components/brands/Nike";
 import Yeezy from "./components/brands/Yeezy";
 import Adidas from "./components/brands/Adidas";
+import Confirmation from "./components/Confirmation";
+import AllUsers from "./components/admin/AllUsers";
+import React, { useState, useEffect, createContext } from "react";
+import { Switch, Route, useParams } from "react-router-dom";
+import { getCurrentUser } from "./services/userService";
+import "./App.css";
+import { userRole } from "./config.json";
+const { ADMIN } = userRole;
+
 export const UserContext = createContext(null);
 
 function App() {
@@ -42,11 +47,14 @@ function App() {
         autoDismissTimeout={6000}
         placement="top-center"
       >
-        <header>
-          <Navbar user={user} />
-        </header>
-        <main className=" flex-fill">
+ 
+          <header>
+            <Navbar user={user} />
+          </header>
+
+        <main className="flex-fill">
           <Switch>
+            <Route path="/admin/all-users" exact component={AllUsers} />
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/step1" component={Step1} />
@@ -62,6 +70,7 @@ function App() {
             <Route path="/brands/nike" component={Nike} />
             <Route path="/brands/yeezy" component={Yeezy} />
             <Route path="/brands/adidas" component={Adidas} />
+            <Route path="/confirmation" component={Confirmation} />
 
             <UserContext.Provider value={user}>
               <Route path="/cart" component={Cart} />
@@ -70,9 +79,11 @@ function App() {
             </UserContext.Provider>
           </Switch>
         </main>
-        <footer>
-          <Footer></Footer>
-        </footer>
+        {window.location.pathname !== "/cpanel" && (
+          <footer>
+            <Footer></Footer>
+          </footer>
+        )}
       </ToastProvider>
     </React.Fragment>
   );

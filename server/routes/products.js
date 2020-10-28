@@ -10,7 +10,6 @@ const { Product, validateProduct } = require("../models/product");
 
 router.post("/getMostViews", (req, res) => {
   let limit = req.body.limit;
-  console.log(limit);
   Product.find({})
     .sort({ views: -1 })
     .limit(limit)
@@ -46,7 +45,6 @@ router.get("/product_by_id", (req, res) => {
       .populate("writer")
       .exec((error, product) => {
         if (error) {
-          console.log("three");
           return res.status(400).send({ error: error });
         }
         return res.status(200).send([product]);
