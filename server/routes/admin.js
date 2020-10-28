@@ -4,11 +4,25 @@ const router = express.Router();
 const _ = require("lodash");
 const Joi = require("@hapi/joi");
 const adminAuth = require("../middleware/adminAuth");
+const adminEditorAuth = require("../middleware/adminEditorAuth");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 const jwt = require("jsonwebtoken");
 const { User, userRole } = require("../models/user");
+const { Product } = require("../models/product");
 const { ADMIN, EDITOR, NORMAL } = userRole;
+
+router.get("/handle-products/getAllProducts", adminEditorAuth, (req, res) => {
+  console.log("asl;djlaskjd");
+  Product.find({}).exec((err, products) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).send({ error: err });
+    }
+    console.log(products);
+    return res.send(products);
+  });
+});
 
 router.post("/all-users/undoDelete", adminAuth, async (req, res) => {
   let user = await new User(req.body);

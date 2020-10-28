@@ -17,6 +17,7 @@ import ThankYou from "./components/utils/ThankYou";
 import HistoryPage from "./components/HistoryPage";
 import SingleUser from "./components/admin/SingleUser";
 import DeletedUserProvider from "./DeletedUserContext";
+import HandleProductsPage from "./components/admin/HandleProductsPage";
 //Else
 import { ToastProvider } from "react-toast-notifications";
 import Jordan from "./components/brands/Jordan";
@@ -75,6 +76,7 @@ function App() {
               <UserContext.Provider value={user}>
                 <Route path="/admin/all-users" exact component={AllUsers} />
                 <Route path="/admin/all-users/:userId" component={SingleUser} />
+                <Route path="/handle-products" component={HandleProductsPage} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/user-page" component={UserPage} />
                 <Route path="/upload-product" component={UploadProduct} />
