@@ -22,33 +22,32 @@ router.post("/getMostViews", (req, res) => {
 });
 
 router.get("/products_by_id", (req, res) => {
-  let type = req.query.type;
   let productIds = req.query.id;
-    productIds = req.query.id.split(",");
-    Product.find({ _id: { $in: productIds } })
-      .populate("writer")
-      .exec((error, product) => {
-        if (error) {
-          return res.status(400).send({ error: error });
-        }
-        return res.send(product);
-      });
+  productIds = req.query.id.split(",");
+  Product.find({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((error, product) => {
+      if (error) {
+        return res.status(400).send({ error: error });
+      }
+      return res.send(product);
+    });
 });
 
 router.get("/product_by_id", (req, res) => {
-  let productIds = req.query.id;
-    Product.findOneAndUpdate(
-      { _id: productIds },
-      { $inc: { views: 1 } },
-      { new: true }
-    )
-      .populate("writer")
-      .exec((error, product) => {
-        if (error) {
-          return res.status(400).send({ error: error });
-        }
-        return res.status(200).send([product]);
-      });
+  let productId = req.query.id;
+  Product.findOneAndUpdate(
+    { _id: productId },
+    { $inc: { views: 1 } },
+    { new: true }
+  )
+    .populate("writer")
+    .exec((error, product) => {
+      if (error) {
+        return res.status(400).send({ error: error });
+      }
+      return res.status(200).send([product]);
+    });
 });
 
 router.post("/getProducts", async (req, res) => {

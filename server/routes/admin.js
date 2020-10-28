@@ -10,16 +10,27 @@ const jwt = require("jsonwebtoken");
 const { User, userRole } = require("../models/user");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+router.get("/all-users/user_by_id", adminAuth, (req, res) => {
+  const userId = req.query.id;
 
-router.get("/getAllUsers", (req, res) => {
-  console.log("koko");
-  User.find({ role: { $ne: ADMIN } }).sort({role: -1}).exec((err, users) => {
+  User.findById({ _id: userId }).select("-password").exec((err, user) => {
     if (err) {
-      return res.status(400).send({ success: false, err });
+      return res.status(400).send({ error: err });
     }
-    console.log(users);
-    return res.send({ success: true, users });
+    return res.send(user);
   });
+});
+
+router.get("/getAllUsers", adminAuth, (req, res) => {
+  User.find({ role: { $ne: ADMIN } })
+    .sort({ role: -1 })
+    .exec((err, users) => {
+      if (err) {
+        return res.status(400).send({ success: false, err });
+      }
+      console.log(users);
+      return res.send({ success: true, users });
+    });
 });
 
 module.exports = router;
