@@ -13,9 +13,21 @@ import {
   TableCell,
   TableBody,
   Button,
+  withStyles,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { userRole } from "../../config.json";
+const { EDITOR, NORMAL } = userRole;
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: "#e0e0e0",
+  },
+}))(TableCell);
 
 function SingleUser(props) {
+  const history = useHistory();
+  const url = `${apiUrl}/admin/all-users`;
   const userId = props.match.params.userId;
   const [User, setUser] = useState({});
   const { addToast } = useToasts();
@@ -24,7 +36,7 @@ function SingleUser(props) {
 
   useEffect(() => {
     http
-      .get(`${apiUrl}/admin/all-users/user_by_id?id=${userId}`)
+      .get(`${url}/user_by_id?id=${userId}`)
       .then((response) => setUser(response.data))
       .catch((error) => {
         if (error) {
@@ -34,6 +46,43 @@ function SingleUser(props) {
         }
       });
   }, []);
+  useEffect(() => {}, [User]);
+
+  const makeEditor = (userId) => {
+    if (User.role === EDITOR) {
+      return addToast("This user is already an EDITOR", { appearance: "info" });
+    }
+    const confirmed = window.confirm(
+      "Are you sure you want to make this user an Editor?\nDoing so will allow this user to make changes throughout your application!"
+    );
+    if (confirmed) {
+      http
+        .post(`${url}/makeEditor?id=${userId}`)
+        .then((response) => {
+          history.push("/admin/all-users");
+          addToast("User have been promoted to EDITOR", {
+            appearance: "success",
+          });
+        })
+        .catch((error) => {
+          addToast("Error: Could't update user");
+        });
+    }
+  };
+  const makeNormal = () => {
+    http
+      .post(`${url}/makeNormal?id=${userId}`)
+      .then((response) => {
+        history.push("admin/all-users");
+        addToast("User have been demoted to NORMAL", { appearance: "success" });
+      })
+      .catch((error) => {
+        addToast("Error: Could't update user");
+      });
+  };
+  const handleDelete = () => {
+    http.delete(`${url}/deleteUser?id=${userId}`);
+  };
 
   const view = entries.map((entry) => {
     if (entry[1] === 1) {
@@ -60,24 +109,40 @@ function SingleUser(props) {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Field</TableCell>
-                  <TableCell>Value</TableCell>
+                  <StyledTableCell>Field</StyledTableCell>
+                  <StyledTableCell>Value</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{view}</TableBody>
             </Table>
           </TableContainer>
-          <div style={{width: "100%"}} className="mt-4 d-flex justify-content-between">
-            <Button color="primary" variant="contained">
+          <div
+            style={{ width: "100%" }}
+            className="mt-4 d-flex justify-content-between"
+          >
+            <Button
+              onClick={() => makeEditor(userId)}
+              color="primary"
+              variant="contained"
+            >
               Make Editor
             </Button>
-            <Button color="default" variant="contained">
+            <Button
+              onClick={() => makeNormal(userId)}
+              color="default"
+              variant="contained"
+            >
               Make Normal
             </Button>
           </div>
-            <Button style={{marginTop: "50px"}} color="secondary" variant="contained">
-              Delete User
-            </Button>
+          <Button
+            onClick={() => handleDelete(userId)}
+            style={{ marginTop: "50px" }}
+            color="secondary"
+            variant="contained"
+          >
+            Delete User
+          </Button>
         </MainContainer>
       </div>
     </div>

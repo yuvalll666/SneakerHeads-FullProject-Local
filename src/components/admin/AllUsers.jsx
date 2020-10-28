@@ -31,7 +31,6 @@ function AllUsers() {
   const user = useContext(UserContext);
   const [Users, setUsers] = useState([]);
   const history = useHistory()
-
   useEffect(() => {
     http
       .get(`${apiUrl}/admin/getAllUsers`)
@@ -90,9 +89,9 @@ function AllUsers() {
                   <TableCell align="left">{item.email}</TableCell>
                   <TableCell align="left">
                     {item.confirmed ? (
-                      <i class="fas fa-check"></i>
+                      <i className="fas fa-check"></i>
                     ) : (
-                      <i class="fas fa-times"></i>
+                      <i className="fas fa-times"></i>
                     )}
                   </TableCell>
                   <TableCell align="left">
