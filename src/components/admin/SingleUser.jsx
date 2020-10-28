@@ -65,14 +65,16 @@ function SingleUser(props) {
           });
         })
         .catch((error) => {
-          addToast("Error: Could't update user");
+          addToast("Error: Could't update user", { appearance: "error" });
         });
     }
   };
 
   const makeNormal = () => {
     if (User.role === NORMAL) {
-      return addToast("This user is already a NORMAL user", { appearance: "info" });
+      return addToast("This user is already a NORMAL user", {
+        appearance: "info",
+      });
     }
     const confirmed = window.confirm(
       "Are you sure you want to make this user a NORMAL user?\nDoing so will take away all of this user authorities!"
@@ -87,13 +89,23 @@ function SingleUser(props) {
           });
         })
         .catch((error) => {
-          addToast("Error: Could't update user");
+          addToast("Error: Could't update user", { appearance: "error" });
         });
     }
   };
 
   const handleDelete = () => {
-    http.delete(`${url}/deleteUser?id=${userId}`);
+    http
+      .delete(`${url}/deleteUser?id=${userId}`)
+      .then((response) => {
+        history.push("/admin/all-users");
+        addToast("User have beem deleted successfully", {
+          appearance: "success",
+        });
+      })
+      .catch((error) => {
+        addToast("Error: Could't update user", { appearance: "error" });
+      });
   };
 
   const view = entries.map((entry) => {
