@@ -12,11 +12,20 @@ const { User, userRole } = require("../models/user");
 const { Product } = require("../models/product");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+router.delete("/handle-products/deleteProduct", adminEditorAuth, (req, res) => {
+  const productId = req.query.id;
+
+  Product.findOneAndDelete({ _id: productId }).exec((err, prod) => {
+    if (err) {
+      return res.status(400).send({ error: err });
+    }
+    return res.send(prod);
+  });
+});
+
 router.get("/handle-products/getAllProducts", adminEditorAuth, (req, res) => {
-  console.log("asl;djlaskjd");
   Product.find({}).exec((err, products) => {
     if (err) {
-      console.log(err);
       return res.status(400).send({ error: err });
     }
     console.log(products);

@@ -103,6 +103,10 @@ function HandleProductsPage() {
     http
       .delete(`${apiUrl}/admin/handle-products/deleteProduct?id=${productId}`)
       .then((response) => {
+        let indexId = Products.map((item) => {
+          return item._id;
+        }).indexOf(productId);
+        Products.splice(indexId, 1);
         setDeletedProduct(response.data);
         addToast("Product deleted successfully", { appearance: "success" });
       })

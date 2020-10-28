@@ -98,8 +98,13 @@ function Cart() {
             }
           });
         });
+        setProductsInfo(products);
+        let indexId = ProductsInfo.map((item) => {
+          return item._id;
+        }).indexOf(productId);
+        ProductsInfo.splice(indexId, 1);
+
         localStorage.setItem("token", response.data.token);
-        window.location = "/cart";
       })
       .catch((err) => console.log("err : ", err));
   };
