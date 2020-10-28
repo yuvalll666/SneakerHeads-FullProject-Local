@@ -18,7 +18,7 @@ import {
 import { useHistory, Redirect } from "react-router-dom";
 import { userRole } from "../../config.json";
 import { useDeletedUser } from "../../DeletedUserContext";
-import {UserContext} from "../../App"
+import { UserContext } from "../../App";
 
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
@@ -29,14 +29,13 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 function SingleUser(props) {
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
   const { DeletedUser, setDeletedUser } = useDeletedUser();
   const history = useHistory();
   const url = `${apiUrl}/admin/all-users`;
   const userId = props.match.params.userId;
   const [User, setUser] = useState({});
   const { addToast } = useToasts();
-
   let entries = Object.entries(User);
 
   useEffect(() => {
