@@ -16,9 +16,11 @@ import {
   makeStyles,
   withStyles,
   Button,
+  Link,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import {useDeletedUser} from "../../DeletedUserContext";
+import { useDeletedUser } from "../../DeletedUserContext";
+import { Delete } from "@material-ui/icons";
 const { ADMIN } = userRole;
 
 const StyledTableCell = withStyles((theme) => ({
@@ -57,6 +59,22 @@ function AllUsers() {
     history.push(`/admin/all-users/${userId}`);
   };
 
+  const undoDelete = (DeletedUser) => {
+    http
+      .post(`${apiUrl}/admin/all-users/undoDelete`, DeletedUser)
+      .then((response) => {
+        let user = response.data;
+        addToast("User restored successfully", {
+          appearance: "success",
+        });
+        history.push(`/admin/all-users/${user._id}`);
+        setDeletedUser(false);
+      })
+      .catch((error) => {
+        addToast("Error: Could't restore user", { appearance: "error" });
+      });
+  };
+
   if (user && user.role !== ADMIN) {
     return <Redirect to="/" />;
   }
@@ -64,7 +82,11 @@ function AllUsers() {
     <div>
       <PageHeader>All Users</PageHeader>
       <div className="container-fluid">
-        <p>cancel last action</p>
+        {DeletedUser && DeletedUser._id && (
+          <Link onClick={() => undoDelete(DeletedUser)}>
+            <i className="fas fa-exclamation-circle"></i>Undo Delete
+          </Link>
+        )}
         <TableContainer component={Paper}>
           <Table>
             <TableHead>

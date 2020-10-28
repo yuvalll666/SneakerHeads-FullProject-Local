@@ -10,6 +10,12 @@ const jwt = require("jsonwebtoken");
 const { User, userRole } = require("../models/user");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+router.post("/all-users/undoDelete", adminAuth, async (req, res) => {
+  let user = await new User(req.body);
+  user.save();
+  return res.send(user);
+});
+
 router.delete("/all-users/deleteUser", adminAuth, (req, res) => {
   const userId = req.query.id;
   User.findOneAndDelete({ _id: userId }).exec((err, user) => {
