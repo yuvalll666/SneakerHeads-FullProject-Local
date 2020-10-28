@@ -14,7 +14,6 @@ const ProductPage = (props) => {
     http
       .get(`${apiUrl}/products/product_by_id?id=${productId}`)
       .then((response) => {
-        console.log(response.data)
         setProduct(response.data[0]);
       });
   }, []);

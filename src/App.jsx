@@ -15,6 +15,7 @@ import ProductsLandingPage from "./components/ProductsLandingPage";
 import Cart from "./components/Cart";
 import ThankYou from "./components/utils/ThankYou";
 import HistoryPage from "./components/HistoryPage";
+import SingleUser from "./components/admin/SingleUser";
 //Else
 import { ToastProvider } from "react-toast-notifications";
 import Jordan from "./components/brands/Jordan";
@@ -47,14 +48,17 @@ function App() {
         autoDismissTimeout={6000}
         placement="top-center"
       >
- 
-          <header>
-            <Navbar user={user} />
-          </header>
+        <header>
+          <Navbar user={user} />
+        </header>
 
         <main className="flex-fill">
           <Switch>
             <Route path="/admin/all-users" exact component={AllUsers} />
+            <Route
+              path="/admin/all-users/:userId"
+              component={SingleUser}
+            />
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/step1" component={Step1} />
