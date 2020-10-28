@@ -17,7 +17,8 @@ import {
   withStyles,
   Button,
 } from "@material-ui/core";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import {useDeletedUser} from "../../DeletedUserContext";
 const { ADMIN } = userRole;
 
 const StyledTableCell = withStyles((theme) => ({
@@ -27,10 +28,11 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 function AllUsers() {
+  const { DeletedUser, setDeletedUser } = useDeletedUser();
   const { addToast } = useToasts();
   const user = useContext(UserContext);
   const [Users, setUsers] = useState([]);
-  const history = useHistory()
+  const history = useHistory();
   useEffect(() => {
     http
       .get(`${apiUrl}/admin/getAllUsers`)
@@ -52,9 +54,8 @@ function AllUsers() {
   }, []);
 
   const handleClick = (userId) => {
-    history.push(`/admin/all-users/${userId}`)
-  }
-
+    history.push(`/admin/all-users/${userId}`);
+  };
 
   if (user && user.role !== ADMIN) {
     return <Redirect to="/" />;
@@ -63,6 +64,7 @@ function AllUsers() {
     <div>
       <PageHeader>All Users</PageHeader>
       <div className="container-fluid">
+        <p>cancel last action</p>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -81,7 +83,13 @@ function AllUsers() {
                   key={index}
                   className={index % 2 ? "bg-light" : "bg-white"}
                 >
-                  <TableCell align="left">{item.role === 1 ? <span className="text-success">EDITOR</span> : <span>normal</span> }</TableCell>
+                  <TableCell align="left">
+                    {item.role === 1 ? (
+                      <span className="text-success">EDITOR</span>
+                    ) : (
+                      <span>normal</span>
+                    )}
+                  </TableCell>
                   <TableCell align="left">
                     {item.firstName + " " + item.lastName}
                   </TableCell>
@@ -95,7 +103,13 @@ function AllUsers() {
                     )}
                   </TableCell>
                   <TableCell align="left">
-                    <Button color="primary" variant="contained" onClick={()=> handleClick(item._id)}>Edit</Button>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleClick(item._id)}
+                    >
+                      Edit
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

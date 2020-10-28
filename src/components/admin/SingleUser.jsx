@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { useToasts } from "react-toast-notifications";
@@ -17,6 +17,8 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { userRole } from "../../config.json";
+import {useDeletedUser} from "../../DeletedUserContext";
+
 const { EDITOR, NORMAL } = userRole;
 
 const StyledTableCell = withStyles((theme) => ({
@@ -26,6 +28,7 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 function SingleUser(props) {
+  const { DeletedUser, setDeletedUser } = useDeletedUser();
   const history = useHistory();
   const url = `${apiUrl}/admin/all-users`;
   const userId = props.match.params.userId;
@@ -95,17 +98,27 @@ function SingleUser(props) {
   };
 
   const handleDelete = () => {
-    http
-      .delete(`${url}/deleteUser?id=${userId}`)
-      .then((response) => {
-        history.push("/admin/all-users");
-        addToast("User have beem deleted successfully", {
-          appearance: "success",
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this user?\nDoing so will permanently delete this user from the database"
+    );
+    if (confirmed) {
+      http
+        .delete(`${url}/deleteUser?id=${userId}`)
+        .then((response) => {
+          setDeletedUser(response.data);
+          history.push("/admin/all-users");
+          addToast("User have beem deleted successfully", {
+            appearance: "success",
+          });
+        })
+        .catch((error) => {
+          addToast("Error: Could't delete user", { appearance: "error" });
         });
-      })
-      .catch((error) => {
-        addToast("Error: Could't update user", { appearance: "error" });
-      });
+    }
+  };
+
+  const handleGoBack = () => {
+    history.push("/admin/all-users");
   };
 
   const view = entries.map((entry) => {
@@ -129,6 +142,14 @@ function SingleUser(props) {
 
       <div className="container">
         <MainContainer>
+          <Button
+            onClick={handleGoBack}
+            className="mb-2 mr-auto"
+            color="primary"
+            variant="outlined"
+          >
+            <i className="fas fa-long-arrow-alt-left"></i>&nbsp; Go Back
+          </Button>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>

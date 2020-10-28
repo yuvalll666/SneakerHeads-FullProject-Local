@@ -16,6 +16,7 @@ import Cart from "./components/Cart";
 import ThankYou from "./components/utils/ThankYou";
 import HistoryPage from "./components/HistoryPage";
 import SingleUser from "./components/admin/SingleUser";
+import DeletedUserProvider from "./DeletedUserContext";
 //Else
 import { ToastProvider } from "react-toast-notifications";
 import Jordan from "./components/brands/Jordan";
@@ -54,11 +55,7 @@ function App() {
 
         <main className="flex-fill">
           <Switch>
-            <Route path="/admin/all-users" exact component={AllUsers} />
-            <Route
-              path="/admin/all-users/:userId"
-              component={SingleUser}
-            />
+         
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/step1" component={Step1} />
@@ -76,6 +73,11 @@ function App() {
             <Route path="/brands/adidas" component={Adidas} />
             <Route path="/confirmation" component={Confirmation} />
 
+            <DeletedUserProvider>
+              <Route path="/admin/all-users" exact component={AllUsers} />
+              <Route path="/admin/all-users/:userId" component={SingleUser} />
+            </DeletedUserProvider>
+            
             <UserContext.Provider value={user}>
               <Route path="/cart" component={Cart} />
               <Route path="/user-page" component={UserPage} />
