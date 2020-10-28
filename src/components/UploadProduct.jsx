@@ -14,17 +14,15 @@ import ChipInput from "material-ui-chip-input";
 import { CloudUploadOutlined } from "@material-ui/icons";
 import PageHeader from "./utils/PageHeader";
 import { brands } from "../datas";
-import {useToasts} from "react-toast-notifications"
-
+import { useToasts } from "react-toast-notifications";
 
 const useStyles = makeStyles((them) => ({
   root: {
     marginTop: them.spacing(0),
   },
 }));
-
 function UploadProduct() {
-  const { addToast } = useToasts()
+  const { addToast } = useToasts();
   const user = useContext(UserContext);
   const styles = useStyles();
   const history = useHistory();
@@ -43,9 +41,9 @@ function UploadProduct() {
 
     if (!title || !description || !price || !brand || !images) {
       // return toast.error("Please fill of fields first!");
-   return addToast("Please fill all of the fields first!", {
-        appearance: 'error',
-      })
+      return addToast("Please fill all of the fields first!", {
+        appearance: "error",
+      });
       // "Please fill of fields first!"
     }
 
@@ -59,13 +57,13 @@ function UploadProduct() {
     try {
       await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
       addToast("Product uploaded successfuly", {
-        appearance:'success'
+        appearance: "success",
       });
       history.push("/");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         addToast(error.response.data.error, {
-          appearance:'success'
+          appearance: "success",
         });
       }
     }
@@ -103,8 +101,8 @@ function UploadProduct() {
             <option>Choose Brand...</option>
 
             {brands.map((item) => (
-              <option key={item.key} value={item.key}>
-                {item.value}
+              <option key={item.key} value={item._id}>
+                {item.name}
               </option>
             ))}
           </select>

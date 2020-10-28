@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import PageHeader from "../utils/PageHeader";
+import { brands } from "../../datas";
 import {
   Table,
   TableContainer,
@@ -40,6 +41,7 @@ function HandleProductsPage() {
   const styles = useStyles();
   const user = useContext(UserContext);
   const [Products, setProducts] = useState([]);
+  const [DeletedProduct, setDeletedProduct] = useState({});
   const { addToast } = useToasts();
   console.log(Products);
   useEffect(() => {
@@ -97,25 +99,26 @@ function HandleProductsPage() {
     );
   });
 
-  const handleDelete = () => {};
+  const handleDelete = (productId) => {
+    http
+      .delete(`${apiUrl}/admin/handle-products/deleteProduct?id=${productId}`)
+      .then((response) => {
+        setDeletedProduct(response.data);
+        addToast("Product deleted successfully", { appearance: "success" });
+      })
+      .catch((error) => {
+        addToast("Error: Couldn't delete product", { appearance: "error" });
+      });
+  };
   const handleUpdate = () => {};
 
-  const buttons = () => {
-    let brands = [
-      "nike",
-      "air jordan",
-      "yeezy",
-      "adidas",
-      "convers",
-      "new Balance",
-    ];
-
-    return brands.map((brandName) => (
+  const buttons = brands.map((brand) => {
+    return (
       <Button color="default" variant="contained">
-        {brandName}
+        {brand.name}
       </Button>
-    ));
-  };
+    );
+  });
 
   if (user && user.role === NORMAL) {
     return <Redirect to="/" />;
@@ -125,7 +128,7 @@ function HandleProductsPage() {
       <PageHeader>Handle Products</PageHeader>
 
       <div className="container-fluid">
-        <div className="d-flex justify-content-between mb-4">{buttons()}</div>
+        <div className="d-flex justify-content-between mb-4">{buttons}</div>
 
         <TableContainer component={Paper}>
           <Table>

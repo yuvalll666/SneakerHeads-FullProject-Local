@@ -5,7 +5,6 @@ const { Panel } = Collapse;
 function CheckBox(props) {
   const [Checked, setChecked] = useState([]);
 
-  console.log(Checked);
   const handleToggle = (value) => {
     const currentIndex = Checked.indexOf(value);
     const newChecked = [...Checked];

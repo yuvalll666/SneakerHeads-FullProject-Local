@@ -39,22 +39,30 @@ const price = [
 const brands = [
   {
     _id: 1,
-    name: "NIKE",
+    name: "Nike",
   },
   {
     _id: 2,
-    name: "ADIDAS",
+    name: "Air Jordan",
   },
   {
     _id: 3,
-    name: "VANS",
+    name: "Adidas",
   },
   {
     _id: 4,
-    name: "CONVERS",
+    name: "Yeezy",
   },
   {
     _id: 5,
+    name: "Vans",
+  },
+  {
+    _id: 6,
+    name: "Convers",
+  },
+  {
+    _id: 7,
     name: "NB",
   },
 ];
