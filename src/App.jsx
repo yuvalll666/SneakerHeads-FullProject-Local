@@ -55,7 +55,6 @@ function App() {
 
         <main className="flex-fill">
           <Switch>
-         
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/step1" component={Step1} />
@@ -72,17 +71,17 @@ function App() {
             <Route path="/brands/yeezy" component={Yeezy} />
             <Route path="/brands/adidas" component={Adidas} />
             <Route path="/confirmation" component={Confirmation} />
-
-            <DeletedUserProvider>
-              <Route path="/admin/all-users" exact component={AllUsers} />
-              <Route path="/admin/all-users/:userId" component={SingleUser} />
-            </DeletedUserProvider>
-            
             <UserContext.Provider value={user}>
               <Route path="/cart" component={Cart} />
               <Route path="/user-page" component={UserPage} />
               <Route path="/upload-product" component={UploadProduct} />
             </UserContext.Provider>
+          </Switch>
+          <Switch>
+            <DeletedUserProvider>
+              <Route path="/admin/all-users" exact component={AllUsers} />
+              <Route path="/admin/all-users/:userId" component={SingleUser} />
+            </DeletedUserProvider>
           </Switch>
         </main>
         {window.location.pathname !== "/cpanel" && (

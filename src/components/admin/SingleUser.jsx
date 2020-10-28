@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { useToasts } from "react-toast-notifications";
@@ -15,11 +15,12 @@ import {
   Button,
   withStyles,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { userRole } from "../../config.json";
-import {useDeletedUser} from "../../DeletedUserContext";
+import { useDeletedUser } from "../../DeletedUserContext";
+import {UserContext} from "../../App"
 
-const { EDITOR, NORMAL } = userRole;
+const { ADMIN, EDITOR, NORMAL } = userRole;
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -28,6 +29,7 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 function SingleUser(props) {
+  const user = useContext(UserContext)
   const { DeletedUser, setDeletedUser } = useDeletedUser();
   const history = useHistory();
   const url = `${apiUrl}/admin/all-users`;
@@ -136,6 +138,9 @@ function SingleUser(props) {
     );
   });
 
+  if (user && user.role !== ADMIN) {
+    return <Redirect to="/" />;
+  }
   return (
     <div>
       <PageHeader>Handle User</PageHeader>

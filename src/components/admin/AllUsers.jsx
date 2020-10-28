@@ -109,7 +109,7 @@ function AllUsers() {
                     {item.role === 1 ? (
                       <span className="text-success">EDITOR</span>
                     ) : (
-                      <span>normal</span>
+                      <span>Normal</span>
                     )}
                   </TableCell>
                   <TableCell align="left">
