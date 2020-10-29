@@ -134,7 +134,9 @@ function HandleProductsPage() {
       });
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = (productId) => {
+    return history.push(`/update-product/${productId}`)
+  };
 
   const buttons = brands.map((brand) => {
     return (

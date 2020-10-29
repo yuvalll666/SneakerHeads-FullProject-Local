@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import MainContainer from "../forms/MainContainer";
 import Form from "../forms/Form";
 import Input from "../forms/Input";
@@ -8,10 +8,10 @@ import FileUpload from "../utils/FileUpload";
 import { makeStyles } from "@material-ui/core/styles";
 import { UserContext } from "../../App";
 import http from "../../services/httpService";
-import { apiUrl } from "../../config.json";
+import { apiUrl, userRole } from "../../config.json";
 import { useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
-import { CloudUploadOutlined } from "@material-ui/icons";
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
 import { useToasts } from "react-toast-notifications";
@@ -21,13 +21,25 @@ const useStyles = makeStyles((them) => ({
     marginTop: them.spacing(0),
   },
 }));
-function UpdateProduct() {
+function UpdateProduct(props) {
+  const productId = props.match.params.productId;
   const { addToast } = useToasts();
   const user = useContext(UserContext);
   const styles = useStyles();
   const history = useHistory();
   const [Chips, setChips] = useState([]);
   const [images, setImages] = useState([]);
+  const [Product, setProduct] = useState({})
+
+
+  useEffect(() => {
+    http.get(`${apiUrl}/update-product` , productId).then(response => {
+      setProduct(response.data)
+    }).catch(error => {
+      addToast("Error: Couldn't fetch product from the server")
+    })
+  }, [])
+
 
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
@@ -79,7 +91,7 @@ function UpdateProduct() {
   return (
     <div>
       <PageHeader>
-        Update Product <CloudUploadOutlined fontSize="inherit" />
+        Update Product <SystemUpdateAltIcon fontSize="inherit" />
       </PageHeader>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
