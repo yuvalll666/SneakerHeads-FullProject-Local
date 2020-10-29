@@ -5,16 +5,13 @@ import MainContainer from "./forms/MainContainer";
 import Input from "./forms/Input";
 import PrimaryButton from "./forms/PrimaryButton";
 import { useForm } from "react-hook-form";
-import Typography from "@material-ui/core/Typography";
 import { FormControlLabel, Checkbox } from "@material-ui/core";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import http from "../services/httpService";
-import { apiUrl } from "../config.json";
+import { apiUrl, tokenKey } from "../config.json";
 import { Button } from "@material-ui/core";
 import PageHeader from "./utils/PageHeader";
-
-const tokenKey = "token";
 
 const schema = yup.object().shape({
   firstName: yup

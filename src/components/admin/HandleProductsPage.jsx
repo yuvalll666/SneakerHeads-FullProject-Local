@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import http from "../../services/httpService";
 import { apiUrl, userRole } from "../../config.json";
 import { UserContext } from "../../App";
-import { useContext } from "react";
 import { Redirect, Link, useHistory } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import PageHeader from "../utils/PageHeader";
@@ -44,7 +43,6 @@ function HandleProductsPage() {
   const [Products, setProducts] = useState([]);
   const [DeletedProduct, setDeletedProduct] = useState({});
   const { addToast } = useToasts();
-  console.log(Products);
   useEffect(() => {
     http
       .get(`${apiUrl}/admin/handle-products/getAllProducts`)
