@@ -103,6 +103,9 @@ function Cart() {
           return item._id;
         }).indexOf(productId);
         ProductsInfo.splice(indexId, 1);
+        if (ProductsInfo.length === 0) {
+          window.location = "/cart";
+        }
 
         localStorage.setItem("token", response.data.token);
       })
