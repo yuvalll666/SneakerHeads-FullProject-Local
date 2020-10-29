@@ -75,7 +75,6 @@ function AllUsers() {
   };
 
   if (user && user.role !== ADMIN) {
-    console.log("koko");
     return <Redirect to="/" />;
   }
   return (

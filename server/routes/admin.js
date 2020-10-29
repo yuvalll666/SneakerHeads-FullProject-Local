@@ -12,6 +12,16 @@ const { User, userRole } = require("../models/user");
 const { Product } = require("../models/product");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+router.get("/update-product/product_by_id", adminEditorAuth, (req, res) => {
+  const productId = req.query.id;
+  Product.findById({ _id: productId }).exec((err, product) => {
+    if (err) {
+      return res.status(400).send({ error: err });
+    }
+    return res.send(product);
+  });
+});
+
 router.post(
   "/handle-products/undoDelete",
   adminEditorAuth,

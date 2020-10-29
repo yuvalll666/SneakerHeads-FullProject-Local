@@ -11,7 +11,7 @@ import http from "../../services/httpService";
 import { apiUrl, userRole } from "../../config.json";
 import { useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
 import { useToasts } from "react-toast-notifications";
@@ -29,23 +29,26 @@ function UpdateProduct(props) {
   const history = useHistory();
   const [Chips, setChips] = useState([]);
   const [images, setImages] = useState([]);
-  const [Product, setProduct] = useState({})
-
-
+  const [Product, setProduct] = useState({});
+  console.log(Product);
   useEffect(() => {
-    http.get(`${apiUrl}/update-product` , productId).then(response => {
-      setProduct(response.data)
-    }).catch(error => {
-      addToast("Error: Couldn't fetch product from the server")
-    })
-  }, [])
-
+    http
+      .get(`${apiUrl}/admin/update-product/product_by_id?id=${productId}`)
+      .then((response) => {
+        setProduct(response.data);
+      })
+      .catch((error) => {
+        addToast("Error: Couldn't fetch product from the server", {
+          appearance: "error",
+        });
+      });
+  }, []);
 
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
-    defaultValues:{
-      title: "koko"
-    }
+    defaultValues: {
+      title: "koko",
+    },
   });
   const updateImages = (newImages) => {
     setImages(newImages);
