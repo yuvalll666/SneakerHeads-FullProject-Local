@@ -7,10 +7,11 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  makeStyles,
   withStyles,
   Button,
 } from "@material-ui/core";
+import { Empty } from "antd";
+import { Link } from "react-router-dom";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -18,8 +19,8 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-
 function HistoryTable({ history }) {
+  console.log(history);
   const getDate = (date) => {
     let newDate = new Date(date);
     let yy = newDate.getFullYear();
@@ -31,18 +32,16 @@ function HistoryTable({ history }) {
     if (dd < 10) {
       dd = "0" + dd;
     }
-    let hh = newDate.getHours()
-    let sec = newDate.getSeconds()
-    let min = newDate.getMinutes()
+    let hh = newDate.getHours();
+    let sec = newDate.getSeconds();
+    let min = newDate.getMinutes();
 
     let formatedDate = `${yy}-${mm}-${dd} ${hh}:${min}:${sec}`;
 
     return formatedDate ? formatedDate : null;
   };
 
-  useEffect(() => {
-    console.log("history Changed");
-  }, [history]);
+  useEffect(() => {}, [history]);
   return (
     <div>
       <TableContainer component={Paper}>
@@ -66,12 +65,36 @@ function HistoryTable({ history }) {
                 <TableCell align="left">{item.name}</TableCell>
                 <TableCell align="center">{item.quantity}</TableCell>
                 <TableCell align="left">${item.price}</TableCell>
-                <TableCell align="left">{getDate(item.dateOfPurchase)}</TableCell>
+                <TableCell align="left">
+                  {getDate(item.dateOfPurchase)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      {history.length < 1 && (
+        <React.Fragment>
+          <Empty
+            className="mt-4"
+            description="Did not purchase any items yet"
+          ></Empty>
+          <div className="row justify-content-center">
+            <div className="mt-4 justify-content-center col-6">
+              <Link to="/products">
+                <Button
+                  fullWidth
+                  size="large"
+                  color="primary"
+                  variant="outlined"
+                >
+                  Shop Now
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </React.Fragment>
+      )}
     </div>
   );
 }

@@ -12,6 +12,18 @@ const { User, userRole } = require("../models/user");
 const { Product } = require("../models/product");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
+router.put("/update-product/product_by_id", adminEditorAuth, (req, res) => {
+  const productId = req.query.id;
+  Product.findOneAndUpdate({ _id: productId }, req.body, { new: true }).exec(
+    (err, product) => {
+      if (err) {
+        return res.status(400).send({ error: err });
+      }
+      return res.send(product);
+    }
+  );
+});
+
 router.get("/update-product/product_by_id", adminEditorAuth, (req, res) => {
   const productId = req.query.id;
   Product.findById({ _id: productId }).exec((err, product) => {
@@ -44,15 +56,18 @@ router.delete("/handle-products/deleteProduct", adminEditorAuth, (req, res) => {
 });
 
 router.get("/handle-products/getAllProducts", adminEditorAuth, (req, res) => {
-  Product.find({})
-    .sort({ createdAt: 1 })
-    .exec((err, products) => {
-      if (err) {
-        return res.status(400).send({ error: err });
-      }
-      console.log(products);
-      return res.send(products);
-    });
+  const filter = req.query.filter ? req.query.filter : null;
+  let x = Product.find({}).sort({ createdAt: 1 });
+  if (filter && filter !== "all") {
+    x = x.find({ brand: filter });
+  }
+
+  x.exec((err, products) => {
+    if (err) {
+      return res.status(400).send({ error: err });
+    }
+    return res.send(products);
+  });
 });
 
 router.post("/all-users/undoDelete", adminAuth, async (req, res) => {

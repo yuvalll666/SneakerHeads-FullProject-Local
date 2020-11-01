@@ -1,8 +1,8 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import http from "../../services/httpService";
 import { apiUrl, userRole } from "../../config.json";
 import { UserContext } from "../../App";
-import { Redirect, Link, useHistory } from "react-router-dom";
+import { Redirect, Link, useHistory, Route } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
@@ -18,6 +18,7 @@ import {
   makeStyles,
   Button,
 } from "@material-ui/core";
+import UpdateProduct from "./UpdateProduct";
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
 const StyledTableCell = withStyles((theme) => ({
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HandleProductsPage() {
+function HandleProductsPage(props) {
   const history = useHistory();
   const styles = useStyles();
   const user = useContext(UserContext);
@@ -56,6 +57,7 @@ function HandleProductsPage() {
         });
       });
   }, []);
+  useEffect(() => {}, [Products]);
 
   const renderProductImage = (images) => {
     if (images.length > 0) {
@@ -98,23 +100,27 @@ function HandleProductsPage() {
     );
   });
 
+  const handleUpdate = (productId) => {
+    return history.push(`/update-product/${productId}`);
+  };
+
   const handleDelete = (productId) => {
-    http
-      .delete(`${apiUrl}/admin/handle-products/deleteProduct?id=${productId}`)
-      .then((response) => {
-        let confirm = window.confirm("Would you like to delete this product?");
-        if (confirm) {
+    const confirm = window.confirm("Would you like to delete this product?");
+    if (confirm) {
+      http
+        .delete(`${apiUrl}/admin/handle-products/deleteProduct?id=${productId}`)
+        .then((response) => {
           let indexId = Products.map((item) => {
             return item._id;
           }).indexOf(productId);
           Products.splice(indexId, 1);
           setDeletedProduct(response.data);
           addToast("Product deleted successfully", { appearance: "success" });
-        }
-      })
-      .catch((error) => {
-        addToast("Error: Couldn't delete product", { appearance: "error" });
-      });
+        })
+        .catch((error) => {
+          addToast("Error: Couldn't delete product", { appearance: "error" });
+        });
+    }
   };
 
   const undoDelete = (DeletedProduct) => {
@@ -134,13 +140,24 @@ function HandleProductsPage() {
       });
   };
 
-  const handleUpdate = (productId) => {
-    return history.push(`/update-product/${productId}`)
+  const handleBrandFilter = (brandId) => {
+    http
+      .get(`${apiUrl}/admin/handle-products/getAllProducts?filter=${brandId}`)
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const buttons = brands.map((brand) => {
     return (
-      <Button color="default" variant="contained">
+      <Button
+        onClick={() => handleBrandFilter(brand._id)}
+        color="default"
+        variant="contained"
+      >
         {brand.name}
       </Button>
     );
@@ -154,9 +171,19 @@ function HandleProductsPage() {
       <PageHeader>Handle Products</PageHeader>
 
       <div className="container-fluid">
-        <div className="d-flex justify-content-between mb-4">{buttons}</div>
+        <div className="d-flex flex-md-row flex-lg-row flex-xl-row flex-column justify-content-between mb-4">
+          <Button
+            onClick={() => handleBrandFilter("all")}
+            color="default"
+            variant="contained"
+          >
+            all brands
+          </Button>
+
+          {buttons}
+        </div>
         {DeletedProduct && DeletedProduct._id && (
-          <Link onClick={() => undoDelete(DeletedProduct)}>
+          <Link to="#" onClick={() => undoDelete(DeletedProduct)}>
             <i className="fas fa-exclamation-circle"></i>Undo Delete
           </Link>
         )}

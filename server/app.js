@@ -7,6 +7,7 @@ const { User } = require("./models/user");
 const jwt = require("jsonwebtoken");
 
 // "mongodb+srv://yuval:Aza315569533@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority"
+//mongodb+srv://yuval:Aza315569533@onlineshop.abqhu.mongodb.net/test -----> connect to compass
 
 mongoose
   .connect(

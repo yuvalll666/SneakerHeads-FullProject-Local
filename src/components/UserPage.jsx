@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState} from "react";
 import { UserContext } from "../App";
 import Form from "./forms/Form";
 import MainContainer from "./forms/MainContainer";
@@ -42,8 +42,12 @@ const schema = yup.object().shape({
 });
 
 const UserPage = () => {
+
   const [error, setError] = useState({});
   const user = useContext(UserContext);
+
+
+
 
   const { firstName, lastName, email } = user;
   const { register, handleSubmit, watch, errors } = useForm({

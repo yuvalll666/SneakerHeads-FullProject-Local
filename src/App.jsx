@@ -75,7 +75,11 @@ function App() {
             <Route path="/confirmation" component={Confirmation} />
             <DeletedUserProvider>
               <UserContext.Provider value={user}>
-                <Route path="/update-product/:productId" exact component={UpdateProduct} />
+                <Route
+                  path="/update-product/:productId"
+                  exact
+                  component={UpdateProduct}
+                />
                 <Route path="/admin/all-users" exact component={AllUsers} />
                 <Route path="/admin/all-users/:userId" component={SingleUser} />
                 <Route path="/handle-products" component={HandleProductsPage} />

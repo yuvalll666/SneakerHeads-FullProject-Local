@@ -15,6 +15,7 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
 import { useToasts } from "react-toast-notifications";
+import UploadProduct from "../UploadProduct";
 
 const useStyles = makeStyles((them) => ({
   root: {
@@ -30,12 +31,16 @@ function UpdateProduct(props) {
   const [Chips, setChips] = useState([]);
   const [images, setImages] = useState([]);
   const [Product, setProduct] = useState({});
-  console.log(Product);
+
   useEffect(() => {
     http
       .get(`${apiUrl}/admin/update-product/product_by_id?id=${productId}`)
       .then((response) => {
-        setProduct(response.data);
+        if (response && response.data) {
+          setProduct(response.data);
+          setImages(response.data.images);
+          setChips(response.data.tags);
+        }
       })
       .catch((error) => {
         addToast("Error: Couldn't fetch product from the server", {
@@ -46,23 +51,18 @@ function UpdateProduct(props) {
 
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
-    defaultValues: {
-      title: "koko",
-    },
   });
+
   const updateImages = (newImages) => {
     setImages(newImages);
   };
 
   const onSubmit = async (data) => {
     const { title, description, price, brand } = data;
-
-    if (!title || !description || !price || !brand || !images) {
-      // return toast.error("Please fill of fields first!");
+    if (!title || !description || !price || isNaN(brand) || !images) {
       return addToast("Please fill all of the fields first!", {
         appearance: "error",
       });
-      // "Please fill of fields first!"
     }
 
     const productInfo = {
@@ -72,12 +72,19 @@ function UpdateProduct(props) {
       ...data,
     };
 
+    console.log(productInfo);
+
+    console.log(productInfo);
+
     try {
-      await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
-      addToast("Product uploaded successfuly", {
+      await http.put(
+        `${apiUrl}/admin/update-product/product_by_id?id=${productId}`,
+        productInfo
+      );
+      addToast("Product updated successfuly", {
         appearance: "success",
       });
-      history.push("/");
+      history.push("/handle-products");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         addToast(error.response.data.error, {
@@ -91,6 +98,25 @@ function UpdateProduct(props) {
     setChips(chips);
   };
 
+  const renderBrands = () => {
+    let array = brands.map((item) => {
+      if (item._id === Product.brand) {
+        return (
+          <option selected="selected" key={item._id} value={item._id}>
+            {item.name}
+          </option>
+        );
+      } else {
+        return (
+          <option key={item._id} value={item._id}>
+            {item.name}
+          </option>
+        );
+      }
+    });
+    return array;
+  };
+
   return (
     <div>
       <PageHeader>
@@ -98,10 +124,19 @@ function UpdateProduct(props) {
       </PageHeader>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FileUpload refreshFunction={updateImages} />
+        <FileUpload oldImages={images} refreshFunction={updateImages} />
         <MainContainer className={styles.root} maxWidth="sm">
-          <Input name="title" label="Title" id="title" ref={register} />
+          <input
+            defaultValue={Product.title}
+            placeholder="Title"
+            name="title"
+            label="Title"
+            id="title"
+            ref={register}
+            className="form-control mb-3"
+          />
           <textarea
+            defaultValue={Product.description}
             className="form-control"
             name="description"
             id="description"
@@ -118,13 +153,11 @@ function UpdateProduct(props) {
           >
             <option>Choose Brand...</option>
 
-            {brands.map((item) => (
-              <option key={item.key} value={item._id}>
-                {item.name}
-              </option>
-            ))}
+            {renderBrands()}
           </select>
-          <Input
+          <input
+            defaultValue={Product.price}
+            className="form-control mt-3"
             name="price"
             label="Price"
             id="price"
@@ -133,6 +166,7 @@ function UpdateProduct(props) {
             ref={register}
           />
           <ChipInput
+            defaultValue={Product.tags}
             fullWidth
             placeholder="+Add_Tag"
             onChange={(chips) => handleChange(chips)}

@@ -29,6 +29,7 @@ function UploadProduct() {
   const [Chips, setChips] = useState([]);
   const [images, setImages] = useState([]);
 
+ 
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
   });
@@ -60,10 +61,11 @@ function UploadProduct() {
         appearance: "success",
       });
       history.push("/");
+      // window.location = "/upload-product";
     } catch (error) {
       if (error.response && error.response.status === 400) {
         addToast(error.response.data.error, {
-          appearance: "success",
+          appearance: "error",
         });
       }
     }

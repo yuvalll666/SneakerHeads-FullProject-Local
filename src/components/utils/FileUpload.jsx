@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Dropzone from "react-dropzone";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
@@ -8,6 +8,7 @@ function FileUpload(props) {
   const { addToast } = useToasts();
   const [images, setImages] = useState([]);
 
+  let oldImages = props.oldImages;
   const onDrop = async (files) => {
     const formData = new FormData();
     const config = {
@@ -39,6 +40,16 @@ function FileUpload(props) {
     newImages.splice(currentIndex, 1);
 
     setImages(newImages);
+    props.refreshFunction(newImages);
+  };
+
+  const oldImageshandleDelete = (image) => {
+    const currentIndex = images.indexOf(image);
+
+    let newImages = [...props.oldImages];
+    newImages.splice(currentIndex, 1);
+
+    oldImages = newImages;
     props.refreshFunction(newImages);
   };
 
@@ -86,6 +97,17 @@ function FileUpload(props) {
               />
             </div>
           ))}
+
+          {props.oldImages &&
+            props.oldImages.map((image, index) => (
+              <div onClick={() => oldImageshandleDelete(image)} key={index}>
+                <img
+                  style={{ minWidth: "300px", width: "300px", height: "240px" }}
+                  src={`http://localhost:3000/${image}`}
+                  alt={`productImg-${index}`}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

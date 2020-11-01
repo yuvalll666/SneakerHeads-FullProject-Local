@@ -30,7 +30,7 @@ function Home() {
 
   const renderCards = ViewsProducts.map((prod, index) => {
     return (
-      <Col xs={12} md={8} lg={6}>
+      <Col key={index} xs={12} md={8} lg={6}>
         <Card
           style={{
             backgroundColor: "#fafafa",
@@ -79,12 +79,7 @@ function Home() {
           <Row gutter={[30, 16]}>{renderCards}</Row>
         </div>
 
-        {/*Eaxmples!!!!!!!!!!!!!!!!!! */}
-        <div className="row">
-          <div className="col-12 mt-4">
-            <h2>What's New ?</h2>
-          </div>
-        </div>
+     
       </div>
     </div>
   );

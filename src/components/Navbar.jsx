@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import { userRole } from "../config.json";
@@ -26,12 +26,12 @@ function Navbar({ user }) {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" to="/products">
-                Browse
+                <strong> Browse</strong>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/about">
-                About
+                <strong> who-we-are </strong>
               </NavLink>
             </li>
             <li className="nav-item dropdown">
@@ -43,7 +43,7 @@ function Navbar({ user }) {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Brands
+                <strong> Brands</strong>
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
                 <Link className="dropdown-item" to="/brands/jordan">
@@ -70,12 +70,12 @@ function Navbar({ user }) {
               <React.Fragment>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/signin">
-                    Signin
+                    <strong>Signin</strong>
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/step1">
-                    Signup
+                    <strong>Signup</strong>
                   </NavLink>
                 </li>
               </React.Fragment>
@@ -94,7 +94,7 @@ function Navbar({ user }) {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        C-Panel
+                        <strong> C-Panel</strong>
                       </Link>
                       <div
                         className="dropdown-menu"
@@ -125,7 +125,7 @@ function Navbar({ user }) {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    {user.firstName + " " + user.lastName}
+                    <strong>{user.firstName + " " + user.lastName}</strong>
                   </Link>
                   <div className="dropdown-menu" aria-labelledby="dropdown04">
                     <Link className="dropdown-item" to="/history">
@@ -135,7 +135,8 @@ function Navbar({ user }) {
                       <i className="fas fa-cog"></i> Settings
                     </Link>
                     <Link className="dropdown-item" to="/logout">
-                      <i className="fas fa-sign-out-alt"></i> Logout
+                      <i className="fas fa-sign-out-alt"></i>{" "}
+                      Logout
                     </Link>
                   </div>
                 </li>

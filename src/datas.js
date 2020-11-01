@@ -59,7 +59,7 @@ const brands = [
   },
   {
     _id: 6,
-    name: "Convers",
+    name: "Converse",
   },
   {
     _id: 7,
