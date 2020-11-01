@@ -9,7 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { login, getCurrentUser } from "../services/userService";
 import PageHeader from "./utils/PageHeader";
-import {useToasts} from "react-toast-notifications"
+import { useToasts } from "react-toast-notifications";
+import "../App.css";
 
 const schema = yup.object().shape({
   email: yup
@@ -23,7 +24,7 @@ const schema = yup.object().shape({
 });
 
 function Signin() {
-  const {addToast} = useToasts()
+  const { addToast } = useToasts();
   const [error, setError] = useState("");
   const { register, handleSubmit, errors } = useForm({
     mode: "onBlur",
@@ -39,8 +40,11 @@ function Signin() {
       if (error.response && error.response.status === 400) {
         setError(error.response.data);
       }
-      if(error.response && error.response.status === 401){
-       addToast(error.response.data, {appearance:"warning", autoDismissTimeOut:10000}) 
+      if (error.response && error.response.status === 401) {
+        addToast(error.response.data, {
+          appearance: "warning",
+          autoDismissTimeOut: 10000,
+        });
       }
     }
   }
@@ -48,35 +52,34 @@ function Signin() {
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <React.Fragment>
-    <PageHeader>
-      <div className="text-center">Signin</div>
-    </PageHeader>
-    
-    <MainContainer>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          ref={register}
-          type="email"
-          label="Email"
-          name="email"
-          required
-          error={!!errors.email}
-          helperText={errors?.email?.message}
-        />
-        <Input
-          ref={register}
-          type="password"
-          label="Password"
-          name="password"
-          required
-          error={!!errors.password || !!error}
-          helperText={errors?.password?.message || error}
-        />
-        <Link to="/step1">Don't have account?</Link>
-        <PrimaryButton type="submit">Submit</PrimaryButton>
-      </Form>
-      
-    </MainContainer>
+      <PageHeader>
+        <div className="text-center">Signin</div>
+      </PageHeader>
+
+      <MainContainer>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              ref={register}
+              type="email"
+              label="Email"
+              name="email"
+              required
+              error={!!errors.email}
+              helperText={errors?.email?.message}
+            />
+            <Input
+              ref={register}
+              type="password"
+              label="Password"
+              name="password"
+              required
+              error={!!errors.password || !!error}
+              helperText={errors?.password?.message || error}
+            />
+            <Link to="/step1">Don't have account?</Link>
+            <PrimaryButton type="submit">Submit</PrimaryButton>
+          </Form>
+      </MainContainer>
     </React.Fragment>
   );
 }

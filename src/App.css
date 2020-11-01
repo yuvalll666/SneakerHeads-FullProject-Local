@@ -18,3 +18,18 @@ main {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+.out-box {
+  margin-top: 10px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgb(231, 238, 236);
+  border-radius: 4px;
+  box-shadow: rgb(184, 196, 194) 0px 4px 10px -4px;
+  padding: 20px;
+  transition: ease-in-out 500ms;
+}
+.out-box:hover {
+  transition: ease-in-out 300ms;
+  box-shadow: rgb(92, 92, 92) 0px 4px 10px -4px;
+}

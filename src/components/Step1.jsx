@@ -12,7 +12,8 @@ import { useData } from "../DataContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { getCurrentUser } from "../services/userService";
-import PageHeader from "./utils/PageHeader"
+import PageHeader from "./utils/PageHeader";
+import "../App.css";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -44,38 +45,35 @@ function Step1() {
   };
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
-
     <React.Fragment>
+      <PageHeader>
+        <div className="text-center">Step 1</div>
+      </PageHeader>
 
-  <PageHeader
-  >
-    <div className="text-center">Step 1</div>
-  </PageHeader>
+      <MainContainer>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              ref={register}
+              name="firstName"
+              type="text"
+              label="First Name"
+              required
+              error={Boolean(errors.firstName)}
+              helperText={errors?.firstName?.message}
+            />
 
-    <MainContainer>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          ref={register}
-          name="firstName"
-          type="text"
-          label="First Name"
-          required
-          error={Boolean(errors.firstName)}
-          helperText={errors?.firstName?.message}
-        />
-        
-        <Input
-          ref={register}
-          name="lastName"
-          type="text"
-          label="Last Name"
-          required
-          error={Boolean(errors.lastName)}
-          helperText={errors?.lastName?.message}
-        />
-        <PrimaryButton type="submit">Next</PrimaryButton>
-      </Form>
-    </MainContainer>
+            <Input
+              ref={register}
+              name="lastName"
+              type="text"
+              label="Last Name"
+              required
+              error={Boolean(errors.lastName)}
+              helperText={errors?.lastName?.message}
+            />
+            <PrimaryButton type="submit">Next</PrimaryButton>
+          </Form>
+      </MainContainer>
     </React.Fragment>
   );
 }

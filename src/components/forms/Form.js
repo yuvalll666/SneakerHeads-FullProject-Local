@@ -1,18 +1,10 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((them) => ({
-  root: {
-    width: "100%",
-    marginTop: them.spacing(1),
-  },
-}));
+import "../../App.css"
 
 function Form({ children, ...props }) {
-  const styles = useStyles();
 
   return (
-    <form className={styles.root} noValidate {...props}>
+    <form className="out-box" noValidate {...props}>
       {children}
     </form>
   );

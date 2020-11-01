@@ -11,7 +11,7 @@ import PrimaryButton from "./forms/PrimaryButton";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { getCurrentUser } from "../services/userService";
-import PageHeader from "./utils/PageHeader"
+import PageHeader from "./utils/PageHeader";
 
 const schema = yup.object().shape({
   email: yup
@@ -54,43 +54,46 @@ function Step2() {
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <React.Fragment>
-      <PageHeader
-  >
-    <div className="text-center">Step 2</div>
-  </PageHeader>
-    
-    <MainContainer>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          ref={register}
-          type="email"
-          label="Email"
-          name="email"
-          required
-          error={!!errors.email}
-          helperText={errors?.email?.message}
-        />
-        <Input
-          ref={register}
-          type="password"
-          label="Password"
-          name="password"
-          required
-          error={!!errors.password}
-          helperText={errors?.password?.message}
-        />
-        <Input
-          ref={register}
-          type="password"
-          label="Confirm Password"
-          name="confirmPassword"
-          required
-          error={!!errors.confirmPassword || !!error.confirmPassword}
-          helperText={errors?.confirmPassword?.message || error?.confirmPassword}
-        />
-        <PrimaryButton type="submit">Next</PrimaryButton>
-      </Form>
-    </MainContainer>
+      <PageHeader>
+        <div className="text-center">Step 2</div>
+      </PageHeader>
+
+      <MainContainer>
+        
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              ref={register}
+              type="email"
+              label="Email"
+              name="email"
+              required
+              error={!!errors.email}
+              helperText={errors?.email?.message}
+            />
+            <Input
+              ref={register}
+              type="password"
+              label="Password"
+              name="password"
+              required
+              error={!!errors.password}
+              helperText={errors?.password?.message}
+            />
+            <Input
+              ref={register}
+              type="password"
+              label="Confirm Password"
+              name="confirmPassword"
+              required
+              error={!!errors.confirmPassword || !!error.confirmPassword}
+              helperText={
+                errors?.confirmPassword?.message || error?.confirmPassword
+              }
+            />
+            <PrimaryButton type="submit">Next</PrimaryButton>
+          </Form>
+        
+      </MainContainer>
     </React.Fragment>
   );
 }
