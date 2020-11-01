@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 
 mongoose
   .connect(
-    "mongodb+srv://yuval:Aza315569533@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority",
+    `mongodb+srv://yuval:${process.env.MONGO_PASSWORD}@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
