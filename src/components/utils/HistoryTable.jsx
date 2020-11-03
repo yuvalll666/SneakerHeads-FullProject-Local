@@ -10,6 +10,7 @@ import {
   withStyles,
   Button,
 } from "@material-ui/core";
+import {getDate} from "../../datas";
 import { Empty } from "antd";
 import { Link } from "react-router-dom";
 
@@ -26,31 +27,6 @@ const StyledTableCell = withStyles((theme) => ({
  * @param {Object} history - User's purchases history information
  */
 function HistoryTable({ history }) {
-  /**
-   * Format a Date.now() Object
-   * @param {Date} date - Date.now()
-   * @returns - Formated date
-   */
-  const getDate = (date) => {
-    let newDate = new Date(date);
-    let yy = newDate.getFullYear();
-    let mm = newDate.getMonth() + 1;
-    if (mm < 10) {
-      mm = "0" + mm;
-    }
-    let dd = newDate.getDate();
-    if (dd < 10) {
-      dd = "0" + dd;
-    }
-    let hh = newDate.getHours();
-    let sec = newDate.getSeconds();
-    let min = newDate.getMinutes();
-
-    let formatedDate = `${yy}-${mm}-${dd} ${hh}:${min}:${sec}`;
-
-    return formatedDate ? formatedDate : null;
-  };
-
   useEffect(() => {}, [history]);
   return (
     <div>

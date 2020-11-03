@@ -1,0 +1,894 @@
+[{
+  "_id": {
+    "$oid": "5f9b10ef642b9425d052fb5b"
+  },
+  "images": [
+    "uploads\\1603997854347_travis.jpg",
+    "uploads\\1603997856437_travis2.jpg",
+    "uploads\\1603997858206_travis3.jpg",
+    "uploads\\1603997859836_travis4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "cactus jack",
+    "travis scott",
+    "air force 1"
+  ],
+  "views": 6,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike Air Force 1 Low Travis Scott Cactus Jack",
+  "description": "Travis Scott and Nike add a new design to their growing Air Force arsenal with the Air Force 1 Low Travis Scott Cactus Jack, now available on StockX. After a year of sneaker world dominance, Nike is adding a twist to their latest collaborative AF 1 with Cactus Jack. This new design features a never before seen detachable lace cover that encloses with a heavy brass zipper.\n\nThis Travis AF-1 features a patchwork upper comprised of camouflage, corduroy, duck canvas, flannel, leather, suede and wool. Unmistakable Cactus Jack insignias are placed throughout the silhouette. A sail midsole and gum rubber outsole completes the design. These sneakers released in November of 2019.",
+  "price": 450,
+  "createdAt": {
+    "$date": "2020-10-29T18:58:55.663Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-02T16:21:12.535Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1149642b9425d052fb5c"
+  },
+  "images": [
+    "uploads\\1603998018893_blackS.jpg",
+    "uploads\\1603998020683_blackS2.jpg",
+    "uploads\\1603998023306_blackS3.jpg",
+    "uploads\\1603998022011_blackS4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "air force 1 ",
+    "supreme",
+    "black"
+  ],
+  "views": 7,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike Air Force 1 Low Supreme Black",
+  "description": "Please note: Extra laces must be included. Supreme and Nike paid homage to an NYC classic with the release of the Nike Air Force 1 Low Supreme Black, now available on StockX. This collaboration adds Supreme’s world-renowned Box Logo to the side of a traditional all-black Air Force 1 design.\n\nThis Air Force 1 Low is comprised of an all-black leather upper with matching soles and detailing. A red Supreme Box Logo placed on the outside heel and alternate branded 3M laces complete the design. These sneakers released in March of 2020.",
+  "price": 180,
+  "createdAt": {
+    "$date": "2020-10-29T19:00:25.128Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-03T00:57:54.008Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1265642b9425d052fb5d"
+  },
+  "images": [
+    "uploads\\1603998303268_sacaiSnowBeach.jpg",
+    "uploads\\1603998304669_sacaiSnowBeach2.jpg",
+    "uploads\\1603998305970_sacaiSnowBeach3.jpg",
+    "uploads\\1603998307826_sacaiSnowBeach4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "blazer",
+    "yellow",
+    "sacai",
+    "mid"
+  ],
+  "views": 5,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike Blazer Mid sacai Snow Beach",
+  "description": "Hit your nearest beach in style while rocking the Nike Blazer High sacai Snow Beach. This Blazer High comes with a yellow upper plus blue accents, red Nike “Swoosh”, blue Nike “Swoosh”, white midsole, and white sole. These sneakers released in May 2019.",
+  "price": 180,
+  "createdAt": {
+    "$date": "2020-10-29T19:05:09.907Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-03T01:49:39.174Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b12af642b9425d052fb5e"
+  },
+  "images": [
+    "uploads\\1603998369576_FlyleatherRuohanWang.jpg",
+    "uploads\\1603998370846_FlyleatherRuohanWang2.jpg",
+    "uploads\\1603998371926_FlyleatherRuohanWang3.jpg",
+    "uploads\\1603998373176_FlyleatherRuohanWang4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "nike",
+    "mid",
+    "blazer",
+    "77"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike Blazer Mid 77 Flyleather Ruohan Wang",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 115,
+  "createdAt": {
+    "$date": "2020-10-29T19:06:23.636Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:06:23.636Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b131f642b9425d052fb5f"
+  },
+  "images": [
+    "uploads\\1603998470630_arzareth.jpg",
+    "uploads\\1603998471888_arzareth2.jpg",
+    "uploads\\1603998472900_arzareth3.jpg",
+    "uploads\\1603998474244_arzareth4.jpg"
+  ],
+  "brand": 4,
+  "tags": [
+    "yeezy",
+    "lightblue",
+    "700",
+    "arzareth"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "adidas Yeezy 700 V3 Arzareth",
+  "description": "Please Note: Extra laces required. The Yeezy 700 V3 Arzareth welcomed a new wave of color for the ever-growing Yeezy line. Previous releases of the 700 V3 have stayed in neutral territory, making the Arzareth a stand out with its striking colorway.\n\nThe Yeezy 700 V3 Arzareth features a blue and grey Primeknit upper that is complemented by a traditional translucent glow-in-the-dark cage overlay. From there, an EVA foam midsole, grey toe cap, and black lining complete the design.\n\nThe Yeezy 700 V3 Arzareth released in August of 2020.",
+  "price": 350,
+  "createdAt": {
+    "$date": "2020-10-29T19:08:15.822Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:08:15.822Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b134b642b9425d052fb60"
+  },
+  "images": [
+    "uploads\\1603998533390_yeezyCarbon.jpg",
+    "uploads\\1603998535384_yeezyCarbon2.jpg",
+    "uploads\\1603998536781_yeezyCarbon3.jpg",
+    "uploads\\1603998538158_yeezyCarbon4.jpg"
+  ],
+  "brand": 4,
+  "tags": [
+    "350",
+    "yeezy",
+    "carbon"
+  ],
+  "views": 1,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "adidas Yeezy Boost 350 V2 Carbon",
+  "description": "Kanye West and adidas keep the ball rolling with the Yeezy 350 V2 Carbon. This release marks the 12th colorway of the favorite 350 V2 model in 2020 and this colorway’s dark-hued upper makes it the perfect piece of footwear for fall.\n\nThe Yeezy 350 V2 Carbon holds all of the familiar elements that make the silhouette so popular; breathable Primeknit solid black mesh with its signature side stripe, ribbed patterned off-white midsole, and classic BOOST cushioning make the 350 V2 Carbon easy to love and easy to wear.\n\nThe Yeezy 350 V2 Carbon released in October of 2020.",
+  "price": 250,
+  "createdAt": {
+    "$date": "2020-10-29T19:08:59.778Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-02T16:21:27.395Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b138a642b9425d052fb61"
+  },
+  "images": [
+    "uploads\\1603998576916_cloud.jpg",
+    "uploads\\1603998581518_cloud2.jpg",
+    "uploads\\1603998582788_cloud3.jpg",
+    "uploads\\1603998583872_cloud4.jpg"
+  ],
+  "brand": 4,
+  "tags": [
+    "yeezy",
+    "350",
+    "cloud white",
+    "v2"
+  ],
+  "views": 2,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "adidas Yeezy Boost 350 V2 Cloud White (Non-Reflective)",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 340,
+  "createdAt": {
+    "$date": "2020-10-29T19:10:02.527Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-03T00:58:00.994Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b140d642b9425d052fb62"
+  },
+  "images": [
+    "uploads\\1603998702297_travisHigh.jpg",
+    "uploads\\1603998704174_travisHigh2.jpg",
+    "uploads\\1603998705673_travisHigh3.jpg",
+    "uploads\\1603998707291_travisHigh4.jpg"
+  ],
+  "brand": 2,
+  "tags": [
+    "travis scott",
+    "air jordan ",
+    "retro"
+  ],
+  "views": 4,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Jordan 1 Retro High Travis Scott",
+  "description": "Grab a pack of coffee beans to match the Jordan 1 Retro High Travis Scott. This AJ1 comes with a brown upper plus white accents, black Nike \"Swoosh\", sail midsole, and a brown sole. These sneakers released in May 2019.",
+  "price": 1155,
+  "createdAt": {
+    "$date": "2020-10-29T19:12:13.367Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-01T00:07:06.572Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b143e642b9425d052fb63"
+  },
+  "images": [
+    "uploads\\1603998774439_tokyo.jpg",
+    "uploads\\1603998776208_tokyo2.jpg",
+    "uploads\\1603998777679_tokyo3.jpg",
+    "uploads\\1603998779063_tokyo4.jpg"
+  ],
+  "brand": 2,
+  "tags": [
+    "retro",
+    "tokyo",
+    "jordan"
+  ],
+  "views": 1,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Jordan 1 Retro High Tokyo Bio Hack",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 205,
+  "createdAt": {
+    "$date": "2020-10-29T19:13:02.779Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:48:32.761Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1480642b9425d052fb64"
+  },
+  "images": [
+    "uploads\\1603998830899_bredLow.jpg",
+    "uploads\\1603998832214_bredLow2.jpg",
+    "uploads\\1603998833311_bredLow3.jpg",
+    "uploads\\1603998834470_bredLow4.jpg"
+  ],
+  "brand": 2,
+  "tags": [
+    "bred low",
+    "air jordan",
+    "retro"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Jordan 11 Retro Low Concord Bred",
+  "description": "Jordan Brand combined elements of two of their greatest Jordan 11 colorways to create the Jordan 11 Retro Low Concord Bred, now available on StockX. This hybrid design takes the upper of a traditional Jordan 11 Low Concord and pairs it with the red outsole of the Jordan 11 Bred.\n\nThe Jordan 11 Low Concord Bred consists of a white upper with black patent leather overlays and black detailing. A white midsole, red translucent outsole, and Jordan branding on the tongue complete the design. These Jordan 11 Lows released in June of 2020.",
+  "price": 200,
+  "createdAt": {
+    "$date": "2020-10-29T19:14:08.968Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:14:08.968Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b14cd642b9425d052fb65"
+  },
+  "images": [
+    "uploads\\1603998920045_snake.jpg",
+    "uploads\\1603998921125_snake2.jpg",
+    "uploads\\1603998922185_snake3.jpg",
+    "uploads\\1603998923389_snake4.jpg"
+  ],
+  "brand": 2,
+  "tags": [
+    "snake",
+    "retro",
+    "air jordan",
+    "high"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Jordan 1 Retro High Satin Snake Chicago (W)",
+  "description": "Jordan Brand added luxe materials to a classic silhouette with the release of the Jordan 1 Retro High Satin Snake Chicago (W). This release combines Jumpman’s ongoing Satin 1 concept with the colorway that started it all.\n\nThis Jordan 1 consists of a white and red leather upper with red satin tongue and liner. Black faux snakeskin leather detailing appears on the upper as well. A white midsole, red outsole, and a traditional Jordan Wings graphic on the ankle completes the design. These sneakers released in August of 2020.",
+  "price": 245,
+  "createdAt": {
+    "$date": "2020-10-29T19:15:25.353Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:15:25.353Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1524642b9425d052fb66"
+  },
+  "images": [
+    "uploads\\1603999007508_CactusTrails.jpg",
+    "uploads\\1603999008722_CactusTrails2.jpg",
+    "uploads\\1603999009777_CactusTrails3.jpg",
+    "uploads\\1603999010816_CactusTrails4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "cactus jack",
+    "travis scott",
+    "air max 270"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike Air Max 270 React ENG Travis Scott Cactus Trails",
+  "description": "Nike and Travis Scott teamed up once again to deliver the Nike Air Max 270 React Travis Scott, now available on StockX. This is the first time La Flame has put his signature touch on an Air Max silhouette.\n\nThis Air Max 270 consists of a mesh upper with tumblr leather and suede overlays. A gold midsole, green tongue with attached lace locks, and Cactus Jack branding on the heel tabs completes the design. These sneakers released in May of 2020.",
+  "price": 375,
+  "createdAt": {
+    "$date": "2020-10-29T19:16:52.452Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:16:52.452Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b154b642b9425d052fb67"
+  },
+  "images": [
+    "uploads\\1603999044782_Element87AnthraciteBlack.jpg",
+    "uploads\\1603999046988_Element87AnthraciteBlack2.jpg",
+    "uploads\\1603999048257_Element87AnthraciteBlack3.jpg",
+    "uploads\\1603999049665_Element87AnthraciteBlack4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "react",
+    "nike",
+    "black"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike React Element 87 Anthracite Black",
+  "description": "Since first being spotted on the runway during a Paris Fashion Week Show in March, the Nike React Element 87 has been of the most hyped shoes of 2018. Mimicking a Virgil Abloh-esque deconstructed style the react Element 87 features a transcluscent upper and a React-cushioned midsole. Released exclusively overseas in June, this pair saw an American release in July 2018.",
+  "price": 70,
+  "createdAt": {
+    "$date": "2020-10-29T19:17:31.415Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:17:31.415Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1583642b9425d052fb68"
+  },
+  "images": [
+    "uploads\\1603999101573_DarkGrey.jpg",
+    "uploads\\1603999102826_DarkGrey2.jpg",
+    "uploads\\1603999103833_DarkGrey3.jpg",
+    "uploads\\1603999104869_DarkGrey4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "nike ",
+    "react",
+    "87"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike React Element 87 Dark Grey Photo Blue",
+  "description": "Marking the latest release since its inaugural drop in July 2018, the Nike React Element 87 is back, and this colorway is cold (ice cold)!! Featuring a Dark Grey Photo Blue colorway, this pair has a translucent upper, grey overlays, a white Nike Swoosh, and photo blue accents. The Nike React Element 87 Dark Grey Photo Blue dropped in August 2018.",
+  "price": 110,
+  "createdAt": {
+    "$date": "2020-10-29T19:18:27.791Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:18:27.791Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1618642b9425d052fb69"
+  },
+  "images": [
+    "uploads\\1603999251732_conversOff-White.jpg",
+    "uploads\\1603999252868_conversOff-White2.jpg",
+    "uploads\\1603999253817_conversOff-White3.jpg",
+    "uploads\\1603999254870_conversOff-White4.jpg"
+  ],
+  "brand": 6,
+  "tags": [
+    "off-white",
+    "convers",
+    "white"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Converse Chuck Taylor All-Star 70s Hi Off-White",
+  "description": "Virgil is back at it again with the Converse Chuck Taylor All-Star 70s Hi Off-White. These legendary sneakers come with an all-white upper, stripped midsole, and orange sole. The Off-White Chucks released in October 2018.",
+  "price": 470,
+  "createdAt": {
+    "$date": "2020-10-29T19:20:56.347Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:20:56.347Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1663642b9425d052fb6a"
+  },
+  "images": [
+    "uploads\\1603999296434_desGarconsBlack.jpg",
+    "uploads\\1603999297551_desGarconsBlack2.jpg",
+    "uploads\\1603999298555_desGarconsBlack3.jpg",
+    "uploads\\1603999299706_desGarconsBlack4.jpg"
+  ],
+  "brand": 6,
+  "tags": [
+    "chuck 70s",
+    "des garcons",
+    "black",
+    "heart"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Converse Chuck Taylor All-Star 70s Hi Comme des Garcons PLAY Black",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 150,
+  "createdAt": {
+    "$date": "2020-10-29T19:22:11.319Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:22:11.319Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b16be642b9425d052fb6b"
+  },
+  "images": [
+    "uploads\\1603999377570_GarconsPlayMultiHeartWhite.jpg"
+  ],
+  "brand": 6,
+  "tags": [
+    "des Garcons",
+    "chuck 70s",
+    "high"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Converse Chuck Taylor All-Star 70s Hi Comme des Garcons Play Multi-Heart White",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 145,
+  "createdAt": {
+    "$date": "2020-10-29T19:23:42.593Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:23:42.593Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b16e4642b9425d052fb6c"
+  },
+  "images": [
+    "uploads\\1603999433160_MonclerFragmentBlack.jpg",
+    "uploads\\1603999435502_MonclerFragmentBlack2.jpg",
+    "uploads\\1603999437318_MonclerFragmentBlack3.jpg",
+    "uploads\\1603999438702_MonclerFragmentBlack4.jpg"
+  ],
+  "brand": 6,
+  "tags": [
+    "black",
+    "low",
+    "convers"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Converse Chuck Taylor All-Star 70s Ox 7 Moncler Fragment Black",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 105,
+  "createdAt": {
+    "$date": "2020-10-29T19:24:20.470Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:24:20.470Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b17a0642b9425d052fb6d"
+  },
+  "images": [
+    "uploads\\1603999583304_solid.jpg",
+    "uploads\\1603999584662_solid2.jpg",
+    "uploads\\1603999585735_solid3.jpg",
+    "uploads\\1603999587783_solid4.jpg"
+  ],
+  "brand": 4,
+  "tags": [
+    "yeezy",
+    "boost 700",
+    "runner"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "adidas Yeezy Boost 700 Wave Runner Solid Grey",
+  "description": "A new set of waves are rolling in as the adidas Yeezy Wave Runner 700s get ready for their first restock on March 10th, 2018. First releasing in November of 2017, the Yeezy Boost 700’s represented what was a significant shift in Kanye’s design aesthetic, moving from the minimalistic silhouettes of early Yeezy seasons to this chunky runner model. It once again showed how Kanye stays ahead of the curve, as chunkier sneakers became more en vogue in 2018. The shoe features an upper with grey and black suede overlays, premium leather with blue mesh underlays, neon green laces, and its signature chunky midsole with encapsulated Boost technology. Translation: these may look bold but are still comfy as hell.",
+  "price": 500,
+  "createdAt": {
+    "$date": "2020-10-29T19:27:28.667Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:27:28.667Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1868642b9425d052fb6e"
+  },
+  "images": [
+    "uploads\\1603999813440_adidas-Nite-Jogger-Star-Wars-R2D2.jpg"
+  ],
+  "brand": 3,
+  "tags": [
+    "star wars",
+    "nite jogger",
+    "r2d2"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "adidas Nite Jogger Star Wars R2D2",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 80,
+  "createdAt": {
+    "$date": "2020-10-29T19:30:48.650Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:30:48.650Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b18d2642b9425d052fb6f"
+  },
+  "images": [
+    "uploads\\1603999913309_Beyonce.jpg",
+    "uploads\\1603999914456_Beyonce2.jpg",
+    "uploads\\1603999915622_Beyonce3.jpg",
+    "uploads\\1603999916654_Beyonce4.jpg"
+  ],
+  "brand": 3,
+  "tags": [
+    "orange ",
+    "brown",
+    "Beyonce"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "adidas Nite Jogger Beyonce Ivy Park",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 260,
+  "createdAt": {
+    "$date": "2020-10-29T19:32:34.811Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:32:34.811Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1922642b9425d052fb70"
+  },
+  "images": [
+    "uploads\\1604000026619_bone.jpg",
+    "uploads\\1604000028225_bone2.jpg",
+    "uploads\\1604000030370_bone3.jpg",
+    "uploads\\1604000032255_bone4.jpg"
+  ],
+  "brand": 4,
+  "tags": [
+    "slides",
+    "yeezy"
+  ],
+  "views": 3,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Yeezy Slide Bone",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 230,
+  "createdAt": {
+    "$date": "2020-10-29T19:33:54.161Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:49:26.057Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b196a642b9425d052fb71"
+  },
+  "images": [
+    "uploads\\1604000098608_Core.jpg",
+    "uploads\\1604000100947_Core2.jpg",
+    "uploads\\1604000102840_Core3.jpg",
+    "uploads\\1604000104709_Core4.jpg"
+  ],
+  "brand": 4,
+  "tags": [
+    "Core",
+    "brown",
+    "slides"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Yeezy Slide Core",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 190,
+  "createdAt": {
+    "$date": "2020-10-29T19:35:06.758Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:35:06.758Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b19a8642b9425d052fb72"
+  },
+  "images": [
+    "uploads\\1604000135357_Donut.jpg"
+  ],
+  "brand": 5,
+  "tags": [
+    "Donut",
+    "lightblue",
+    "high"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Vans Sk8-Hi Odd Future Donut",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 420,
+  "createdAt": {
+    "$date": "2020-10-29T19:36:08.041Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:36:08.041Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b19d2642b9425d052fb73"
+  },
+  "images": [
+    "uploads\\1604000172933_Simpsons.jpg",
+    "uploads\\1604000174070_Simpsons2.jpg",
+    "uploads\\1604000175194_Simpsons3.jpg",
+    "uploads\\1604000176584_Simpsons4.jpg"
+  ],
+  "brand": 5,
+  "tags": [
+    "moes",
+    "simpson",
+    "low",
+    "green"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Vans Old Skool The Simpsons Moe's",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 75,
+  "createdAt": {
+    "$date": "2020-10-29T19:36:50.626Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:36:50.626Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1a3b642b9425d052fb74"
+  },
+  "images": [
+    "uploads\\1604000245894_Supreme.jpg"
+  ],
+  "brand": 5,
+  "tags": [
+    "public enemy",
+    "black white",
+    "high"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Vans Sk8-Hi Supreme Public Enemy Black White",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 650,
+  "createdAt": {
+    "$date": "2020-10-29T19:38:35.352Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:38:35.352Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1ae4642b9425d052fb75"
+  },
+  "images": [
+    "uploads\\1604000471681_Phantaci.jpg",
+    "uploads\\1604000472887_Phantaci2.jpg",
+    "uploads\\1604000473876_Phantaci3.jpg",
+    "uploads\\1604000475379_Phantaci4.jpg"
+  ],
+  "brand": 7,
+  "tags": [
+    "NB",
+    "pink"
+  ],
+  "views": 1,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "New Balance 997.5 Phantaci",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 315,
+  "createdAt": {
+    "$date": "2020-10-29T19:41:24.332Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:41:38.633Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1c44642b9425d052fb77"
+  },
+  "images": [
+    "uploads\\1604000807089_327.jpg",
+    "uploads\\1604000809611_3272.jpg",
+    "uploads\\1604000811205_3273.jpg",
+    "uploads\\1604000813465_3274.jpg"
+  ],
+  "brand": 7,
+  "tags": [
+    "grey",
+    "327"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "New Balance 327 Grey",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 150,
+  "createdAt": {
+    "$date": "2020-10-29T19:47:16.401Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:47:16.401Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b1c6f642b9425d052fb78"
+  },
+  "images": [
+    "uploads\\1604000872726_992.jpg",
+    "uploads\\1604000875688_9922.jpg",
+    "uploads\\1604000876942_9923.jpg",
+    "uploads\\1604000878336_9924.jpg"
+  ],
+  "brand": 7,
+  "tags": [
+    "grey",
+    "990",
+    "v5"
+  ],
+  "views": 0,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "New Balance 990v5 Grey",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 145,
+  "createdAt": {
+    "$date": "2020-10-29T19:47:59.851Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T19:47:59.851Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f9b107c642b9425d052fb5a"
+  },
+  "images": [
+    "uploads\\1603997638875_goretex.jpg",
+    "uploads\\1603997641090_goretex2.jpg",
+    "uploads\\1603997643868_gortex3.jpg",
+    "uploads\\1603997642531_goretex4.jpg"
+  ],
+  "brand": 1,
+  "tags": [
+    "air force 1",
+    "white",
+    "gore-tex",
+    "high"
+  ],
+  "views": 9,
+  "writer": {
+    "$oid": "5f96db6e1d2bf51fe89430b8"
+  },
+  "title": "Nike Air Force 1 Gore-tex High Phantom White",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vehicula ex, et sodales lectus. Etiam tellus diam, laoreet eu orci sed, semper mollis sem. Nulla ultricies, purus bibendum imperdiet porttitor, tellus ex eleifend turpis, non tincidunt ante est id dui. In ut lectus interdum, vestibulum lacus nec, porta risus.",
+  "price": 340,
+  "createdAt": {
+    "$date": "2020-10-29T18:57:00.475Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-29T18:57:00.475Z"
+  },
+  "__v": 0
+}]

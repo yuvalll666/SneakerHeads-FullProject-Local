@@ -18,6 +18,7 @@ import SingleUser from "./components/admin/SingleUser";
 import DeletedUserProvider from "./DeletedUserContext";
 import HandleProductsPage from "./components/admin/HandleProductsPage";
 import UpdateProduct from "./components/admin/UpdateProduct";
+import Payments from "./components/admin/Payments"
 //Else
 import { ToastProvider } from "react-toast-notifications";
 import Jordan from "./components/brands/Jordan";
@@ -33,11 +34,15 @@ import "./App.css";
 import { userRole } from "./config.json";
 const { ADMIN } = userRole;
 
+// Create new context for user
 export const UserContext = createContext(null);
 
 function App() {
   const [user, SetUser] = useState({});
 
+  /**
+   * On page load get logged in user information {Object}
+   */
   useEffect(() => {
     const user = getCurrentUser();
     SetUser(user);
@@ -73,6 +78,7 @@ function App() {
             <Route path="/confirmation" component={Confirmation} />
             <DeletedUserProvider>
               <UserContext.Provider value={user}>
+                <Route path="/admin/payments" exact component={Payments} />
                 <Route
                   path="/update-product/:productId"
                   exact

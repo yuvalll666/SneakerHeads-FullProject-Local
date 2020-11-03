@@ -108,9 +108,20 @@ function Navbar({ user }) {
                           Products
                         </Link>
                         {user.role === ADMIN && (
-                          <Link className="dropdown-item" to="/admin/all-users">
-                            <i className="far fa-address-book"></i> All Users
-                          </Link>
+                          <div>
+                            <Link
+                              className="dropdown-item"
+                              to="/admin/all-users"
+                            >
+                              <i className="far fa-address-book"></i> All Users
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="/admin/payments"
+                            >
+                              <i className="fas fa-credit-card"></i> Payments
+                            </Link>
+                          </div>
                         )}
                       </div>
                     </li>
@@ -135,8 +146,7 @@ function Navbar({ user }) {
                       <i className="fas fa-cog"></i> Settings
                     </Link>
                     <Link className="dropdown-item" to="/logout">
-                      <i className="fas fa-sign-out-alt"></i>{" "}
-                      Logout
+                      <i className="fas fa-sign-out-alt"></i> Logout
                     </Link>
                   </div>
                 </li>

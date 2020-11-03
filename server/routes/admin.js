@@ -4,10 +4,11 @@ const adminAuth = require("../middleware/adminAuth");
 const adminEditorAuth = require("../middleware/adminEditorAuth");
 const { User, userRole } = require("../models/user");
 const { Product } = require("../models/product");
+const { Payment } = require("../models/payment");
 const { ADMIN, EDITOR, NORMAL } = userRole;
 
 /**
- * Updates a product 
+ * Updates a product
  * ADMIN / EDITOR authentication
  * @returns {Object} data - Product {Object}
  */
@@ -65,7 +66,7 @@ router.post(
  */
 router.delete("/handle-products/deleteProduct", adminEditorAuth, (req, res) => {
   const productId = req.query.id;
-// Find one product and delete 
+  // Find one product and delete
   Product.findOneAndDelete({ _id: productId }).exec((err, prod) => {
     if (err) {
       return res.status(400).send({ error: err });
@@ -98,9 +99,24 @@ router.get("/handle-products/getAllProducts", adminEditorAuth, (req, res) => {
 });
 
 /**
+ * Get all payments from DB
+ * ADMIN authentication
+ * @returns {Object} data - User Object
+ */
+router.get("/payments", adminAuth, (req, res) => {
+  // Find all payments in DB
+  Payment.find({}).exec((err, payments) => {
+    if (err) {
+      return res.status(400).send({ error: err });
+    }
+    return res.send(payments);
+  });
+});
+
+/**
  * Restore last deleted user
  * ADMIN authentication
- * @returns {Object} data - User Object 
+ * @returns {Object} data - User Object
  */
 router.post("/all-users/undoDelete", adminAuth, async (req, res) => {
   // Recreate user
@@ -113,7 +129,7 @@ router.post("/all-users/undoDelete", adminAuth, async (req, res) => {
 /**
  * Delete a user from DB
  * ADMIN authentication
- * @returns {Object} data - Deleted user Object 
+ * @returns {Object} data - Deleted user Object
  */
 router.delete("/all-users/deleteUser", adminAuth, (req, res) => {
   const userId = req.query.id;
@@ -129,7 +145,7 @@ router.delete("/all-users/deleteUser", adminAuth, (req, res) => {
 /**
  * Demote EDITOR user to NORMAL user
  * ADMIN authentication
- * @returns {Object} data - User Object 
+ * @returns {Object} data - User Object
  */
 router.post("/all-users/makeNormal", adminAuth, (req, res) => {
   const userId = req.query.id;
@@ -147,7 +163,7 @@ router.post("/all-users/makeNormal", adminAuth, (req, res) => {
 /**
  * Promote NORAML user TO EDITOR user
  * ADMIN authentication
- * @returns {Object} data - User Object 
+ * @returns {Object} data - User Object
  */
 router.post("/all-users/makeEditor", adminAuth, (req, res) => {
   const userId = req.query.id;
@@ -169,7 +185,7 @@ router.post("/all-users/makeEditor", adminAuth, (req, res) => {
  */
 router.get("/all-users/user_by_id", adminAuth, (req, res) => {
   const userId = req.query.id;
-// Get one user with only needed information
+  // Get one user with only needed information
   User.findById({ _id: userId })
     .select(["-password", "-cart", "-history", "-__v", "-confirmed"])
     .exec((err, user) => {

@@ -51,7 +51,7 @@ function HandleProductsPage() {
   const { addToast } = useToasts();
 
   /**
-   * On page load get all products Array.<Object>
+   * On page load get all products {Array.<Object>}
    */
   useEffect(() => {
     // Send request to server

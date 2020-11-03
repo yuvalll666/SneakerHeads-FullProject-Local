@@ -1,3 +1,28 @@
+/**
+ * Format a Date.now() Object
+ * @param {Date} date - Date.now()
+ * @returns - Formated date
+ */
+const getDate = (date) => {
+  let newDate = new Date(date);
+  let yy = newDate.getFullYear();
+  let mm = newDate.getMonth() + 1;
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  let dd = newDate.getDate();
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  let hh = newDate.getHours();
+  let sec = newDate.getSeconds();
+  let min = newDate.getMinutes();
+
+  let formatedDate = `${yy}-${mm}-${dd} ${hh}:${min}:${sec}`;
+
+  return formatedDate ? formatedDate : null;
+};
+
 const price = [
   {
     _id: 0,
@@ -67,7 +92,4 @@ const brands = [
   },
 ];
 
-export {
-  price,
-  brands
-}
+export { price, brands, getDate };

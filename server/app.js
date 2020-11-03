@@ -6,10 +6,7 @@ const cors = require("cors");
 const { User } = require("./models/user");
 const jwt = require("jsonwebtoken");
 
-// Connect to mongoDB --> "mongodb+srv://yuval:315569533@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority"
-// Connect to Compass --> mongodb+srv://yuval:315569533@onlineshop.abqhu.mongodb.net/test
-
-// Connect to mongoDB
+// Connect to atlas mongoDB
 mongoose
   .connect(
     `mongodb+srv://yuval:${process.env.MONGO_PASSWORD}@onlineshop.abqhu.mongodb.net/online-shop?retryWrites=true&w=majority`,
