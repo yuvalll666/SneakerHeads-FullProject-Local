@@ -1,4 +1,32 @@
-import React, { useState, useEffect, useContext } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/CartPage.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/CartPage.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
@@ -55,15 +83,15 @@ function CartPage() {
   useEffect(() => {
     let cartItemsIds = [];
 
-    if (user && cart) {
+    if (user &amp;&amp; cart) {
       // If there's items in cart push the items ids {Sting} to cartItemsIds
-      if (cart && cart.length > 0) {
+      if (cart &amp;&amp; cart.length > 0) {
         cart.forEach((item) => {
           cartItemsIds.push(item._id);
         });
         http
           .get(
-            `${apiUrl}/products/products_by_id?id=${cartItemsIds}&type=array`
+            `${apiUrl}/products/products_by_id?id=${cartItemsIds}&amp;type=array`
           )
           .then((response) => {
             // Create Array of items quntity numbers
@@ -101,7 +129,7 @@ function CartPage() {
 
   /**
    * Set the total sum of cart items price to TotalPrice state
-   * @param {Array.<Object>} productsInfo
+   * @param {Array.&lt;Object>} productsInfo
    */
   const totalSum = (productsInfo) => {
     let total = 0;
@@ -113,12 +141,12 @@ function CartPage() {
   };
 
   /**
-   * <pre>
+   * &lt;pre>
    * const {cart} - user's cart details Object
    * const {products} - cart products details Object
    * Send request to server to remove item from the cart
    * @param {String} productId
-   * </pre>
+   * &lt;/pre>
    */
   const removeFromCart = (productId) => {
     http
@@ -153,11 +181,11 @@ function CartPage() {
   };
 
   /**
-   * <pre>
+   * &lt;pre>
    * Send request to server to update user purchases history
    * and payment information
    * @param {Object} data - payment information gatherd from paypal component
-   * </pre>
+   * &lt;/pre>
    */
   const transactionSuccess = (data) => {
     const variables = {
@@ -178,7 +206,7 @@ function CartPage() {
             "success"
           )
           .then((data) => {
-            if (data && data.isConfirmed) {
+            if (data &amp;&amp; data.isConfirmed) {
               // Move to Home page
               window.location = "/";
             }
@@ -189,7 +217,7 @@ function CartPage() {
     });
   };
   if (Success) {
-    return <Confetii />;
+    return &lt;Confetii />;
   }
 
   /**
@@ -207,74 +235,74 @@ function CartPage() {
   };
 
   // If user not logged in move to Home page
-  if (!getCurrentUser()) return <Redirect to="/" />;
+  if (!getCurrentUser()) return &lt;Redirect to="/" />;
   return (
-    <React.Fragment>
-      <PageHeader>Shopping Cart</PageHeader>
-      <div className="container-lg container-md">
-        <div className="row">
-          <div className="col-12">
-            <CartTable
+    &lt;React.Fragment>
+      &lt;PageHeader>Shopping Cart&lt;/PageHeader>
+      &lt;div className="container-lg container-md">
+        &lt;div className="row">
+          &lt;div className="col-12">
+            &lt;CartTable
               ProductsInfo={ProductsInfo}
               removeFromCart={removeFromCart}
             />
-          </div>
-        </div>
+          &lt;/div>
+        &lt;/div>
 
-        <div className="row">
-          <div className="col-12">
+        &lt;div className="row">
+          &lt;div className="col-12">
             {TotalPrice > 0 ? (
-              <Card style={{ display: "inline-block" }} className={styles.card}>
-                <CardContent>
-                  <Typography
+              &lt;Card style={{ display: "inline-block" }} className={styles.card}>
+                &lt;CardContent>
+                  &lt;Typography
                     className="d-flex justify-content-between"
                     variant="body1"
                     component="p"
                   >
-                    <span>
+                    &lt;span>
                       Subtotal (
                       {Quantity > 1 ? (
-                        <span>{Quantity} items</span>
+                        &lt;span>{Quantity} items&lt;/span>
                       ) : (
-                        <span>{Quantity} item</span>
+                        &lt;span>{Quantity} item&lt;/span>
                       )}
                       )
-                    </span>{" "}
-                    <span>US ${TotalPrice}</span>
-                  </Typography>
-                  <Typography
+                    &lt;/span>{" "}
+                    &lt;span>US ${TotalPrice}&lt;/span>
+                  &lt;/Typography>
+                  &lt;Typography
                     className="d-flex justify-content-between"
                     variant="body1"
                     component="p"
                   >
-                    Shipping <span>Free</span>
-                  </Typography>
-                  <hr />
-                  <div className="d-flex justify-content-between">
-                    <Typography variant="h5" component="h2">
+                    Shipping &lt;span>Free&lt;/span>
+                  &lt;/Typography>
+                  &lt;hr />
+                  &lt;div className="d-flex justify-content-between">
+                    &lt;Typography variant="h5" component="h2">
                       Order total
-                    </Typography>
-                    <Typography variant="h6" component="h2">
+                    &lt;/Typography>
+                    &lt;Typography variant="h6" component="h2">
                       US ${TotalPrice}
-                    </Typography>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Paypal
+                    &lt;/Typography>
+                  &lt;/div>
+                &lt;/CardContent>
+                &lt;CardActions>
+                  &lt;Paypal
                     totalPrice={TotalPrice}
                     onSuccess={transactionSuccess}
                     transactionError={transactionError}
                     transactionCanceled={transactionCanceled}
                   />
-                </CardActions>
-              </Card>
+                &lt;/CardActions>
+              &lt;/Card>
             ) : (
-              <React.Fragment>
-                <Empty className="mt-4" description="No Items In Cart"></Empty>
-                <div className="row justify-content-center">
-                  <div className="mt-4 justify-content-center col-6">
-                    <Link to="/products">
-                      <Button
+              &lt;React.Fragment>
+                &lt;Empty className="mt-4" description="No Items In Cart">&lt;/Empty>
+                &lt;div className="row justify-content-center">
+                  &lt;div className="mt-4 justify-content-center col-6">
+                    &lt;Link to="/products">
+                      &lt;Button
                         fullWidth
                         size="large"
                         color="primary"
@@ -282,17 +310,40 @@ function CartPage() {
                       >
                         {" "}
                         Shop Now{" "}
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </React.Fragment>
+                      &lt;/Button>
+                    &lt;/Link>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/React.Fragment>
             )}
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/React.Fragment>
   );
 }
 
 export default CartPage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CartPage.html">CartPage</a></li><li><a href="HistoryPage.html">HistoryPage</a></li><li><a href="Home.html">Home</a></li><li><a href="Logout.html">Logout</a></li><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="Result.html">Result</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 03:57:30 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

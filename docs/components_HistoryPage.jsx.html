@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/userService.js</title>
+    <title>JSDoc: Source: components/HistoryPage.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/userService.js</h1>
+    <h1 class="page-title">Source: components/HistoryPage.jsx</h1>
 
     
 
@@ -26,59 +26,45 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { apiUrl } from "../config.json";
-import http from "./httpService";
-import jwtDecode from "jwt-decode";
-
-const tokenKey = "token";
-
-/**
- * @returns - JWT token that containes user's information from the local storage
- */
-export function getJwt() {
-  const tokenKey = "token";
-  return localStorage.getItem(tokenKey);
-}
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import http from "../services/httpService";
+import { apiUrl } from "../config.json";
+import HistoryTable from "./utils/HistoryTable";
+import PageHeader from "./utils/PageHeader";
+import { useToasts } from "react-toast-notifications";
 
 /**
- * Remove user's JWT token from the local storage
+ * Component - History page, purchases information
+ * @component
  */
-export function logout() {
-  localStorage.removeItem(tokenKey);
+function HistoryPage() {
+  const { addToast } = useToasts();
+  const [History, setHistory] = useState([]);
+
+  /**
+   * On page load send request to server to get purchases history
+   */
+  useEffect(() => {
+    http.get(`${apiUrl}/users/getHistory`).then((response) => {
+      if (response.data.success) {
+        setHistory(response.data.history);
+      } else {
+        addToast("Failed to get History", { appearance: "error" });
+      }
+    });
+  }, []);
+
+  return (
+    &lt;React.Fragment>
+      &lt;PageHeader>Purchase History&lt;/PageHeader>
+      &lt;div className="container-lg container-md">
+        &lt;HistoryTable history={History} />
+      &lt;/div>
+    &lt;/React.Fragment>
+  );
 }
 
-/**
- * @returns {object} - Current logged in user information
- */
-export function getCurrentUser() {
-  try {
-    const jwt = localStorage.getItem(tokenKey);
-    return jwtDecode(jwt);
-  } catch (ex) {
-    return null;
-  }
-}
-
-/**
- * Set JWT token with user's info from the server to local storage
- * @param {string} email - User's email input value
- * @param {string} password - User's password input value
- */
-export async function login(email, password) {
-  const { data } = await http.post(`${apiUrl}/users/login`, {
-    email,
-    password,
-  });
-
-  localStorage.setItem(tokenKey, data.token);
-}
-
-export default {
-  login,
-  getCurrentUser,
-  logout,
-  getJwt,
-};
+export default HistoryPage;
 </code></pre>
         </article>
     </section>

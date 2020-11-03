@@ -13,7 +13,6 @@ import ProductPage from "./components/ProductPage";
 import UploadProduct from "./components/UploadProduct";
 import ProductsLandingPage from "./components/ProductsLandingPage";
 import Cart from "./components/CartPage";
-import ThankYou from "./components/utils/ThankYou";
 import HistoryPage from "./components/HistoryPage";
 import SingleUser from "./components/admin/SingleUser";
 import DeletedUserProvider from "./DeletedUserContext";
@@ -66,7 +65,6 @@ function App() {
             <Route path="/logout" component={Logout} />
             <Route path="/products/:productId" component={ProductPage} />
             <Route path="/products" exact component={ProductsLandingPage} />
-            <Route path="/thank-you" exact component={ThankYou} />
             <Route path="/history" exact component={HistoryPage} />
             <Route path="/brands/jordan" component={Jordan} />
             <Route path="/brands/nike" component={Nike} />

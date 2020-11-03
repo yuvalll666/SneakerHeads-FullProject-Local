@@ -18,6 +18,7 @@ import {
 import { getCurrentUser } from "../services/userService";
 import PageHeader from "./utils/PageHeader";
 import { useToasts } from "react-toast-notifications";
+import swal from "sweetalert2";
 
 /**
  * Component - Final step of signup wizard
@@ -25,7 +26,6 @@ import { useToasts } from "react-toast-notifications";
  */
 function Result() {
   const { data } = useData();
-  const { addToast } = useToasts();
   let entries = Object.entries(data);
   entries.pop();
   const [error, setError] = useState("");
@@ -34,15 +34,26 @@ function Result() {
   /**
    * <pre>
    * const {data} - Object containes user information
-   * Send request to server to signup a user 
+   * Send request to server to signup a user
    * </pre>
    */
   async function onSubmit() {
     try {
       await http.post(`http://localhost:3900/api/users`, data);
-      // Move to sign in page
-      history.push("/signin");
-      addToast("Please confirm your email", { appearance: "info" });
+      // Fire success popup
+      swal
+        .fire(
+          "Signup Successfull!",
+          "Confirmation email have been sent to your email inbox.",
+          "success"
+        )
+        .then((data) => {
+          if (data && data.isConfirmed) {
+            // Move to sign in page
+            history.push("/signin");
+          }
+        });
+
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data.error);

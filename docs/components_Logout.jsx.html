@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/userService.js</title>
+    <title>JSDoc: Source: components/Logout.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/userService.js</h1>
+    <h1 class="page-title">Source: components/Logout.jsx</h1>
 
     
 
@@ -26,59 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { apiUrl } from "../config.json";
-import http from "./httpService";
-import jwtDecode from "jwt-decode";
-
-const tokenKey = "token";
+            <pre class="prettyprint source linenums"><code>import { useEffect } from "react";
+import { logout } from "../services/userService";
 
 /**
- * @returns - JWT token that containes user's information from the local storage
+ * Component - Logout page
+ * @component
  */
-export function getJwt() {
-  const tokenKey = "token";
-  return localStorage.getItem(tokenKey);
+function Logout() {
+  /**
+   * On page load logout user
+   * @see logout
+   */
+  useEffect(() => {
+    logout();
+    // Move to Signin page
+    window.location = "/signin";
+  }, []);
+
+  return null;
 }
 
-/**
- * Remove user's JWT token from the local storage
- */
-export function logout() {
-  localStorage.removeItem(tokenKey);
-}
-
-/**
- * @returns {object} - Current logged in user information
- */
-export function getCurrentUser() {
-  try {
-    const jwt = localStorage.getItem(tokenKey);
-    return jwtDecode(jwt);
-  } catch (ex) {
-    return null;
-  }
-}
-
-/**
- * Set JWT token with user's info from the server to local storage
- * @param {string} email - User's email input value
- * @param {string} password - User's password input value
- */
-export async function login(email, password) {
-  const { data } = await http.post(`${apiUrl}/users/login`, {
-    email,
-    password,
-  });
-
-  localStorage.setItem(tokenKey, data.token);
-}
-
-export default {
-  login,
-  getCurrentUser,
-  logout,
-  getJwt,
-};
+export default Logout;
 </code></pre>
         </article>
     </section>
