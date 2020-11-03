@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import { userRole } from "../config.json";
-const { NORMAL, EDITOR, ADMIN } = userRole;
+const { NORMAL, ADMIN } = userRole;
 
 function Navbar({ user }) {
   return (

@@ -12,7 +12,7 @@ import UserPage from "./components/UserPage";
 import ProductPage from "./components/ProductPage";
 import UploadProduct from "./components/UploadProduct";
 import ProductsLandingPage from "./components/ProductsLandingPage";
-import Cart from "./components/Cart";
+import Cart from "./components/CartPage";
 import ThankYou from "./components/utils/ThankYou";
 import HistoryPage from "./components/HistoryPage";
 import SingleUser from "./components/admin/SingleUser";

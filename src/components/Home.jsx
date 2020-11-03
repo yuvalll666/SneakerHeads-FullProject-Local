@@ -11,15 +11,22 @@ import { useToasts } from "react-toast-notifications";
 import PageHeader from "./utils/PageHeader";
 import PopularBrands from "./HomePageDetail/PopularBrands";
 
+/**
+ * Component - Home page
+ * @component
+ */
 function Home() {
   const { addToast } = useToasts();
-  const [ViewsProducts, setViewsProducts] = useState([]);
+  const [MostViewedProducts, setMostViewedProducts] = useState([]);
 
+  /**
+   * On page load send request to server to get most viewed products list
+   */
   useEffect(() => {
     const limit = 8;
     http.post(`${apiUrl}/products/getMostViews`, { limit }).then((response) => {
       if (response.data.success) {
-        setViewsProducts(response.data.products);
+        setMostViewedProducts(response.data.products);
       } else {
         addToast("Faild to fetch products", {
           appearance: "error",
@@ -28,7 +35,8 @@ function Home() {
     });
   }, []);
 
-  const renderCards = ViewsProducts.map((prod, index) => {
+  // Render products cards by mapping MostViewedProducts {Array}
+  const renderCards = MostViewedProducts.map((prod, index) => {
     return (
       <Col key={index} xs={12} md={8} lg={6}>
         <Card
@@ -78,8 +86,6 @@ function Home() {
         <div className="mt-2">
           <Row gutter={[30, 16]}>{renderCards}</Row>
         </div>
-
-     
       </div>
     </div>
   );

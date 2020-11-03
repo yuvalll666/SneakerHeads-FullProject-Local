@@ -23,7 +23,7 @@ const useStyles = makeStyles((them) => ({
 }));
 
 /**
- * Component - Upload product form
+ * Component - Upload product form page
  * @component
  */
 function UploadProduct() {
