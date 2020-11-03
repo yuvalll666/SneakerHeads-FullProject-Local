@@ -156,8 +156,22 @@ function validatePassAndUser(data) {
   return schema.validate(data, { abortEarly: false });
 }
 
+/**
+ * Validate an Object structure
+ * @param {Object} data - Login input data
+ * @returns {Object} - Containes validation details
+ */
+function validateLogin(data) {
+  const schema = Joi.object({
+    email: Joi.string().required().email().min(5).max(255),
+    password: Joi.string().required().min(2).max(255),
+  });
+  return schema.validate(data);
+}
+
 module.exports = {
   User,
+  validateLogin,
   validateUser,
   userRole,
   validateEditedUser,
