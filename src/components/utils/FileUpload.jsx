@@ -1,19 +1,29 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { useToasts } from "react-toast-notifications";
 
+/**
+ * Component - FileUpload
+ * @component
+ * @param {Object} props - containes oldImages and updateImages
+ */
 function FileUpload(props) {
   const { addToast } = useToasts();
   const [images, setImages] = useState([]);
-
   let oldImages = props.oldImages;
+
+  /**
+   * Send request to server to add image file to /public/uploads dir
+   * @param {Array.<Object>} files - Array of one image information
+   */
   const onDrop = async (files) => {
     const formData = new FormData();
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
+    // Add the file to formData
     formData.append("file", files[0]);
 
     try {
@@ -22,8 +32,10 @@ function FileUpload(props) {
         formData,
         config
       );
+      // Add image from server to existing images
       setImages([...images, data.image]);
-      props.refreshFunction([...images, data.image]);
+      // Pass images to father component
+      props.updateImages([...images, data.image]);
     } catch (error) {
       if (error.response) {
         addToast("Faild to save the Image in the server", {
@@ -33,24 +45,35 @@ function FileUpload(props) {
     }
   };
 
+  /**
+   * Delete file on click (create product)
+   * @param {String} image - Image File path
+   */
   const handleDelete = (image) => {
     const currentIndex = images.indexOf(image);
-
+    
     let newImages = [...images];
+    // Remove image file from newImages Array
     newImages.splice(currentIndex, 1);
-
     setImages(newImages);
-    props.refreshFunction(newImages);
+
+     // Pass images to father component
+    props.updateImages(newImages);
   };
 
+  /**
+   * Delete file on click (update product)
+   * @param {String} image - Image file path
+   */
   const oldImageshandleDelete = (image) => {
     const currentIndex = images.indexOf(image);
 
-    let newImages = [...props.oldImages];
+    let newImages = [...oldImages];
+    // Remove image file from newImages Array
     newImages.splice(currentIndex, 1);
 
     oldImages = newImages;
-    props.refreshFunction(newImages);
+    props.updateImages(newImages);
   };
 
   return (

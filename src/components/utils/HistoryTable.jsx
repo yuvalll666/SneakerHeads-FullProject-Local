@@ -13,14 +13,24 @@ import {
 import { Empty } from "antd";
 import { Link } from "react-router-dom";
 
+// Items CSS styles
 const StyledTableCell = withStyles((theme) => ({
   head: {
     color: theme.palette.common.white,
   },
 }))(TableCell);
 
+/**
+ * Component - HistoryTable
+ * @component
+ * @param {Object} history - User's purchases history information
+ */
 function HistoryTable({ history }) {
-  console.log(history);
+  /**
+   * Format a Date.now() Object
+   * @param {Date} date - Date.now()
+   * @returns - Formated date
+   */
   const getDate = (date) => {
     let newDate = new Date(date);
     let yy = newDate.getFullYear();

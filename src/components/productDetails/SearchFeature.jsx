@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import { Input } from "antd";
 const { Search } = Input;
 
+/**
+ * Component - SearchFeature
+ * @component
+ * @param {Object} props - Object containes updateSearchValues function 
+ */
 function SearchFeature(props) {
   const [SearchValue, setSearchValue] = useState("");
 
+  /**
+   * Pass search input value to father component
+   * @event e {onChange} 
+   * @see updateSearchValues
+   */
   const onChangeSearch = (e) => {
     setSearchValue(e.target.value);
 
-    props.refreshFunction(e.target.value);
+    props.updateSearchValues(e.target.value);
   };
 
   return (

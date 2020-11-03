@@ -2,21 +2,31 @@ import React, { useState } from "react";
 import { Checkbox, Collapse } from "antd";
 const { Panel } = Collapse;
 
+/**
+ * Component - CheckBox
+ * @component
+ * @param {Object} props - Containes handleFilters
+ * @see handleFilters
+ */
 function CheckBox(props) {
   const [Checked, setChecked] = useState([]);
 
+  /**
+   * Add or remove checkBox value from array
+   * @param {String} value - brand _id
+   */
   const handleToggle = (value) => {
     const currentIndex = Checked.indexOf(value);
     const newChecked = [...Checked];
-
-    if (currentIndex  === -1) {
+    // If value not exists in the array push it in
+    if (currentIndex === -1) {
       newChecked.push(value);
+      //Remove item from the array if exists
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     setChecked(newChecked);
-
+    // Pass filter array to father component
     props.handleFilters(newChecked);
   };
 

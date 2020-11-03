@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/UploadProduct.jsx</title>
+    <title>JSDoc: Source: components/admin/UpdateProduct.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/UploadProduct.jsx</h1>
+    <h1 class="page-title">Source: components/admin/UpdateProduct.jsx</h1>
 
     
 
@@ -26,24 +26,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { useState, useContext } from "react";
-import MainContainer from "./forms/MainContainer";
-import Form from "./forms/Form";
-import Input from "./forms/Input";
-import PrimaryButton from "./forms/PrimaryButton";
+            <pre class="prettyprint source linenums"><code>import React, { useState, useContext, useEffect } from "react";
+import MainContainer from "../forms/MainContainer";
+import Form from "../forms/Form";
+import Input from "../forms/Input";
+import PrimaryButton from "../forms/PrimaryButton";
 import { useForm } from "react-hook-form";
-import FileUpload from "./utils/FileUpload";
+import FileUpload from "../utils/FileUpload";
 import { makeStyles } from "@material-ui/core/styles";
-import { UserContext } from "../App";
-import http from "../services/httpService";
-import { apiUrl } from "../config.json";
+import { UserContext } from "../../App";
+import http from "../../services/httpService";
+import { apiUrl, userRole } from "../../config.json";
 import { useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
-import { CloudUploadOutlined } from "@material-ui/icons";
-import PageHeader from "./utils/PageHeader";
-import { brands } from "../datas";
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
+import PageHeader from "../utils/PageHeader";
+import { brands } from "../../datas";
 import { useToasts } from "react-toast-notifications";
 
+// Items CSS styles
 const useStyles = makeStyles((them) => ({
   root: {
     marginTop: them.spacing(0),
@@ -51,72 +52,101 @@ const useStyles = makeStyles((them) => ({
 }));
 
 /**
- * Component - Upload product form page
+ * Component - UpdateProduct
  * @component
+ * @param {Object} props - Containes product _id in params 
  */
-function UploadProduct() {
+function UpdateProduct(props) {
+  const productId = props.match.params.productId;
   const { addToast } = useToasts();
   const user = useContext(UserContext);
   const styles = useStyles();
   const history = useHistory();
   const [Chips, setChips] = useState([]);
-  const [Images, setImages] = useState([]);
+  const [images, setImages] = useState([]);
+  const [Product, setProduct] = useState({});
+
+  /**
+   * On page load send request to server to get single product by _id
+   */
+  useEffect(() => {
+    http
+      .get(`${apiUrl}/admin/update-product/product_by_id?id=${productId}`)
+      .then((response) => {
+        if (response &amp;&amp; response.data) {
+          // When server response set Product to the response data
+          setProduct(response.data);
+          // Set the images to product images
+          setImages(response.data.images);
+          // Set Chips to product tags
+          setChips(response.data.tags);
+        }
+      })
+      .catch((error) => {
+        addToast("Error: Couldn't fetch product from the server", {
+          appearance: "error",
+        });
+      });
+  }, []);
 
   const { register, handleSubmit } = useForm({
     mode: "onBlur",
   });
 
   /**
-   * Set the state of Images to a new one
-   * @param {Array.&lt;String>} newImages - Array of images sources
+   * Updates Array of images to new one
+   * @param {Array.&lt;String>} newImages - Array of images paths
    */
   const updateImages = (newImages) => {
     setImages(newImages);
   };
 
   /**
-   * Send request to server to create new product
+   * Send request to server to update existing product
    * @param {Object} data - Values gathered by usForm hook from the inputs
    */
   const onSubmit = async (data) => {
     const { title, description, price, brand } = data;
-    if (!title || !description || !price || !brand || !Images) {
+    // If either one not exists, bail
+    if (!title || !description || !price || isNaN(brand) || !images) {
       return addToast("Please fill all of the fields first!", {
         appearance: "error",
       });
     }
 
-    /**
+      /**
      * ProductInfo object
      * @type {{
-     * writer: String,
-     * images: Array,
-     * tags: Array,
-     * title: String,
-     * description: String,
-     * price: Number,
-     * brand: Number
-     * }}
-     */
+      * writer: String,
+      * images: Array,
+      * tags: Array,
+      * title: String,
+      * description: String,
+      * price: Number,
+      * brand: Number
+      * }}
+      */
     const productInfo = {
       writer: user._id,
-      images: Images,
+      images: images,
       tags: Chips,
       ...data,
     };
 
     try {
-      await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
-      addToast("Product uploaded successfuly", {
+      await http.put(
+        `${apiUrl}/admin/update-product/product_by_id?id=${productId}`,
+        productInfo
+      );
+      addToast("Product updated successfuly", {
         appearance: "success",
       });
-      // Move to Home page
-      history.push("/");
-      // window.location = "/upload-product";
+      // Move to HandleProduct page
+      history.push("/handle-products");
     } catch (error) {
       if (error.response &amp;&amp; error.response.status === 400) {
         addToast(error.response.data.error, {
-          appearance: "error",
+          appearance: "success",
         });
       }
     }
@@ -130,17 +160,45 @@ function UploadProduct() {
     setChips(chips);
   };
 
+  const renderBrands = () => {
+    let array = brands.map((item) => {
+      if (item._id === Product.brand) {
+        return (
+          &lt;option selected="selected" key={item._id} value={item._id}>
+            {item.name}
+          &lt;/option>
+        );
+      } else {
+        return (
+          &lt;option key={item._id} value={item._id}>
+            {item.name}
+          &lt;/option>
+        );
+      }
+    });
+    return array;
+  };
+
   return (
     &lt;div>
       &lt;PageHeader>
-        Upload Product &lt;CloudUploadOutlined fontSize="inherit" />
+        Update Product &lt;SystemUpdateAltIcon fontSize="inherit" />
       &lt;/PageHeader>
 
       &lt;Form onSubmit={handleSubmit(onSubmit)}>
-        &lt;FileUpload updateImages={updateImages} />
+        &lt;FileUpload oldImages={images} refreshFunction={updateImages} />
         &lt;MainContainer className={styles.root} maxWidth="sm">
-          &lt;Input name="title" label="Title" id="title" ref={register} />
+          &lt;input
+            defaultValue={Product.title}
+            placeholder="Title"
+            name="title"
+            label="Title"
+            id="title"
+            ref={register}
+            className="form-control mb-3"
+          />
           &lt;textarea
+            defaultValue={Product.description}
             className="form-control"
             name="description"
             id="description"
@@ -157,13 +215,11 @@ function UploadProduct() {
           >
             &lt;option>Choose Brand...&lt;/option>
 
-            {brands.map((item) => (
-              &lt;option key={item.key} value={item._id}>
-                {item.name}
-              &lt;/option>
-            ))}
+            {renderBrands()}
           &lt;/select>
-          &lt;Input
+          &lt;input
+            defaultValue={Product.price}
+            className="form-control mt-3"
             name="price"
             label="Price"
             id="price"
@@ -172,6 +228,7 @@ function UploadProduct() {
             ref={register}
           />
           &lt;ChipInput
+            defaultValue={Product.tags}
             fullWidth
             placeholder="+Add_Tag"
             onChange={(chips) => handleChange(chips)}
@@ -185,7 +242,7 @@ function UploadProduct() {
   );
 }
 
-export default UploadProduct;
+export default UpdateProduct;
 </code></pre>
         </article>
     </section>

@@ -1,6 +1,7 @@
 import { TextField } from "@material-ui/core";
 import React, { forwardRef } from "react";
 
+// Render TextFiled with styles
 const Input = forwardRef((props, ref) => {
   return (
     <TextField

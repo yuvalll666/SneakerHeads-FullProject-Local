@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../App";
 import {
   TableContainer,
   Paper,
@@ -14,6 +13,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+// Table cell CSS styles
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: "#3f51b5",
@@ -23,6 +23,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
+// Items CSS styles
 const useStyles = makeStyles((theme) => ({
   productImage: {
     width: "100px",
@@ -33,10 +34,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * <pre>
+ * Component - CartTable
+ * @component
+ * @param {Object} props - containes ProductsInfo {Object} and 
+ * removeFromCart {Function}
+ * </pre>
+ */
 function CartTable({ ProductsInfo, removeFromCart }) {
   const styles = useStyles();
-  const user = useContext(UserContext);
 
+  /**
+   * Return an image path
+   * @param {Array.<String>} images - Array of image paths
+   * @returns {String} - First image path of the array
+   */
   const renderCartImage = (images) => {
     if (images.length > 0) {
       let image = images[0];
@@ -45,7 +58,6 @@ function CartTable({ ProductsInfo, removeFromCart }) {
   };
 
   return (
-    
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

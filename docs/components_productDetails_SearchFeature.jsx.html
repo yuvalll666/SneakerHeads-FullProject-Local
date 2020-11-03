@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: HistoryPage</title>
+    <title>JSDoc: Source: components/productDetails/SearchFeature.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,137 +17,55 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: HistoryPage</h1>
+    <h1 class="page-title">Source: components/productDetails/SearchFeature.jsx</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>HistoryPage<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-
-    
-    <h4 class="name" id="HistoryPage"><span class="type-signature"></span>new HistoryPage<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Component - History page, purchases information</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_HistoryPage.jsx.html">components/HistoryPage.jsx</a>, <a href="components_HistoryPage.jsx.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import { Input } from "antd";
+const { Search } = Input;
+
+/**
+ * Component - SearchFeature
+ * @component
+ * @param {Object} props - Object containes updateSearchValues function 
+ */
+function SearchFeature(props) {
+  const [SearchValue, setSearchValue] = useState("");
+
+  /**
+   * Pass search input value to father component
+   * @event e {onChange} 
+   * @see updateSearchValues
+   */
+  const onChangeSearch = (e) => {
+    setSearchValue(e.target.value);
+
+    props.updateSearchValues(e.target.value);
+  };
+
+  return (
+  
+      &lt;Search
+        style={{ width: "100%" }}
+        size="large"
+        value={SearchValue}
+        onChange={onChangeSearch}
+        placeholder="Search..."
+      />
+ 
+  );
+}
+
+export default SearchFeature;
+</code></pre>
+        </article>
+    </section>
 
 
 

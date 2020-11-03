@@ -94,7 +94,7 @@ function UploadProduct() {
     }
   };
 
-   /**
+  /**
    * Set the state of Chips to a new one
    * @param {Array.<String>} chips - Array of strings (tags)
    */
@@ -109,7 +109,7 @@ function UploadProduct() {
       </PageHeader>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FileUpload refreshFunction={updateImages} />
+        <FileUpload updateImages={updateImages} />
         <MainContainer className={styles.root} maxWidth="sm">
           <Input name="title" label="Title" id="title" ref={register} />
           <textarea

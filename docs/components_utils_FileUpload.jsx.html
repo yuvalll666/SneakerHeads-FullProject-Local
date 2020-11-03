@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/utils/FileUpload.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/utils/FileUpload.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import Dropzone from "react-dropzone";
+import http from "../../services/httpService";
+import { apiUrl } from "../../config.json";
+import { useToasts } from "react-toast-notifications";
+
+/**
+ * Component - FileUpload
+ * @component
+ * @param {Object} props - containes oldImages and updateImages
+ */
+function FileUpload(props) {
+  const { addToast } = useToasts();
+  const [images, setImages] = useState([]);
+  let oldImages = props.oldImages;
+
+  /**
+   * Send request to server to add image file to /public/uploads dir
+   * @param {Array.&lt;Object>} files - Array of one image information
+   */
+  const onDrop = async (files) => {
+    const formData = new FormData();
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+    // Add the file to formData
+    formData.append("file", files[0]);
+
+    try {
+      const { data } = await http.post(
+        `${apiUrl}/products/uploadImage`,
+        formData,
+        config
+      );
+      // Add image from server to existing images
+      setImages([...images, data.image]);
+      // Pass images to father component
+      props.updateImages([...images, data.image]);
+    } catch (error) {
+      if (error.response) {
+        addToast("Faild to save the Image in the server", {
+          appearance: "error",
+        });
+      }
+    }
+  };
+
+  /**
+   * Delete file on click (create product)
+   * @param {String} image - Image File path
+   */
+  const handleDelete = (image) => {
+    const currentIndex = images.indexOf(image);
+    
+    let newImages = [...images];
+    // Remove image file from newImages Array
+    newImages.splice(currentIndex, 1);
+    setImages(newImages);
+
+     // Pass images to father component
+    props.updateImages(newImages);
+  };
+
+  /**
+   * Delete file on click (update product)
+   * @param {String} image - Image file path
+   */
+  const oldImageshandleDelete = (image) => {
+    const currentIndex = images.indexOf(image);
+
+    let newImages = [...oldImages];
+    // Remove image file from newImages Array
+    newImages.splice(currentIndex, 1);
+
+    oldImages = newImages;
+    props.updateImages(newImages);
+  };
+
+  return (
+    &lt;div className="container d-lg-flex justify-content-center">
+      &lt;div className="row justify-content-center">
+        &lt;div className="mr-4 mb-2 ">
+          &lt;Dropzone onDrop={onDrop} multiple={false} maxSize={800000}>
+            {({ getRootProps, getInputProps }) => (
+              &lt;div
+                style={{
+                  width: "300px",
+                  height: "240px",
+                  border: "1px solid lightgrey",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                {...getRootProps()}
+              >
+                &lt;input {...getInputProps()} />
+                &lt;i className="fas fa-plus" style={{ fontSize: "4rem" }}>&lt;/i>
+              &lt;/div>
+            )}
+          &lt;/Dropzone>
+        &lt;/div>
+
+        &lt;div
+          className="ml-4"
+          style={{
+            display: "flex",
+            width: "351px",
+            height: "241px",
+            overflowX: "auto",
+            overflowY: "hidden",
+            border: "1px solid lightgrey",
+          }}
+        >
+          {images.map((image, index) => (
+            &lt;div onClick={() => handleDelete(image)} key={index}>
+              &lt;img
+                style={{ minWidth: "300px", width: "300px", height: "240px" }}
+                src={`http://localhost:3000/${image}`}
+                alt={`productImg-${index}`}
+              />
+            &lt;/div>
+          ))}
+
+          {props.oldImages &amp;&amp;
+            props.oldImages.map((image, index) => (
+              &lt;div onClick={() => oldImageshandleDelete(image)} key={index}>
+                &lt;img
+                  style={{ minWidth: "300px", width: "300px", height: "240px" }}
+                  src={`http://localhost:3000/${image}`}
+                  alt={`productImg-${index}`}
+                />
+              &lt;/div>
+            ))}
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+export default FileUpload;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CartPage.html">CartPage</a></li><li><a href="CartTable.html">CartTable</a></li><li><a href="CheckBox.html">CheckBox</a></li><li><a href="FileUpload.html">FileUpload</a></li><li><a href="HistoryPage.html">HistoryPage</a></li><li><a href="HistoryTable.html">HistoryTable</a></li><li><a href="Home.html">Home</a></li><li><a href="Logout.html">Logout</a></li><li><a href="ProductCarousel.html">ProductCarousel</a></li><li><a href="ProductInfo.html">ProductInfo</a></li><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="RadioBox.html">RadioBox</a></li><li><a href="Result.html">Result</a></li><li><a href="SearchFeature.html">SearchFeature</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UpdateProduct.html">UpdateProduct</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:e%257BonChange%257D">e {onChange}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeLocation">changeLocation</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#SingleUser">SingleUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 17:41:30 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

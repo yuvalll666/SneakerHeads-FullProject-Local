@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: HistoryPage</title>
+    <title>JSDoc: Source: components/productDetails/CheckBox.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,137 +17,71 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: HistoryPage</h1>
+    <h1 class="page-title">Source: components/productDetails/CheckBox.jsx</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>HistoryPage<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-
-    
-    <h4 class="name" id="HistoryPage"><span class="type-signature"></span>new HistoryPage<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Component - History page, purchases information</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_HistoryPage.jsx.html">components/HistoryPage.jsx</a>, <a href="components_HistoryPage.jsx.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import { Checkbox, Collapse } from "antd";
+const { Panel } = Collapse;
+
+/**
+ * Component - CheckBox
+ * @component
+ * @param {Object} props - Containes handleFilters
+ * @see handleFilters
+ */
+function CheckBox(props) {
+  const [Checked, setChecked] = useState([]);
+
+  /**
+   * Add or remove checkBox value from array
+   * @param {String} value - brand _id
+   */
+  const handleToggle = (value) => {
+    const currentIndex = Checked.indexOf(value);
+    const newChecked = [...Checked];
+    // If value not exists in the array push it in
+    if (currentIndex === -1) {
+      newChecked.push(value);
+      //Remove item from the array if exists
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+    // Pass filter array to father component
+    props.handleFilters(newChecked);
+  };
+
+  return (
+    &lt;div>
+      &lt;Collapse defaultActiveKey={["0"]}>
+        &lt;Panel header="Choose a brand" key="1">
+          {props.brands.map((brand, index) => (
+            &lt;React.Fragment key={index}>
+              &lt;Checkbox
+                onChange={() => handleToggle(brand._id)}
+                type="checkbox"
+                checked={Checked.indexOf(brand._id) === -1 ? false : true}
+              />
+              &lt;span className="ml-1 mr-2">{brand.name}&lt;/span>
+            &lt;/React.Fragment>
+          ))}
+        &lt;/Panel>
+      &lt;/Collapse>
+    &lt;/div>
+  );
+}
+
+export default CheckBox;
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -15,13 +15,19 @@ import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
 import PageHeader from "../utils/PageHeader";
 import { brands } from "../../datas";
 import { useToasts } from "react-toast-notifications";
-import UploadProduct from "../UploadProduct";
 
+// Items CSS styles
 const useStyles = makeStyles((them) => ({
   root: {
     marginTop: them.spacing(0),
   },
 }));
+
+/**
+ * Component - UpdateProduct
+ * @component
+ * @param {Object} props - Containes product _id in params 
+ */
 function UpdateProduct(props) {
   const productId = props.match.params.productId;
   const { addToast } = useToasts();
@@ -32,13 +38,19 @@ function UpdateProduct(props) {
   const [images, setImages] = useState([]);
   const [Product, setProduct] = useState({});
 
+  /**
+   * On page load send request to server to get single product by _id
+   */
   useEffect(() => {
     http
       .get(`${apiUrl}/admin/update-product/product_by_id?id=${productId}`)
       .then((response) => {
         if (response && response.data) {
+          // When server response set Product to the response data
           setProduct(response.data);
+          // Set the images to product images
           setImages(response.data.images);
+          // Set Chips to product tags
           setChips(response.data.tags);
         }
       })
@@ -53,28 +65,45 @@ function UpdateProduct(props) {
     mode: "onBlur",
   });
 
+  /**
+   * Updates Array of images to new one
+   * @param {Array.<String>} newImages - Array of images paths
+   */
   const updateImages = (newImages) => {
     setImages(newImages);
   };
 
+  /**
+   * Send request to server to update existing product
+   * @param {Object} data - Values gathered by usForm hook from the inputs
+   */
   const onSubmit = async (data) => {
     const { title, description, price, brand } = data;
+    // If either one not exists, bail
     if (!title || !description || !price || isNaN(brand) || !images) {
       return addToast("Please fill all of the fields first!", {
         appearance: "error",
       });
     }
 
+      /**
+     * ProductInfo object
+     * @type {{
+      * writer: String,
+      * images: Array,
+      * tags: Array,
+      * title: String,
+      * description: String,
+      * price: Number,
+      * brand: Number
+      * }}
+      */
     const productInfo = {
       writer: user._id,
       images: images,
       tags: Chips,
       ...data,
     };
-
-    console.log(productInfo);
-
-    console.log(productInfo);
 
     try {
       await http.put(
@@ -84,6 +113,7 @@ function UpdateProduct(props) {
       addToast("Product updated successfuly", {
         appearance: "success",
       });
+      // Move to HandleProduct page
       history.push("/handle-products");
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -94,6 +124,10 @@ function UpdateProduct(props) {
     }
   };
 
+  /**
+   * Set the state of Chips to a new one
+   * @param {Array.<String>} chips - Array of strings (tags)
+   */
   const handleChange = (chips) => {
     setChips(chips);
   };

@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+// Items CSS styles
 const useStyles = makeStyles((them) => ({
   root: {
     fontSize:"1.7em",
@@ -10,11 +11,22 @@ const useStyles = makeStyles((them) => ({
   },
 }));
 
+/**
+ * Component - ProductInfo
+ * @component
+ * @param {Object} props - Containes product and addToCart function
+ */
 function ProductInfo(props) {
   const { product, addToCart } = props;
 
   const styles = useStyles();
 
+  /**
+   * <pre>
+   * const {product} - Object with product details
+   * Pass _id of product to father component
+   * </pre>
+   */
   const addToCartHandler = () =>{ 
     addToCart(product._id)
   }

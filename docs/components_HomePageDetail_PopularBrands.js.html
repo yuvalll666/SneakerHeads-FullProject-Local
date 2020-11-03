@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/HomePageDetail/PopularBrands.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/HomePageDetail/PopularBrands.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Link, NavLink, Redirect } from "react-router-dom";
+import { Typography } from "@material-ui/core";
+
+/**
+ * Move to dynamic url
+ * @param {String} brandName - Brand name
+ */
+const changeLocation = (brandName) => {
+  return (window.location = `/brands/${brandName}`);
+};
+
+function PopularBrands() {
+  return (
+    &lt;div>
+      &lt;div className="row mt-4">
+        &lt;div className="col-8">
+          &lt;h2 className="mb-0 row-title">Popular Brands&lt;/h2>
+        &lt;/div>
+        &lt;div className="col-4 d-flex align-items-end justify-content-end">
+          &lt;Typography component="h5">
+            &lt;Link className="see-all text-success" to="/products">
+              See All
+            &lt;/Link>
+          &lt;/Typography>
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="row scroll" style={{ overflowX: "auto" }}>
+        &lt;div className="col-12 d-flex justify-content-between">
+          &lt;div className="p-2 brands-container ">
+            &lt;Link to="#" onClick={() => changeLocation("jordan")}>
+              &lt;img
+                src="http://localhost:3000/images/000-air-jordan.jpg"
+                alt=""
+                className="brands"
+              />
+              &lt;div className="side-image-container jordan" />
+            &lt;/Link>
+          &lt;/div>
+          &lt;div className="p-2 brands-container">
+            &lt;Link to="#" onClick={() => changeLocation("nike")}>
+              &lt;img
+                width="250px"
+                src="http://localhost:3000/images/001-nike.jpg"
+                alt=""
+                className="brands"
+              />
+              &lt;div className="side-image-container nike" />
+            &lt;/Link>
+          &lt;/div>
+          &lt;div className="p-2 brands-container ">
+            &lt;Link to="#" onClick={() => changeLocation("yeezy")}>
+              &lt;img
+                width="250px"
+                src="http://localhost:3000/images/002-yeezy.jpg"
+                alt=""
+                className="brands"
+              />
+              &lt;div className="side-image-container yeezy" />
+            &lt;/Link>
+          &lt;/div>
+          &lt;div className="p-2 brands-container ">
+            &lt;Link to="#" onClick={() => changeLocation("adidas")}>
+              &lt;img
+                width="250px"
+                src="http://localhost:3000/images/003-adidas.jpg"
+                alt=""
+                className="brands"
+              />
+              &lt;div className="side-image-container adidas" />
+            &lt;/Link>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+export default PopularBrands;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CartPage.html">CartPage</a></li><li><a href="CartTable.html">CartTable</a></li><li><a href="CheckBox.html">CheckBox</a></li><li><a href="FileUpload.html">FileUpload</a></li><li><a href="HistoryPage.html">HistoryPage</a></li><li><a href="HistoryTable.html">HistoryTable</a></li><li><a href="Home.html">Home</a></li><li><a href="Logout.html">Logout</a></li><li><a href="ProductCarousel.html">ProductCarousel</a></li><li><a href="ProductInfo.html">ProductInfo</a></li><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="RadioBox.html">RadioBox</a></li><li><a href="Result.html">Result</a></li><li><a href="SearchFeature.html">SearchFeature</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UpdateProduct.html">UpdateProduct</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:e%257BonChange%257D">e {onChange}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeLocation">changeLocation</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#SingleUser">SingleUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 17:41:30 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

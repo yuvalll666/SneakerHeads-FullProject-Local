@@ -2,6 +2,10 @@ import React from "react";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 
+/**
+ * Move to dynamic url
+ * @param {String} brandName - Brand name
+ */
 const changeLocation = (brandName) => {
   return (window.location = `/brands/${brandName}`);
 };

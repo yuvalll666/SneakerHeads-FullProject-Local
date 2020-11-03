@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/utils/HistoryTable.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/utils/HistoryTable.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect } from "react";
+import {
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  withStyles,
+  Button,
+} from "@material-ui/core";
+import { Empty } from "antd";
+import { Link } from "react-router-dom";
+
+// Items CSS styles
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    color: theme.palette.common.white,
+  },
+}))(TableCell);
+
+/**
+ * Component - HistoryTable
+ * @component
+ * @param {Object} history - User's purchases history information
+ */
+function HistoryTable({ history }) {
+  /**
+   * Format a Date.now() Object
+   * @param {Date} date - Date.now()
+   * @returns - Formated date
+   */
+  const getDate = (date) => {
+    let newDate = new Date(date);
+    let yy = newDate.getFullYear();
+    let mm = newDate.getMonth() + 1;
+    if (mm &lt; 10) {
+      mm = "0" + mm;
+    }
+    let dd = newDate.getDate();
+    if (dd &lt; 10) {
+      dd = "0" + dd;
+    }
+    let hh = newDate.getHours();
+    let sec = newDate.getSeconds();
+    let min = newDate.getMinutes();
+
+    let formatedDate = `${yy}-${mm}-${dd} ${hh}:${min}:${sec}`;
+
+    return formatedDate ? formatedDate : null;
+  };
+
+  useEffect(() => {}, [history]);
+  return (
+    &lt;div>
+      &lt;TableContainer component={Paper}>
+        &lt;Table>
+          &lt;TableHead>
+            &lt;TableRow className="bg-success">
+              &lt;StyledTableCell align="left">Payment ID&lt;/StyledTableCell>
+              &lt;StyledTableCell align="left">Product Name&lt;/StyledTableCell>
+              &lt;StyledTableCell align="left">Quantity&lt;/StyledTableCell>
+              &lt;StyledTableCell align="left">Price / per 1&lt;/StyledTableCell>
+              &lt;StyledTableCell align="left">Date Of Purchase&lt;/StyledTableCell>
+            &lt;/TableRow>
+          &lt;/TableHead>
+          &lt;TableBody>
+            {history.map((item, index) => (
+              &lt;TableRow
+                key={index}
+                className={index % 2 ? "bg-light" : "bg-white"}
+              >
+                &lt;TableCell align="left">{item.paymentId}&lt;/TableCell>
+                &lt;TableCell align="left">{item.name}&lt;/TableCell>
+                &lt;TableCell align="center">{item.quantity}&lt;/TableCell>
+                &lt;TableCell align="left">${item.price}&lt;/TableCell>
+                &lt;TableCell align="left">
+                  {getDate(item.dateOfPurchase)}
+                &lt;/TableCell>
+              &lt;/TableRow>
+            ))}
+          &lt;/TableBody>
+        &lt;/Table>
+      &lt;/TableContainer>
+      {history.length &lt; 1 &amp;&amp; (
+        &lt;React.Fragment>
+          &lt;Empty
+            className="mt-4"
+            description="Did not purchase any items yet"
+          >&lt;/Empty>
+          &lt;div className="row justify-content-center">
+            &lt;div className="mt-4 justify-content-center col-6">
+              &lt;Link to="/products">
+                &lt;Button
+                  fullWidth
+                  size="large"
+                  color="primary"
+                  variant="outlined"
+                >
+                  Shop Now
+                &lt;/Button>
+              &lt;/Link>
+            &lt;/div>
+          &lt;/div>
+        &lt;/React.Fragment>
+      )}
+    &lt;/div>
+  );
+}
+
+export default HistoryTable;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CartPage.html">CartPage</a></li><li><a href="CartTable.html">CartTable</a></li><li><a href="CheckBox.html">CheckBox</a></li><li><a href="FileUpload.html">FileUpload</a></li><li><a href="HistoryPage.html">HistoryPage</a></li><li><a href="HistoryTable.html">HistoryTable</a></li><li><a href="Home.html">Home</a></li><li><a href="Logout.html">Logout</a></li><li><a href="ProductCarousel.html">ProductCarousel</a></li><li><a href="ProductInfo.html">ProductInfo</a></li><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="RadioBox.html">RadioBox</a></li><li><a href="Result.html">Result</a></li><li><a href="SearchFeature.html">SearchFeature</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UpdateProduct.html">UpdateProduct</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:e%257BonChange%257D">e {onChange}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeLocation">changeLocation</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#SingleUser">SingleUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 17:41:30 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

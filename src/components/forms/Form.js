@@ -1,6 +1,7 @@
 import React from "react";
 import "../../App.css"
 
+// Render form with styles
 function Form({ children, ...props }) {
 
   return (

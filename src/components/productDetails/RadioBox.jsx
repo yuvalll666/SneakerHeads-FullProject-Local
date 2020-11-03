@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { Collapse, Radio } from "antd";
 const { Panel } = Collapse;
 
+/**
+ * Component - RadioBox
+ * @component
+ * @param {Object} props - Object containes handleFilters function 
+ */
 function RadioBox(props) {
   const [Value, setValue] = useState(0);
+
+ // Redner radio buttons
   const renderRadioBox = () =>
     props.price.map((value) => (
       <Radio key={value._id} value={value._id}>
@@ -11,6 +18,10 @@ function RadioBox(props) {
       </Radio>
     ));
 
+    /**
+     * Pass filter to father component
+     * @event e {onChange}
+     */
   const handleChange = (e) => {
     const { value } = e.target;
     setValue(value);

@@ -214,7 +214,7 @@ function ProductsLandingPage() {
             />
           </div>
           <div className="mt-lg-2 d-flex justify-content-end col-lg-4 col-md-12">
-            <SearchFeature refreshFunction={updateSearchValues} />
+            <SearchFeature updateSearchValues={updateSearchValues} />
           </div>
         </div>
         {Products.length === 0 ? (

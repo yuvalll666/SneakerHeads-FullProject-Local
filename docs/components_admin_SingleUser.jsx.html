@@ -1,4 +1,32 @@
-import React, { useEffect, useState, useContext } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/admin/SingleUser.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/admin/SingleUser.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState, useContext } from "react";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { useToasts } from "react-toast-notifications";
@@ -45,10 +73,10 @@ function SingleUser(props) {
   let entries = Object.entries(User);
 
   /**
-   * <pre>
+   * &lt;pre>
    * On page load send request to server to get user inforamtion Object
    * Watch for User changes
-   * </pre>
+   * &lt;/pre>
    */
   useEffect(() => {
     http
@@ -171,73 +199,96 @@ function SingleUser(props) {
     }
 
     return (
-      <TableRow key={entry[0]}>
-        <TableCell>{entry[0]}</TableCell>
-        <TableCell>{entry[1]}</TableCell>
-      </TableRow>
+      &lt;TableRow key={entry[0]}>
+        &lt;TableCell>{entry[0]}&lt;/TableCell>
+        &lt;TableCell>{entry[1]}&lt;/TableCell>
+      &lt;/TableRow>
     );
   });
 
   // If not ADMIN user move to Home page
-  if (user && user.role !== ADMIN) {
-    return <Redirect to="/" />;
+  if (user &amp;&amp; user.role !== ADMIN) {
+    return &lt;Redirect to="/" />;
   }
   return (
-    <div>
-      <PageHeader>Handle User</PageHeader>
+    &lt;div>
+      &lt;PageHeader>Handle User&lt;/PageHeader>
 
-      <div className="container">
-        <MainContainer>
-          <Button
+      &lt;div className="container">
+        &lt;MainContainer>
+          &lt;Button
             onClick={handleGoBack}
             className="mb-2 mr-auto"
             color="primary"
             variant="outlined"
           >
-            <i className="fas fa-long-arrow-alt-left"></i>&nbsp; Go Back
-          </Button>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Field</StyledTableCell>
-                  <StyledTableCell>Value</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{view}</TableBody>
-            </Table>
-          </TableContainer>
-          <div
+            &lt;i className="fas fa-long-arrow-alt-left">&lt;/i>&amp;nbsp; Go Back
+          &lt;/Button>
+          &lt;TableContainer component={Paper}>
+            &lt;Table>
+              &lt;TableHead>
+                &lt;TableRow>
+                  &lt;StyledTableCell>Field&lt;/StyledTableCell>
+                  &lt;StyledTableCell>Value&lt;/StyledTableCell>
+                &lt;/TableRow>
+              &lt;/TableHead>
+              &lt;TableBody>{view}&lt;/TableBody>
+            &lt;/Table>
+          &lt;/TableContainer>
+          &lt;div
             style={{ width: "100%" }}
             className="mt-4 d-flex justify-content-between"
           >
-            <Button
+            &lt;Button
               onClick={() => makeEditor(userId)}
               color="primary"
               variant="contained"
             >
               Make Editor
-            </Button>
-            <Button
+            &lt;/Button>
+            &lt;Button
               onClick={() => makeNormal(userId)}
               color="default"
               variant="contained"
             >
               Make Normal
-            </Button>
-          </div>
-          <Button
+            &lt;/Button>
+          &lt;/div>
+          &lt;Button
             onClick={() => handleDelete(userId)}
             style={{ marginTop: "50px" }}
             color="secondary"
             variant="contained"
           >
             Delete User
-          </Button>
-        </MainContainer>
-      </div>
-    </div>
+          &lt;/Button>
+        &lt;/MainContainer>
+      &lt;/div>
+    &lt;/div>
   );
 }
 
 export default SingleUser;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CartPage.html">CartPage</a></li><li><a href="CartTable.html">CartTable</a></li><li><a href="CheckBox.html">CheckBox</a></li><li><a href="FileUpload.html">FileUpload</a></li><li><a href="HistoryPage.html">HistoryPage</a></li><li><a href="HistoryTable.html">HistoryTable</a></li><li><a href="Home.html">Home</a></li><li><a href="Logout.html">Logout</a></li><li><a href="ProductCarousel.html">ProductCarousel</a></li><li><a href="ProductInfo.html">ProductInfo</a></li><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="RadioBox.html">RadioBox</a></li><li><a href="Result.html">Result</a></li><li><a href="SearchFeature.html">SearchFeature</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UpdateProduct.html">UpdateProduct</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:e%257BonChange%257D">e {onChange}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeLocation">changeLocation</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#SingleUser">SingleUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 17:41:30 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

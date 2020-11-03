@@ -2,6 +2,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 
+// Items CSS styles
 const useStyles = makeStyles((them) => ({
   root: {
     marginTop: them.spacing(0),
@@ -11,6 +12,7 @@ const useStyles = makeStyles((them) => ({
   },
 }));
 
+// Render Container with styles
 function MainContainer({ children, ...props }) {
   const styles = useStyles();
 
