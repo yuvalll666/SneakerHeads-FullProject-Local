@@ -19,6 +19,7 @@ const paymentSchema = new Schema(
   { timestamps: true }
 );
 
+// Create mongoose Payment model with schema
 const Payment = mongoose.model("Payment", paymentSchema);
 
 exports.Payment = Payment;

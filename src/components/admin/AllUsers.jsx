@@ -22,19 +22,29 @@ import { useHistory } from "react-router-dom";
 import { useDeletedUser } from "../../DeletedUserContext";
 const { ADMIN } = userRole;
 
+// Table Cell CSS styles
 const StyledTableCell = withStyles((theme) => ({
   head: {
     color: theme.palette.common.white,
   },
 }))(TableCell);
 
+/**
+ * Component - AllUsers
+ * @component
+ */
 function AllUsers() {
   const { DeletedUser, setDeletedUser } = useDeletedUser();
   const { addToast } = useToasts();
   const user = useContext(UserContext);
   const [Users, setUsers] = useState([]);
   const history = useHistory();
+
+  /**
+   * On page load get all users
+   */
   useEffect(() => {
+    // send request to server
     http
       .get(`${apiUrl}/admin/getAllUsers`)
       .then((response) => {
@@ -50,22 +60,32 @@ function AllUsers() {
         addToast("There was a problem with the server", {
           appearance: "error",
         });
-        console.log(error);
       });
   }, []);
 
+  /**
+   * Move to single user handling page
+   * @param {String} userId - User _id
+   */
   const handleClick = (userId) => {
     history.push(`/admin/all-users/${userId}`);
   };
 
+  /**
+   * Restore last deleted user
+   * @param {Object} DeletedUser - Last deleted user information
+   */
   const undoDelete = (DeletedUser) => {
+    // Send request to server
     http
       .post(`${apiUrl}/admin/all-users/undoDelete`, DeletedUser)
       .then((response) => {
+        // Set user to the response data Object
         let user = response.data;
         addToast("User restored successfully", {
           appearance: "success",
         });
+        // Move to restored single user page
         history.push(`/admin/all-users/${user._id}`);
         setDeletedUser(false);
       })
@@ -74,6 +94,7 @@ function AllUsers() {
       });
   };
 
+  // If user in not ADMIN move to Home page
   if (user && user.role !== ADMIN) {
     return <Redirect to="/" />;
   }

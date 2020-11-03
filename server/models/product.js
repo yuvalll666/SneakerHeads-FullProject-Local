@@ -43,15 +43,21 @@ const productSchema = new Schema(
     },
     views: {
       type: Number,
-      default:0,
+      default: 0,
     },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );
 
+// Create mongoose Product model with schema
 const Product = mongoose.model("Product", productSchema);
 
+/**
+ * Validate an Object structure
+ * @param {Object} product - Product information
+ * @returns {Object} - Containes validation details
+ */
 function validateProduct(product) {
   const schema = Joi.object({
     title: Joi.string().required().min(2).max(255),

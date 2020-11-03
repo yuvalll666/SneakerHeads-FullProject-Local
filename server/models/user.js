@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+// Enums for user Roel
 const userRole = {
   NORMAL: 0,
   EDITOR: 1,
@@ -58,7 +59,11 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//create a user token with needed user information
+/**
+ * Create a user token with needed user information
+ * @param {Object | null} options
+ * @returns {String} - User's JWT token
+ */
 userSchema.methods.generateAuthToken = function (options = null) {
   const token = jwt.sign(
     {
@@ -71,7 +76,6 @@ userSchema.methods.generateAuthToken = function (options = null) {
       password: this.password,
       cart: this.cart,
     },
-    //----->>TODO: change Private Key
     process.env.JWT_TOKEN_KEY,
     options
   );
@@ -79,8 +83,14 @@ userSchema.methods.generateAuthToken = function (options = null) {
   return token;
 };
 
+// Create mongoose User model with schema
 const User = mongoose.model("User", userSchema);
 
+/**
+ * Validate an Object structure
+ * @param {Object} user - User information
+ * @returns {Object} - Containes validation details
+ */
 function validateUser(user) {
   const schema = Joi.object({
     firstName: Joi.string()
@@ -99,6 +109,11 @@ function validateUser(user) {
   return schema.validate(user, { abortEarly: false });
 }
 
+/**
+ * Validate an Object structure
+ * @param {Object} user - User information
+ * @returns {Object} - Containes validation details
+ */
 function validateEditedUser(user) {
   const schema = Joi.object({
     firstName: Joi.string()
@@ -116,6 +131,11 @@ function validateEditedUser(user) {
   return schema.validate(user, { abortEarly: false });
 }
 
+/**
+ * Validate an Object structure
+ * @param {Object} data - Changed user information
+ * @returns {Object} - Containes validation details
+ */
 function validatePassAndUser(data) {
   const schema = Joi.object({
     firstName: Joi.string()

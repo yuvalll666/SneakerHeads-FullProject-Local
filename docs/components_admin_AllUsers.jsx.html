@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/admin/AllUsers.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/admin/AllUsers.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../App";
+import { useToasts } from "react-toast-notifications";
+import { Redirect } from "react-router-dom";
+import http from "../../services/httpService";
+import { apiUrl, userRole } from "../../config.json";
+import PageHeader from "../utils/PageHeader";
+import {
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  makeStyles,
+  withStyles,
+  Button,
+  Link,
+} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { useDeletedUser } from "../../DeletedUserContext";
+const { ADMIN } = userRole;
+
+// Table Cell CSS styles
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    color: theme.palette.common.white,
+  },
+}))(TableCell);
+
+/**
+ * Component - AllUsers
+ * @component
+ */
+function AllUsers() {
+  const { DeletedUser, setDeletedUser } = useDeletedUser();
+  const { addToast } = useToasts();
+  const user = useContext(UserContext);
+  const [Users, setUsers] = useState([]);
+  const history = useHistory();
+
+  /**
+   * On page load get all users
+   */
+  useEffect(() => {
+    // send request to server
+    http
+      .get(`${apiUrl}/admin/getAllUsers`)
+      .then((response) => {
+        if (response &amp;&amp; response.data.success) {
+          setUsers(response.data.users);
+        } else {
+          addToast("Could not fetch users from database", {
+            appearance: "error",
+          });
+        }
+      })
+      .catch((error) => {
+        addToast("There was a problem with the server", {
+          appearance: "error",
+        });
+      });
+  }, []);
+
+  /**
+   * Move to single user handling page
+   * @param {String} userId - User _id
+   */
+  const handleClick = (userId) => {
+    history.push(`/admin/all-users/${userId}`);
+  };
+
+  /**
+   * Restore last deleted user
+   * @param {Object} DeletedUser - Last deleted user information
+   */
+  const undoDelete = (DeletedUser) => {
+    // Send request to server
+    http
+      .post(`${apiUrl}/admin/all-users/undoDelete`, DeletedUser)
+      .then((response) => {
+        // Set user to the response data Object
+        let user = response.data;
+        addToast("User restored successfully", {
+          appearance: "success",
+        });
+        // Move to restored single user page
+        history.push(`/admin/all-users/${user._id}`);
+        setDeletedUser(false);
+      })
+      .catch((error) => {
+        addToast("Error: Could't restore user", { appearance: "error" });
+      });
+  };
+
+  // If user in not ADMIN move to Home page
+  if (user &amp;&amp; user.role !== ADMIN) {
+    return &lt;Redirect to="/" />;
+  }
+  return (
+    &lt;div>
+      &lt;PageHeader>All Users&lt;/PageHeader>
+      &lt;div className="container-fluid">
+        {DeletedUser &amp;&amp; DeletedUser._id &amp;&amp; (
+          &lt;Link onClick={() => undoDelete(DeletedUser)}>
+            &lt;i className="fas fa-exclamation-circle">&lt;/i>Undo Delete
+          &lt;/Link>
+        )}
+        &lt;TableContainer component={Paper}>
+          &lt;Table>
+            &lt;TableHead>
+              &lt;TableRow className="bg-info">
+                &lt;StyledTableCell align="left">User Role&lt;/StyledTableCell>
+                &lt;StyledTableCell align="left">User Name&lt;/StyledTableCell>
+                &lt;StyledTableCell align="left">ID&lt;/StyledTableCell>
+                &lt;StyledTableCell align="left">Email&lt;/StyledTableCell>
+                &lt;StyledTableCell align="left">Confirmed?&lt;/StyledTableCell>
+                &lt;StyledTableCell align="left">Handle User&lt;/StyledTableCell>
+              &lt;/TableRow>
+            &lt;/TableHead>
+            &lt;TableBody>
+              {Users.map((item, index) => (
+                &lt;TableRow
+                  key={index}
+                  className={index % 2 ? "bg-light" : "bg-white"}
+                >
+                  &lt;TableCell align="left">
+                    {item.role === 1 ? (
+                      &lt;span className="text-success">EDITOR&lt;/span>
+                    ) : (
+                      &lt;span>Normal&lt;/span>
+                    )}
+                  &lt;/TableCell>
+                  &lt;TableCell align="left">
+                    {item.firstName + " " + item.lastName}
+                  &lt;/TableCell>
+                  &lt;TableCell align="left">{item._id}&lt;/TableCell>
+                  &lt;TableCell align="left">{item.email}&lt;/TableCell>
+                  &lt;TableCell align="left">
+                    {item.confirmed ? (
+                      &lt;i className="fas fa-check">&lt;/i>
+                    ) : (
+                      &lt;i className="fas fa-times">&lt;/i>
+                    )}
+                  &lt;/TableCell>
+                  &lt;TableCell align="left">
+                    &lt;Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleClick(item._id)}
+                    >
+                      Edit
+                    &lt;/Button>
+                  &lt;/TableCell>
+                &lt;/TableRow>
+              ))}
+            &lt;/TableBody>
+          &lt;/Table>
+        &lt;/TableContainer>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+export default AllUsers;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AllUsers.html">AllUsers</a></li><li><a href="CartPage.html">CartPage</a></li><li><a href="CartTable.html">CartTable</a></li><li><a href="CheckBox.html">CheckBox</a></li><li><a href="FileUpload.html">FileUpload</a></li><li><a href="HandleProductsPage.html">HandleProductsPage</a></li><li><a href="HistoryPage.html">HistoryPage</a></li><li><a href="HistoryTable.html">HistoryTable</a></li><li><a href="Home.html">Home</a></li><li><a href="Logout.html">Logout</a></li><li><a href="ProductCarousel.html">ProductCarousel</a></li><li><a href="ProductInfo.html">ProductInfo</a></li><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="RadioBox.html">RadioBox</a></li><li><a href="Result.html">Result</a></li><li><a href="SearchFeature.html">SearchFeature</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UpdateProduct.html">UpdateProduct</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:e%257BonChange%257D">e {onChange}</a></li></ul><h3>Global</h3><ul><li><a href="global.html#changeLocation">changeLocation</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#SingleUser">SingleUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 18:33:21 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

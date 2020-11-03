@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: UpdateProduct</title>
+    <title>JSDoc: Class: HandleProductsPage</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: UpdateProduct</h1>
+    <h1 class="page-title">Class: HandleProductsPage</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>UpdateProduct<span class="signature">(props)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>HandleProductsPage<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="UpdateProduct"><span class="type-signature"></span>new UpdateProduct<span class="signature">(props)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="HandleProductsPage"><span class="type-signature"></span>new HandleProductsPage<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    <p>Component - UpdateProduct</p>
+    <p>Component - HandleProductsPage</p>
 </div>
 
 
@@ -58,55 +58,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Containes product _id in params</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -142,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_admin_UpdateProduct.jsx.html">components/admin/UpdateProduct.jsx</a>, <a href="components_admin_UpdateProduct.jsx.html#line31">line 31</a>
+        <a href="components_admin_HandleProductsPage.jsx.html">components/admin/HandleProductsPage.jsx</a>, <a href="components_admin_HandleProductsPage.jsx.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -198,7 +149,7 @@
     
 
     
-    <h4 class="name" id="~handleChange"><span class="type-signature">(inner) </span>handleChange<span class="signature">(chips)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~handleBrandFilter"><span class="type-signature">(inner) </span>handleBrandFilter<span class="signature">(brandId)</span><span class="type-signature"></span></h4>
     
 
     
@@ -206,7 +157,7 @@
 
 
 <div class="description">
-    <p>Set the state of Chips to a new one</p>
+    <p>Filter results by brand</p>
 </div>
 
 
@@ -242,13 +193,16 @@
 
         <tr>
             
-                <td class="name"><code>chips</code></td>
+                <td class="name"><code>brandId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;String></span>
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">String</span>
 
 
             
@@ -258,7 +212,7 @@
 
             
 
-            <td class="description last"><p>Array of strings (tags)</p></td>
+            <td class="description last"><p>Brand _id number , &quot;all&quot; string</p></td>
         </tr>
 
     
@@ -299,7 +253,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_admin_UpdateProduct.jsx.html">components/admin/UpdateProduct.jsx</a>, <a href="components_admin_UpdateProduct.jsx.html#line131">line 131</a>
+        <a href="components_admin_HandleProductsPage.jsx.html">components/admin/HandleProductsPage.jsx</a>, <a href="components_admin_HandleProductsPage.jsx.html#line185">line 185</a>
     </li></ul></dd>
     
 
@@ -335,7 +289,7 @@
     
 
     
-    <h4 class="name" id="~onSubmit"><span class="type-signature">(async, inner) </span>onSubmit<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~handleDelete"><span class="type-signature">(inner) </span>handleDelete<span class="signature">(productId)</span><span class="type-signature"></span></h4>
     
 
     
@@ -343,7 +297,7 @@
 
 
 <div class="description">
-    <p>Send request to server to update existing product</p>
+    <p>Delete specific product by _id</p>
 </div>
 
 
@@ -379,7 +333,430 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Strinf</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Product _id</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_admin_HandleProductsPage.jsx.html">components/admin/HandleProductsPage.jsx</a>, <a href="components_admin_HandleProductsPage.jsx.html#line133">line 133</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~handleUpdate"><span class="type-signature">(inner) </span>handleUpdate<span class="signature">(productId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Move to UpdateProduct page with product _id</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Product _id</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_admin_HandleProductsPage.jsx.html">components/admin/HandleProductsPage.jsx</a>, <a href="components_admin_HandleProductsPage.jsx.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~renderProductImage"><span class="type-signature">(inner) </span>renderProductImage<span class="signature">(images)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get first Image of the Array</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>images</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of image paths</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_admin_HandleProductsPage.jsx.html">components/admin/HandleProductsPage.jsx</a>, <a href="components_admin_HandleProductsPage.jsx.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Image path</li>
+</ul>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~undoDelete"><span class="type-signature">(inner) </span>undoDelete<span class="signature">(DeletedProduct)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Restore last deleted product</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>DeletedProduct</code></td>
             
 
             <td class="type">
@@ -395,7 +772,7 @@
 
             
 
-            <td class="description last"><p>Values gathered by usForm hook from the inputs</p></td>
+            <td class="description last"><p>Last deleted product information</p></td>
         </tr>
 
     
@@ -436,144 +813,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_admin_UpdateProduct.jsx.html">components/admin/UpdateProduct.jsx</a>, <a href="components_admin_UpdateProduct.jsx.html#line80">line 80</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~updateImages"><span class="type-signature">(inner) </span>updateImages<span class="signature">(newImages)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Updates Array of images to new one</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>newImages</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;String></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Array of images paths</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_admin_UpdateProduct.jsx.html">components/admin/UpdateProduct.jsx</a>, <a href="components_admin_UpdateProduct.jsx.html#line72">line 72</a>
+        <a href="components_admin_HandleProductsPage.jsx.html">components/admin/HandleProductsPage.jsx</a>, <a href="components_admin_HandleProductsPage.jsx.html#line161">line 161</a>
     </li></ul></dd>
     
 
