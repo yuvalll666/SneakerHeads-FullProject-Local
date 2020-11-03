@@ -3,6 +3,12 @@
 This project is a representation of the abilities I acquired during a 7 months Full-Stack Web Development course.
 Throughout this project i will demostrate my knowledge using **React.js**, **Node.Js** and **MongoDB**.
 
+### MongoDB
+
+_This project collections will be inside my-app/DB folder_
+
+- Please read the README.md file next to it if you would like to change to local mongoDB
+
 # Start Up
 
 _Make sure none of the ports 3900 and 3000 in your localhost are being used._  
