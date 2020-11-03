@@ -18,17 +18,29 @@ import {
 import { getCurrentUser } from "../services/userService";
 import PageHeader from "./utils/PageHeader";
 import { useToasts } from "react-toast-notifications";
+
+/**
+ * Component - Final step of signup wizard
+ * @component
+ */
 function Result() {
-  const { addToast } = useToasts();
   const { data } = useData();
+  const { addToast } = useToasts();
   let entries = Object.entries(data);
   entries.pop();
   const [error, setError] = useState("");
   const history = useHistory();
 
+  /**
+   * <pre>
+   * const {data} - Object containes user information
+   * Send request to server to signup a user 
+   * </pre>
+   */
   async function onSubmit() {
     try {
       await http.post(`http://localhost:3900/api/users`, data);
+      // Move to sign in page
       history.push("/signin");
       addToast("Please confirm your email", { appearance: "info" });
     } catch (error) {
@@ -39,6 +51,7 @@ function Result() {
       }
     }
   }
+  // If user logged in Move to Home page
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <React.Fragment>

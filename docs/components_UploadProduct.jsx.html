@@ -1,4 +1,32 @@
-import React, { useState, useContext } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/UploadProduct.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/UploadProduct.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useContext } from "react";
 import MainContainer from "./forms/MainContainer";
 import Form from "./forms/Form";
 import Input from "./forms/Input";
@@ -40,7 +68,7 @@ function UploadProduct() {
 
   /**
    * Set the state of Images to a new one
-   * @param {Array.<String>} newImages - Array of images sources
+   * @param {Array.&lt;String>} newImages - Array of images sources
    */
   const updateImages = (newImages) => {
     setImages(newImages);
@@ -86,7 +114,7 @@ function UploadProduct() {
       history.push("/");
       // window.location = "/upload-product";
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (error.response &amp;&amp; error.response.status === 400) {
         addToast(error.response.data.error, {
           appearance: "error",
         });
@@ -96,23 +124,23 @@ function UploadProduct() {
 
    /**
    * Set the state of Chips to a new one
-   * @param {Array.<String>} chips - Array of strings (tags)
+   * @param {Array.&lt;String>} chips - Array of strings (tags)
    */
   const handleChange = (chips) => {
     setChips(chips);
   };
 
   return (
-    <div>
-      <PageHeader>
-        Upload Product <CloudUploadOutlined fontSize="inherit" />
-      </PageHeader>
+    &lt;div>
+      &lt;PageHeader>
+        Upload Product &lt;CloudUploadOutlined fontSize="inherit" />
+      &lt;/PageHeader>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <FileUpload refreshFunction={updateImages} />
-        <MainContainer className={styles.root} maxWidth="sm">
-          <Input name="title" label="Title" id="title" ref={register} />
-          <textarea
+      &lt;Form onSubmit={handleSubmit(onSubmit)}>
+        &lt;FileUpload refreshFunction={updateImages} />
+        &lt;MainContainer className={styles.root} maxWidth="sm">
+          &lt;Input name="title" label="Title" id="title" ref={register} />
+          &lt;textarea
             className="form-control"
             name="description"
             id="description"
@@ -121,21 +149,21 @@ function UploadProduct() {
             rows="7"
             ref={register}
           />
-          <select
+          &lt;select
             className="form-control mt-3"
             name="brand"
             id="brand"
             ref={register}
           >
-            <option>Choose Brand...</option>
+            &lt;option>Choose Brand...&lt;/option>
 
             {brands.map((item) => (
-              <option key={item.key} value={item._id}>
+              &lt;option key={item.key} value={item._id}>
                 {item.name}
-              </option>
+              &lt;/option>
             ))}
-          </select>
-          <Input
+          &lt;/select>
+          &lt;Input
             name="price"
             label="Price"
             id="price"
@@ -143,18 +171,41 @@ function UploadProduct() {
             type="number"
             ref={register}
           />
-          <ChipInput
+          &lt;ChipInput
             fullWidth
             placeholder="+Add_Tag"
             onChange={(chips) => handleChange(chips)}
             className="mt-2"
             ref={register}
           />
-          <PrimaryButton type="submit">Submit</PrimaryButton>
-        </MainContainer>
-      </Form>
-    </div>
+          &lt;PrimaryButton type="submit">Submit&lt;/PrimaryButton>
+        &lt;/MainContainer>
+      &lt;/Form>
+    &lt;/div>
   );
 }
 
 export default UploadProduct;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="Result.html">Result</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 02:14:15 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

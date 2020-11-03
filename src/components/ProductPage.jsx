@@ -4,12 +4,19 @@ import { apiUrl } from "../config.json";
 import ProductCarousel from "./productDetails/ProductCarousel";
 import ProductInfo from "./productDetails/ProductInfo";
 import { Typography } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
+/**
+ * Component - Product page, single product
+ * @component
+ */
 const ProductPage = (props) => {
+  const { addToast } = useToasts();
   const productId = props.match.params.productId;
   const [Product, setProduct] = useState([]);
-
+  /**
+   * On page load fetch single product data from DB using _id
+   */
   useEffect(() => {
     http
       .get(`${apiUrl}/products/product_by_id?id=${productId}`)
@@ -18,15 +25,25 @@ const ProductPage = (props) => {
       });
   }, []);
 
+  /**
+   * Send request to server to add a product to the cart
+   * @param {String} productId - product id number
+   */
   const addToCartHandler = async (productId) => {
     await http
       .post(`${apiUrl}/users/addToCart`, { productId })
       .then((response) => {
+        // Replace user's JWT token to new one in local storage
         localStorage.setItem("token", response.data.token);
       })
-      .catch((err) => console.log("err : ", err));
-
-    window.location = "/cart"; 
+      .catch((err) =>
+        addToast(
+          "Error: Unexpcted problem. Coludn't add this products to your cart",
+          { appearance: "error" }
+        )
+      );
+    // Move to Cart page
+    window.location = "/cart";
   };
 
   return (
@@ -49,7 +66,6 @@ const ProductPage = (props) => {
       <div style={{ marginTop: "50px" }}>
         <ProductInfo addToCart={addToCartHandler} product={Product} />
       </div>
-
     </div>
   );
 };

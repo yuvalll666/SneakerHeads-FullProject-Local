@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Online-Shop (SneakerHeads)</h1>
+<p>This project is a representation of the abilities I acquired during a 7 months Full-Stack Web Development course.
+Throughout this project i will demostrate my knowledge using <strong>React.js</strong>, <strong>Node.Js</strong> and <strong>MongoDB</strong>.</p>
+<h1>Start Up</h1>
+<p><em>Make sure none of the ports 3900 and 3000 in your localhost are being used.</em><br>
+<em>dependencies: node.js need to be installed on the computer to run this application.</em></p>
+<ol>
+<li>Open CMD in wanted directory and paste the following:<pre class="prettyprint source"><code>git clone git@bitbucket.org:YuvalAzaria/my-app.git
+</code></pre>
+Optionaly you can download the zip file and install it instead.</li>
+<li>Open my-app directory with you code editor.</li>
+<li>Split CMD into two windows both at my-app directory, in the first one stay at my-app and type:<pre class="prettyprint source"><code>npm i
+</code></pre>
+wait until it's finish installing then type<pre class="prettyprint source"><code>npm start
+</code></pre>
+in the second window go to server directory by typing<pre class="prettyprint source"><code>cd server
+</code></pre>
+and then type<pre class="prettyprint source"><code>npm i
+</code></pre>
+wait until it's finish installing then type<pre class="prettyprint source"><code>npm run start
+</code></pre>
+</li>
+</ol>
+<h1>In Application</h1>
+<p><em>The application containes 3 users an ADMIN user and EDITOR user and a NORMAL user.</em><br>
+<em>You can sign in using either one of them or create your own NORMAL user using the signup page(make sure to use a valid email).</em></p>
+<h3>NORMAL user abilities:</h3>
+<ul>
+<li>can view products and add them to his cart.</li>
+<li>edit his account settings like user name email and password.</li>
+<li>pay for listed itemes in the cart.</li>
+</ul>
+<h3>ADMIN user abilities:</h3>
+<ul>
+<li>delete existing users completely (have an option to restore the user in the page after deleting).</li>
+<li>promote and demote users to EDITOR or NORMAL .</li>
+<li>create delete and update products.</li>
+<li>all the NORMAL user abilities.</li>
+</ul>
+<h3>EDITOR user abilities:</h3>
+<ul>
+<li>create delete and update products.</li>
+<li>all the NORMAL user abilities.</li>
+</ul>
+<h3><strong>Signin as ADMIN user:</strong></h3>
+<pre class="prettyprint source"><code>Email: admin@admin.com
+Password: admin@admin.com
+</code></pre>
+<h3><strong>Signin as EDITOR user</strong></h3>
+<pre class="prettyprint source"><code>Email: editor@editor.com
+Password: editor@editor.com
+</code></pre>
+<h3><strong>Signin as NORMAL user</strong></h3>
+<pre class="prettyprint source"><code>Email: normal@normal.com
+Password: normal@normal.com
+</code></pre>
+<h1>Description</h1>
+<h3>Users handling (crud)</h3>
+<ol>
+<li>Signup - any user can signup as a new NORMAL user to the application with the 3 steps signup system, after filling all the inputs and submiting the form, a confirmation email will be sent to the user's email adress to confirm it.</li>
+<li>Signin - Only a confirmed user can login to the application, after loging in a JWT token with the user details will be added to the user's local storage and will be added to the headers of each request from the clinet to the server.</li>
+<li>A user can logout of the system, edit his name, email and password or delete his user completely.</li>
+</ol>
+<h3>Products handling (crud)</h3>
+<ol>
+<li>
+<p>Products rendering - both Home, HandleProducts , Browse and Product (single) pages render products from the database.</p>
+<p><em>each one is a bit different:</em></p>
+<ul>
+<li>Home page render products with the most views, each product increment by 1 view each time the single product page load.</li>
+<li>HandleProducts page render all the products in the prodcuts collection as default but can be filtered by a single brand each time.</li>
+<li>Browse page render all the products in the products collection but limits to 8, user can press the <em>load more</em> button to load 8 more products. in addition a user can filter the result by multiple or single brands and price range.</li>
+<li>Product page render a single product with an image carousel, description, price and add to cart button.</li>
+</ul>
+</li>
+</ol>
+<h1>Support</h1>
+<p>For any questions regarding the application fill free to contact me via email</p>
+<pre class="prettyprint source"><code>Yuval-Azaria-mail: yuval66550@gmail.com
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="Result.html">Result</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 02:14:15 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

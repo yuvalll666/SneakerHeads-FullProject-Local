@@ -12,6 +12,7 @@ import PageHeader from "./utils/PageHeader";
 import { useToasts } from "react-toast-notifications";
 import "../App.css";
 
+// Signin values requirements 
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -23,6 +24,10 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
+/**
+ * Component - Signin form
+ * @component
+ */
 function Signin() {
   const { addToast } = useToasts();
   const [error, setError] = useState("");
@@ -31,10 +36,16 @@ function Signin() {
     resolver: yupResolver(schema),
   });
 
+
+/**
+ * Send request to server to login a user
+ * @param {object} data - Values gathered by usForm hook from the inputs
+ */
   async function onSubmit(data) {
     try {
       const { email, password } = data;
       await login(email, password);
+      // Move to Home page
       window.location = "/";
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -48,7 +59,8 @@ function Signin() {
       }
     }
   }
-
+  
+  //If user logged in move to Home page
   if (getCurrentUser()) return <Redirect to="/" />;
   return (
     <React.Fragment>

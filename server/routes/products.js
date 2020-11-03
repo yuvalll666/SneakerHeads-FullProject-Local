@@ -78,15 +78,14 @@ router.post("/getProducts", async (req, res) => {
 
   x.populate("writer")
     .limit(limit)
-    .exec((error, products) => {
+    .exec((error, productsList) => {
       if (error) {
-        console.log(error);
         return res.status(400).send({ success: false, error });
       }
       res.send({
         success: true,
-        products,
-        postSize: products.length,
+        productsList,
+        postSize: productsList.length,
       });
     });
 });

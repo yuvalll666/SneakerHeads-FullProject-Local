@@ -1,4 +1,32 @@
-import React, { useContext, useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/UserPage.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/UserPage.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useContext, useState } from "react";
 import { UserContext } from "../App";
 import Form from "./forms/Form";
 import MainContainer from "./forms/MainContainer";
@@ -72,7 +100,7 @@ const UserPage = () => {
     const { oldPassword, newPassword, confirmPassword } = formData;
     delete formData.changePass;
     // Check if passwords are the same and old password exists
-    if (oldPassword && newPassword !== confirmPassword) {
+    if (oldPassword &amp;&amp; newPassword !== confirmPassword) {
       setError({ confirmPassword: "Passwords most be the same" });
     } else {
       try {
@@ -85,7 +113,7 @@ const UserPage = () => {
         // Move to Home page
         window.location = "/";
       } catch (error) {
-        if (error.response && error.response.status === 400) {
+        if (error.response &amp;&amp; error.response.status === 400) {
           setError({ oldPassword: error.response.data });
         }
       }
@@ -93,10 +121,10 @@ const UserPage = () => {
   };
 
   /**
-   * <pre>
+   * &lt;pre>
    * Delete user from DB
    * logout user
-   * </pre>
+   * &lt;/pre>
    */
   const deleteUser = async () => {
     if (
@@ -119,14 +147,14 @@ const UserPage = () => {
   };
 
   return (
-    <React.Fragment>
-      <PageHeader>
-        <div className="text-center">Edit Account</div>
-      </PageHeader>
+    &lt;React.Fragment>
+      &lt;PageHeader>
+        &lt;div className="text-center">Edit Account&lt;/div>
+      &lt;/PageHeader>
 
-      <MainContainer>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Input
+      &lt;MainContainer>
+        &lt;Form onSubmit={handleSubmit(onSubmit)}>
+          &lt;Input
             ref={register}
             name="firstName"
             type="text"
@@ -135,7 +163,7 @@ const UserPage = () => {
             error={Boolean(errors.firstName)}
             helperText={errors?.firstName?.message}
           />
-          <Input
+          &lt;Input
             ref={register}
             name="lastName"
             type="text"
@@ -144,7 +172,7 @@ const UserPage = () => {
             error={Boolean(errors.lastName)}
             helperText={errors?.lastName?.message}
           />
-          <Input
+          &lt;Input
             ref={register}
             name="email"
             type="email"
@@ -154,15 +182,15 @@ const UserPage = () => {
             helperText={errors?.email?.message}
           />
 
-          <FormControlLabel
+          &lt;FormControlLabel
             control={
-              <Checkbox color="primary" inputRef={register} name="changePass" />
+              &lt;Checkbox color="primary" inputRef={register} name="changePass" />
             }
             label="Would you like to change password ?"
           />
-          {changePass && (
-            <React.Fragment>
-              <Input
+          {changePass &amp;&amp; (
+            &lt;React.Fragment>
+              &lt;Input
                 ref={register}
                 name="oldPassword"
                 type="password"
@@ -171,7 +199,7 @@ const UserPage = () => {
                 error={Boolean(errors.oldPassword) || !!error.oldPassword}
                 helperText={errors?.oldPassword?.message || error?.oldPassword}
               />
-              <Input
+              &lt;Input
                 ref={register}
                 name="newPassword"
                 type="password"
@@ -180,7 +208,7 @@ const UserPage = () => {
                 error={Boolean(errors.newPassword)}
                 helperText={errors?.newPassword?.message}
               />
-              <Input
+              &lt;Input
                 ref={register}
                 name="confirmPassword"
                 type="password"
@@ -193,11 +221,11 @@ const UserPage = () => {
                   errors?.confirmPassword?.message || error?.confirmPassword
                 }
               />
-            </React.Fragment>
+            &lt;/React.Fragment>
           )}
-          <PrimaryButton type="submit">Submit</PrimaryButton>
-        </Form>
-        <Button
+          &lt;PrimaryButton type="submit">Submit&lt;/PrimaryButton>
+        &lt;/Form>
+        &lt;Button
           style={{ marginTop: "100px" }}
           color="secondary"
           variant="outlined"
@@ -205,10 +233,33 @@ const UserPage = () => {
           onClick={deleteUser}
         >
           Delete Account
-        </Button>
-      </MainContainer>
-    </React.Fragment>
+        &lt;/Button>
+      &lt;/MainContainer>
+    &lt;/React.Fragment>
   );
 };
 
 export default UserPage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="Result.html">Result</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 02:14:15 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

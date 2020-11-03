@@ -1,4 +1,32 @@
-import React, { useState, useEffect } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/ProductsLandingPage.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/ProductsLandingPage.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
 import http from "../services/httpService";
 import { apiUrl } from "../config.json";
 import PrimaryButton from "./forms/PrimaryButton";
@@ -43,12 +71,12 @@ function ProductsLandingPage() {
   }, []);
 
   /**
-   * <pre>
+   * &lt;pre>
    * Render products from DB
    * const productsList {Array} - Array of product objects
    * const postSize {Number} - Amount of products returned
    * @param {Obejct} variables - Info passed to server
-   * </pre>
+   * &lt;/pre>
    */
   const getProducts = (variables) => {
     http.post(`${apiUrl}/products/getProducts`, variables).then((response) => {
@@ -71,7 +99,7 @@ function ProductsLandingPage() {
         let lastProduct = productsList[lastIndex];
         // If there's a last item set LastId state to the id {string} of
         // the last object in the array
-        if (lastProduct && lastProduct._id) {
+        if (lastProduct &amp;&amp; lastProduct._id) {
           setLastId(lastProduct._id);
         }
       } else {
@@ -111,7 +139,7 @@ function ProductsLandingPage() {
   /**
    * const price {array} - Array of objects containes id and array
    * @param {Number} value - Int
-   * @returns {Array.<String>} - Array of 2 strings
+   * @returns {Array.&lt;String>} - Array of 2 strings
    */
   const handlePrice = (value) => {
     let array = [];
@@ -127,7 +155,7 @@ function ProductsLandingPage() {
 
   /**
    * Set the filters of http request to render specific products
-   * @param {Array.<Number> | Number} filters - Array of numbers || Single number
+   * @param {Array.&lt;Number> | Number} filters - Array of numbers || Single number
    * @param {String} category - category name
    * @see filteredResults
    */
@@ -165,89 +193,112 @@ function ProductsLandingPage() {
   // Render products cards by mapping Products {Array}
   const renderCards = Products.map((prod, index) => {
     return (
-      <Col lg={6} md={8} xs={12} key={index}>
-        <Card
+      &lt;Col lg={6} md={8} xs={12} key={index}>
+        &lt;Card
           style={{ backgroundColor: "#fafafa", overflow: "hidden" }}
           bordered={true}
           hoverable={true}
           cover={
-            <a href={`/products/${prod._id}`}>
-              <ImageSlider images={prod.images} />{" "}
-            </a>
+            &lt;a href={`/products/${prod._id}`}>
+              &lt;ImageSlider images={prod.images} />{" "}
+            &lt;/a>
           }
         >
-          <Meta title={prod.title} description={`$${prod.price}`} />
-        </Card>
-      </Col>
+          &lt;Meta title={prod.title} description={`$${prod.price}`} />
+        &lt;/Card>
+      &lt;/Col>
     );
   });
 
   return (
-    <React.Fragment>
-      <div className="d-sm-block d-md-none">
-        <PageHeader>Browse</PageHeader>
-      </div>
-      <div className="container">
-        <div className="d-none d-sm-none d-md-block">
-          <div className="col-12 d-flex flex-column align-items-end product-landingpage-header-container">
-            <div className="d-flex mt-2 flex-column text-box">
-              <h1>Sneakers</h1>
-              <p>
+    &lt;React.Fragment>
+      &lt;div className="d-sm-block d-md-none">
+        &lt;PageHeader>Browse&lt;/PageHeader>
+      &lt;/div>
+      &lt;div className="container">
+        &lt;div className="d-none d-sm-none d-md-block">
+          &lt;div className="col-12 d-flex flex-column align-items-end product-landingpage-header-container">
+            &lt;div className="d-flex mt-2 flex-column text-box">
+              &lt;h1>Sneakers&lt;/h1>
+              &lt;p>
                 Air Jordan, adidas, Nike, Yeezy and more! Buy all the latest
-                sneakers & shoes right here on SneakerHeads.
-              </p>
-            </div>
-          </div>
-        </div>
+                sneakers &amp; shoes right here on SneakerHeads.
+              &lt;/p>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
 
-        <div className="row mb-2 mt-4">
-          <div className="col-lg-6 col-md-6">
-            <CheckBox
+        &lt;div className="row mb-2 mt-4">
+          &lt;div className="col-lg-6 col-md-6">
+            &lt;CheckBox
               brands={brands}
               handleFilters={(filters) => handleFilters(filters, "brand")}
             />
-          </div>
-          <div className="col-lg-6 col-md-6">
-            <RadioBox
+          &lt;/div>
+          &lt;div className="col-lg-6 col-md-6">
+            &lt;RadioBox
               price={price}
               handleFilters={(filters) => handleFilters(filters, "price")}
             />
-          </div>
-          <div className="mt-lg-2 d-flex justify-content-end col-lg-4 col-md-12">
-            <SearchFeature refreshFunction={updateSearchValues} />
-          </div>
-        </div>
+          &lt;/div>
+          &lt;div className="mt-lg-2 d-flex justify-content-end col-lg-4 col-md-12">
+            &lt;SearchFeature refreshFunction={updateSearchValues} />
+          &lt;/div>
+        &lt;/div>
         {Products.length === 0 ? (
-          <div className="row justify-content-center">
-            <div
+          &lt;div className="row justify-content-center">
+            &lt;div
               style={{ height: "300px" }}
               className="d-flex justify-content-center align-items-center"
             >
-              <CircularProgress />
-            </div>
-          </div>
+              &lt;CircularProgress />
+            &lt;/div>
+          &lt;/div>
         ) : (
-          <div className="mt-2">
-            <Row gutter={[30, 16]}>{renderCards}</Row>
-          </div>
+          &lt;div className="mt-2">
+            &lt;Row gutter={[30, 16]}>{renderCards}&lt;/Row>
+          &lt;/div>
         )}
 
-        {PostSize >= Limit && (
-          <div className="row justify-content-center">
-            <div>
-              <PrimaryButton
+        {PostSize >= Limit &amp;&amp; (
+          &lt;div className="row justify-content-center">
+            &lt;div>
+              &lt;PrimaryButton
                 variant="outlined"
                 onClick={onLoadMore}
                 fullWidth={false}
               >
                 Load More
-              </PrimaryButton>
-            </div>
-          </div>
+              &lt;/PrimaryButton>
+            &lt;/div>
+          &lt;/div>
         )}
-      </div>
-    </React.Fragment>
+      &lt;/div>
+    &lt;/React.Fragment>
   );
 }
 
 export default ProductsLandingPage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ProductPage.html">ProductPage</a></li><li><a href="ProductsLandingPage.html">ProductsLandingPage</a></li><li><a href="Result.html">Result</a></li><li><a href="Signin.html">Signin</a></li><li><a href="Step1.html">Step1</a></li><li><a href="Step2.html">Step2</a></li><li><a href="UploadProduct.html">UploadProduct</a></li><li><a href="UserPage.html">UserPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getJwt">getJwt</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 02:14:15 GMT+0200 (Israel Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,15 +1,8 @@
 import axios from "axios";
 import { getJwt } from "./userService";
 
+// Set x-auth-token as default header
 axios.defaults.headers.common["x-auth-token"] = getJwt();
-
-// axios.interceptors.response.use(null, (error) => {
-//   const exErr = error.response && error.response.status >=403;
-//   if (exErr) {
-//     console.log("An unexpected error occurred with the httpService");
-//     return Promise.reject(error);
-//   }
-// });
 
 export default {
   get: axios.get,
