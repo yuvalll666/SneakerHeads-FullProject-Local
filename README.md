@@ -45,6 +45,7 @@ _dependencies: node.js need to be installed on the computer to run this applicat
 
 _The application containes 3 users an ADMIN user and EDITOR user and a NORMAL user._  
 _You can sign in using either one of them or create your own NORMAL user using the signup page(make sure to use a valid email)._
+_Brand pages are without content_
 
 ### NORMAL user abilities:
 
