@@ -51,6 +51,7 @@ function ProductsLandingPage() {
    * </pre>
    */
   const getProducts = (variables) => {
+    // Send request to server
     http.post(`${apiUrl}/products/getProducts`, variables).then((response) => {
       if (response.data.success) {
         const { productsList, postSize } = response.data;
