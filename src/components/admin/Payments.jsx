@@ -63,7 +63,8 @@ function Payments() {
     });
     // Get total sum of all products prices
     let reducedNum = arr.reduce((a, b) => a + b, 0);
-    
+    console.log(products[0]);
+
     return (
       <TableRow key={index} className={index % 2 ? "bg-light" : "bg-white"}>
         <TableCell>
@@ -84,9 +85,9 @@ function Payments() {
           {paymentData.cancelled && "CANCELLED"}
         </TableCell>
         <TableCell>
-          {products.map((item) => {
+          {products.map((item, index) => {
             return (
-              <div className="card p-2 m-1 bg-info text-white">
+              <div key={index} className="card p-2 m-1 bg-info text-white">
                 Name: {item.name}
                 <br />
                 Price: {item.price}
@@ -110,9 +111,11 @@ function Payments() {
   });
 
   // If user in not ADMIN move to Home page
-  if (user && user.role !== ADMIN) {
-    return <Redirect to="/" />;
-  }
+  setTimeout(() => {
+    if (user && user.role !== ADMIN) {
+      return <Redirect to="/" />;
+    }
+  }, 100);
   return (
     <div>
       <PageHeader>User's Payments</PageHeader>

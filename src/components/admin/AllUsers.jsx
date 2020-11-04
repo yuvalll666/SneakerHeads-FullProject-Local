@@ -95,9 +95,11 @@ function AllUsers() {
   };
 
   // If user in not ADMIN move to Home page
-  if (user && user.role !== ADMIN) {
-    return <Redirect to="/" />;
-  }
+  setTimeout(() => {
+    if (user && user.role !== ADMIN) {
+      return <Redirect to="/" />;
+    }
+  }, 100);
   return (
     <div>
       <PageHeader>All Users</PageHeader>

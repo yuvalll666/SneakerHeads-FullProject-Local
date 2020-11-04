@@ -178,10 +178,12 @@ function SingleUser(props) {
     );
   });
 
-  // If not ADMIN user move to Home page
-  if (user && user.role !== ADMIN) {
-    return <Redirect to="/" />;
-  }
+  // If user in not ADMIN move to Home page
+  setTimeout(() => {
+    if (user && user.role !== ADMIN) {
+      return <Redirect to="/" />;
+    }
+  }, 100);
   return (
     <div>
       <PageHeader>Handle User</PageHeader>
