@@ -151,7 +151,11 @@ function Navbar({ user }) {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/cart">
+                  <NavLink
+                    className="nav-link"
+                    to="#"
+                    onClick={() => (window.location = "/cart")}
+                  >
                     <Badge
                       badgeContent={user.cart && user.cart.length}
                       color="secondary"

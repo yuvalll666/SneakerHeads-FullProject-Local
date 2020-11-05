@@ -12,6 +12,7 @@ import {
   Button,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useHistory, Link } from "react-router-dom";
 
 // Table cell CSS styles
 const StyledTableCell = withStyles((theme) => ({
@@ -38,12 +39,13 @@ const useStyles = makeStyles((theme) => ({
  * <pre>
  * Component - CartTable
  * @component
- * @param {Object} props - containes ProductsInfo {Object} and 
+ * @param {Object} props - containes ProductsInfo {Object} and
  * removeFromCart {Function}
  * </pre>
  */
 function CartTable({ ProductsInfo, removeFromCart }) {
   const styles = useStyles();
+  const history = useHistory();
 
   /**
    * Return an image path
@@ -57,49 +59,55 @@ function CartTable({ ProductsInfo, removeFromCart }) {
     }
   };
 
+  const toProductPage = (productId) => {
+    return history.push(`/products/${productId}`);
+  };
+
   return (
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="left">Product Image</StyledTableCell>
-              <StyledTableCell align="center">Quantity</StyledTableCell>
-              <StyledTableCell align="right">Price</StyledTableCell>
-              <StyledTableCell align="right">Remove From Cart</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {ProductsInfo.map((prod, index) => (
-              <TableRow key={index}>
-                <TableCell align="left">
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <StyledTableCell align="left">Product Image</StyledTableCell>
+            <StyledTableCell align="center">Quantity</StyledTableCell>
+            <StyledTableCell align="right">Price</StyledTableCell>
+            <StyledTableCell align="right">Remove From Cart</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {ProductsInfo.map((prod, index) => (
+            <TableRow key={index}>
+              <TableCell align="left">
+                <Link to="#">
                   <img
+                    onClick={() => toProductPage(prod._id)}
                     src={renderCartImage(prod.images)}
                     alt="productImage"
                     className={styles.productImage}
                   />
-                </TableCell>
-                <TableCell className={styles.numbers} align="center">
-                  {prod.quantity}
-                </TableCell>
-                <TableCell className={styles.numbers} align="right">
-                  ${prod.price}
-                </TableCell>
-                <TableCell align="right">
-                  <Button
-                    onClick={() => removeFromCart(prod._id)}
-                    variant="outlined"
-                    color="secondary"
-                    startIcon={<DeleteIcon />}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-  
+                </Link>
+              </TableCell>
+              <TableCell className={styles.numbers} align="center">
+                {prod.quantity}
+              </TableCell>
+              <TableCell className={styles.numbers} align="right">
+                ${prod.price}
+              </TableCell>
+              <TableCell align="right">
+                <Button
+                  onClick={() => removeFromCart(prod._id)}
+                  variant="outlined"
+                  color="secondary"
+                  startIcon={<DeleteIcon />}
+                >
+                  Delete
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

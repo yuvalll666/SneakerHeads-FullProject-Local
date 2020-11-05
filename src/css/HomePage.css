@@ -4,7 +4,19 @@
   background-image: url("http://localhost:3000/images/homepagestrip.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50% 1%;
+  background-position: 50% ;
+}
+
+@media all and (min-width: 1500px) {
+  .home-page-header {
+    height: 550px;
+  }
+}
+
+@media all and (min-width: 1800px) {
+  .home-page-header {
+    height: 700px;
+  }
 }
 
 .see-all {

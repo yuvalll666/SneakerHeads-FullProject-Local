@@ -29,7 +29,7 @@ const ProductPage = (props) => {
    * Send request to server to add a product to the cart
    * @param {String} productId - product id number
    */
-  const addToCartHandler = async (productId) => {
+  const addToCartHandler = async (productId, action = null) => {
     await http
       .post(`${apiUrl}/users/addToCart`, { productId })
       .then((response) => {
@@ -43,7 +43,14 @@ const ProductPage = (props) => {
         )
       );
     // Move to Cart page
-    window.location = "/cart";
+    if (action && action === "buy") {
+      return (window.location = "/cart");
+    } else {
+      addToast(
+        "This product have been added to your cart!",
+        { appearance: "success" }
+      );
+    }
   };
 
   return (
