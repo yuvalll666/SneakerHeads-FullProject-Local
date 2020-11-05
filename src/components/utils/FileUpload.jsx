@@ -51,13 +51,13 @@ function FileUpload(props) {
    */
   const handleDelete = (image) => {
     const currentIndex = images.indexOf(image);
-    
+
     let newImages = [...images];
     // Remove image file from newImages Array
     newImages.splice(currentIndex, 1);
     setImages(newImages);
 
-     // Pass images to father component
+    // Pass images to father component
     props.updateImages(newImages);
   };
 
@@ -115,7 +115,7 @@ function FileUpload(props) {
             <div onClick={() => handleDelete(image)} key={index}>
               <img
                 style={{ minWidth: "300px", width: "300px", height: "240px" }}
-                src={`http://localhost:3000/${image}`}
+                src={`http://165.227.128.247:3000/${image}`}
                 alt={`productImg-${index}`}
               />
             </div>
@@ -126,7 +126,7 @@ function FileUpload(props) {
               <div onClick={() => oldImageshandleDelete(image)} key={index}>
                 <img
                   style={{ minWidth: "300px", width: "300px", height: "240px" }}
-                  src={`http://localhost:3000/${image}`}
+                  src={`http://165.227.128.247:3000/${image}`}
                   alt={`productImg-${index}`}
                 />
               </div>

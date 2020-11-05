@@ -77,7 +77,7 @@ function HandleProductsPage() {
     // If 1 or more items get in
     if (images.length > 0) {
       let image = images[0];
-      return `http://localhost:3000/${image}`;
+      return `http://165.227.128.247:3000/${image}`;
     }
   };
 

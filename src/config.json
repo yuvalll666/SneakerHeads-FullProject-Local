@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://localhost:3900/api",
+  "apiUrl": "http://165.227.128.247:3000/api",
   "userRole": {
     "NORMAL": 0,
     "EDITOR": 1,

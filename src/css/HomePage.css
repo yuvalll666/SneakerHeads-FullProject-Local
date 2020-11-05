@@ -1,10 +1,10 @@
 .home-page-header {
   width: 100%;
   height: 450px;
-  background-image: url("http://localhost:3000/images/homepagestrip.jpg");
+  background-image: url("http://165.227.128.247:3000/images/homepagestrip.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50% ;
+  background-position: 50%;
 }
 
 @media all and (min-width: 1500px) {
@@ -59,15 +59,15 @@
 }
 
 .jordan {
-  background-image: url("http://localhost:3000/images/JumpMan.png");
+  background-image: url("http://165.227.128.247:3000/images/JumpMan.png");
 }
 
 .nike {
-  background-image: url("http://localhost:3000/images/nikeSwoosh.png");
+  background-image: url("http://165.227.128.247:3000/images/nikeSwoosh.png");
 }
 .yeezy {
-  background-image: url("http://localhost:3000/images/yeezyLogo.png");
+  background-image: url("http://165.227.128.247:3000/images/yeezyLogo.png");
 }
 .adidas {
-  background-image: url("http://localhost:3000/images/adidasLogo.png");
+  background-image: url("http://165.227.128.247:3000/images/adidasLogo.png");
 }

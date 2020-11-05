@@ -1,5 +1,5 @@
 .product-landingpage-header-container {
-  background-image: url("http://localhost:3000/images/pexels-ray-piedra-1503009.jpg");
+  background-image: url("http://165.227.128.247:3000/images/pexels-ray-piedra-1503009.jpg");
   background-position: 50% 53%;
   background-size: cover;
   width: 50px;
@@ -14,7 +14,7 @@
 .text-box h1 {
   color: white;
   font-size: 3em;
-  font-family:"Courier New", Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 .text-box p {
   margin-top: -15px;

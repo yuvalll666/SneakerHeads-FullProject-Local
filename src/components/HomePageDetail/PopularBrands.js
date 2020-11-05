@@ -30,7 +30,7 @@ function PopularBrands() {
           <div className="p-2 brands-container ">
             <Link to="#" onClick={() => changeLocation("jordan")}>
               <img
-                src="http://localhost:3000/images/000-air-jordan.jpg"
+                src="http://165.227.128.247:3000/images/000-air-jordan.jpg"
                 alt=""
                 className="brands"
               />
@@ -41,7 +41,7 @@ function PopularBrands() {
             <Link to="#" onClick={() => changeLocation("nike")}>
               <img
                 width="250px"
-                src="http://localhost:3000/images/001-nike.jpg"
+                src="http://165.227.128.247:3000/images/001-nike.jpg"
                 alt=""
                 className="brands"
               />
@@ -52,7 +52,7 @@ function PopularBrands() {
             <Link to="#" onClick={() => changeLocation("yeezy")}>
               <img
                 width="250px"
-                src="http://localhost:3000/images/002-yeezy.jpg"
+                src="http://165.227.128.247:3000/images/002-yeezy.jpg"
                 alt=""
                 className="brands"
               />
@@ -63,7 +63,7 @@ function PopularBrands() {
             <Link to="#" onClick={() => changeLocation("adidas")}>
               <img
                 width="250px"
-                src="http://localhost:3000/images/003-adidas.jpg"
+                src="http://165.227.128.247:3000/images/003-adidas.jpg"
                 alt=""
                 className="brands"
               />
