@@ -38,7 +38,7 @@ function SingleUser(props) {
   const user = useContext(UserContext);
   const { DeletedUser, setDeletedUser } = useDeletedUser();
   const history = useHistory();
-  const url = `${apiUrl}/admin/all-users`;
+  const url = `/admin/all-users`;
   const userId = props.match.params.userId;
   const [User, setUser] = useState({});
   const { addToast } = useToasts();
@@ -77,7 +77,7 @@ function SingleUser(props) {
     const confirmed = window.confirm(
       "Are you sure you want to make this user an Editor?\nDoing so will allow this user to make changes throughout your application!"
     );
-    // If "OK" pressed get in 
+    // If "OK" pressed get in
     if (confirmed) {
       http
         .post(`${url}/makeEditor?id=${userId}`)

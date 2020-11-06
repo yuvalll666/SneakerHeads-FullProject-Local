@@ -76,10 +76,7 @@ const UserPage = () => {
       setError({ confirmPassword: "Passwords most be the same" });
     } else {
       try {
-        const { data } = await http.patch(
-          `${apiUrl}/users/${user._id}`,
-          formData
-        );
+        const { data } = await http.patch(`/users/${user._id}`, formData);
         // Replace user's JWT token in local storage
         localStorage.setItem(tokenKey, data.token);
         // Move to Home page
@@ -105,7 +102,7 @@ const UserPage = () => {
       )
     ) {
       try {
-        await http.delete(`${apiUrl}/users/${user._id}`);
+        await http.delete(`/users/${user._id}`);
         // Remove user's JWT token from local storage
         localStorage.removeItem(tokenKey);
         // Move to Home page

@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
-
+import {localUrl} from "../../config.json"
 function ImageSlider({ images }) {
   return (
     <div>
@@ -9,7 +9,7 @@ function ImageSlider({ images }) {
           <div key={index}>
             <img
               style={{ width: "100%", maxHeight: "150px" }}
-              src={`http://165.227.128.247:3000/${image}`}
+              src={`${localUrl}/${image}`}
               alt="productImage"
             />
           </div>

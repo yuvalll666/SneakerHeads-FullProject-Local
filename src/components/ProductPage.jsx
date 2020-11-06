@@ -18,11 +18,9 @@ const ProductPage = (props) => {
    * On page load fetch single product data from DB using _id
    */
   useEffect(() => {
-    http
-      .get(`${apiUrl}/products/product_by_id?id=${productId}`)
-      .then((response) => {
-        setProduct(response.data[0]);
-      });
+    http.get(`/products/product_by_id?id=${productId}`).then((response) => {
+      setProduct(response.data[0]);
+    });
   }, []);
 
   /**
@@ -31,7 +29,7 @@ const ProductPage = (props) => {
    */
   const addToCartHandler = async (productId, action = null) => {
     await http
-      .post(`${apiUrl}/users/addToCart`, { productId })
+      .post(`/users/addToCart`, { productId })
       .then((response) => {
         // Replace user's JWT token to new one in local storage
         localStorage.setItem("token", response.data.token);
@@ -46,10 +44,9 @@ const ProductPage = (props) => {
     if (action && action === "buy") {
       return (window.location = "/cart");
     } else {
-      addToast(
-        "This product have been added to your cart!",
-        { appearance: "success" }
-      );
+      addToast("This product have been added to your cart!", {
+        appearance: "success",
+      });
     }
   };
 

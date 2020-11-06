@@ -12,6 +12,7 @@ import {
   Button,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { localUrl } from "../../config.json";
 import { useHistory, Link } from "react-router-dom";
 
 // Table cell CSS styles
@@ -55,7 +56,7 @@ function CartTable({ ProductsInfo, removeFromCart }) {
   const renderCartImage = (images) => {
     if (images.length > 0) {
       let image = images[0];
-      return `http://165.227.128.247:3000/${image}`;
+      return `${localUrl}/${image}`;
     }
   };
 

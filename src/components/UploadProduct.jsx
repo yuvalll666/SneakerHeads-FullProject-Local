@@ -78,7 +78,7 @@ function UploadProduct() {
     };
 
     try {
-      await http.post(`${apiUrl}/products/uploadProduct`, productInfo);
+      await http.post(`/uploadProduct`, productInfo);
       addToast("Product uploaded successfuly", {
         appearance: "success",
       });

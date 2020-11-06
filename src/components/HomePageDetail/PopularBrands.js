@@ -1,6 +1,23 @@
 import React from "react";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import { localUrl } from "../../config.json";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((them) => ({
+  jordan: {
+    backgroundImage: `url("${localUrl}/images/JumpMan.png")`,
+  },
+  nike: {
+    backgroundImage: `url("${localUrl}/images/nikeSwoosh.png")`,
+  },
+  yeezy: {
+    backgroundImage: `url("${localUrl}/images/yeezyLogo.png")`,
+  },
+  adidas: {
+    backgroundImage: `url("${localUrl}/images/adidasLogo.png")`,
+  },
+}));
 
 /**
  * Move to dynamic url
@@ -11,6 +28,8 @@ const changeLocation = (brandName) => {
 };
 
 function PopularBrands() {
+  const styles = useStyles();
+
   return (
     <div>
       <div className="row mt-4">
@@ -30,7 +49,7 @@ function PopularBrands() {
           <div className="p-2 brands-container ">
             <Link to="#" onClick={() => changeLocation("jordan")}>
               <img
-                src="http://165.227.128.247:3000/images/000-air-jordan.jpg"
+                src={`${localUrl}/images/000-air-jordan.jpg`}
                 alt=""
                 className="brands"
               />
@@ -41,7 +60,7 @@ function PopularBrands() {
             <Link to="#" onClick={() => changeLocation("nike")}>
               <img
                 width="250px"
-                src="http://165.227.128.247:3000/images/001-nike.jpg"
+                src={`${localUrl}/images/001-nike.jpg`}
                 alt=""
                 className="brands"
               />
@@ -52,7 +71,7 @@ function PopularBrands() {
             <Link to="#" onClick={() => changeLocation("yeezy")}>
               <img
                 width="250px"
-                src="http://165.227.128.247:3000/images/002-yeezy.jpg"
+                src={`${localUrl}/images/002-yeezy.jpg`}
                 alt=""
                 className="brands"
               />
@@ -63,7 +82,7 @@ function PopularBrands() {
             <Link to="#" onClick={() => changeLocation("adidas")}>
               <img
                 width="250px"
-                src="http://165.227.128.247:3000/images/003-adidas.jpg"
+                src={`${localUrl}/images/003-adidas.jpg`}
                 alt=""
                 className="brands"
               />

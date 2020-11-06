@@ -3,6 +3,7 @@ import Dropzone from "react-dropzone";
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
 import { useToasts } from "react-toast-notifications";
+import { localUrl } from "../../config.json";
 
 /**
  * Component - FileUpload
@@ -28,7 +29,7 @@ function FileUpload(props) {
 
     try {
       const { data } = await http.post(
-        `${apiUrl}/products/uploadImage`,
+        `/products/uploadImage`,
         formData,
         config
       );
@@ -115,7 +116,7 @@ function FileUpload(props) {
             <div onClick={() => handleDelete(image)} key={index}>
               <img
                 style={{ minWidth: "300px", width: "300px", height: "240px" }}
-                src={`http://165.227.128.247:3000/${image}`}
+                src={`${localUrl}/${image}`}
                 alt={`productImg-${index}`}
               />
             </div>
@@ -126,7 +127,7 @@ function FileUpload(props) {
               <div onClick={() => oldImageshandleDelete(image)} key={index}>
                 <img
                   style={{ minWidth: "300px", width: "300px", height: "240px" }}
-                  src={`http://165.227.128.247:3000/${image}`}
+                  src={`${localUrl}/${image}`}
                   alt={`productImg-${index}`}
                 />
               </div>

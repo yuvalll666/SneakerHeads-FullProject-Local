@@ -17,7 +17,7 @@ function HistoryPage() {
    * On page load send request to server to get purchases history
    */
   useEffect(() => {
-    http.get(`${apiUrl}/users/getHistory`).then((response) => {
+    http.get(`/users/getHistory`).then((response) => {
       if (response.data.success) {
         setHistory(response.data.history);
       } else {

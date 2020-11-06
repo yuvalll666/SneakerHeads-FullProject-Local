@@ -62,9 +62,7 @@ function CartPage() {
           cartItemsIds.push(item._id);
         });
         http
-          .get(
-            `${apiUrl}/products/products_by_id?id=${cartItemsIds}&type=array`
-          )
+          .get(`/products/products_by_id?id=${cartItemsIds}&type=array`)
           .then((response) => {
             // Create Array of items quntity numbers
             let arr = cart.map((item) => {
@@ -122,7 +120,7 @@ function CartPage() {
    */
   const removeFromCart = (productId) => {
     http
-      .get(`${apiUrl}/users/removeFromCart?_id=${productId}`)
+      .get(`/users/removeFromCart?_id=${productId}`)
       .then((response) => {
         const { cart, products } = response.data;
         cart.forEach((cartItem) => {
@@ -165,7 +163,7 @@ function CartPage() {
       paymentData: data,
     };
 
-    http.post(`${apiUrl}/users/successBuy`, variables).then((response) => {
+    http.post(`/users/successBuy`, variables).then((response) => {
       if (response.data.success) {
         // Replace user's JWT token to updated token
         localStorage.setItem("token", response.data.token);

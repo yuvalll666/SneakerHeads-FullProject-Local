@@ -18,6 +18,7 @@ import {
   makeStyles,
   Button,
 } from "@material-ui/core";
+import { localUrl } from "../../config.json";
 const { NORMAL } = userRole;
 
 // Table Cell CSS styles
@@ -56,7 +57,7 @@ function HandleProductsPage() {
   useEffect(() => {
     // Send request to server
     http
-      .get(`${apiUrl}/admin/handle-products/getAllProducts`)
+      .get(`/admin/handle-products/getAllProducts`)
       .then((response) => {
         setProducts(response.data);
       })
@@ -77,7 +78,7 @@ function HandleProductsPage() {
     // If 1 or more items get in
     if (images.length > 0) {
       let image = images[0];
-      return `http://165.227.128.247:3000/${image}`;
+      return `${localUrl}/${image}`;
     }
   };
 
@@ -137,7 +138,7 @@ function HandleProductsPage() {
     if (confirm) {
       // Send request to server
       http
-        .delete(`${apiUrl}/admin/handle-products/deleteProduct?id=${productId}`)
+        .delete(`/admin/handle-products/deleteProduct?id=${productId}`)
         .then((response) => {
           // Find the index of this product
           let indexId = Products.map((item) => {
@@ -161,7 +162,7 @@ function HandleProductsPage() {
   const undoDelete = (DeletedProduct) => {
     // Send request to server
     http
-      .post(`${apiUrl}/admin/handle-products/undoDelete`, DeletedProduct)
+      .post(`/admin/handle-products/undoDelete`, DeletedProduct)
       .then((response) => {
         let product = response.data;
         addToast("Product restored successfully", {
@@ -185,7 +186,7 @@ function HandleProductsPage() {
   const handleBrandFilter = (brandId) => {
     //Send request to server
     http
-      .get(`${apiUrl}/admin/handle-products/getAllProducts?filter=${brandId}`)
+      .get(`/admin/handle-products/getAllProducts?filter=${brandId}`)
       .then((response) => {
         // Set Products to new Array.<Object>
         setProducts(response.data);

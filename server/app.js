@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const { User } = require("./models/user");
 const jwt = require("jsonwebtoken");
-
+const localUrl = require("./config");
 // Connect to atlas mongoDB
 mongoose
   .connect(
@@ -39,7 +39,7 @@ app.get("/confirmation/:token", async (req, res) => {
       // Update user
       await User.findOneAndUpdate({ _id: data._id }, { confirmed: true });
       // Redirect to confirmation page
-      return res.redirect("http://localhost:3000/confirmation");
+      return res.redirect(`${localUrl}/confirmation`);
     } else {
       return res.send("Error");
     }

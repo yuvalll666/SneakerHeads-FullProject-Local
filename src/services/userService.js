@@ -37,7 +37,7 @@ export function getCurrentUser() {
  * @param {string} password - User's password input value
  */
 export async function login(email, password) {
-  const { data } = await http.post(`${apiUrl}/users/login`, {
+  const { data } = await http.post("/users/login", {
     email,
     password,
   });

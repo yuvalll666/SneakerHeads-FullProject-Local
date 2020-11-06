@@ -46,7 +46,7 @@ function AllUsers() {
   useEffect(() => {
     // send request to server
     http
-      .get(`${apiUrl}/admin/getAllUsers`)
+      .get(`/admin/getAllUsers`)
       .then((response) => {
         if (response && response.data.success) {
           setUsers(response.data.users);
@@ -78,7 +78,7 @@ function AllUsers() {
   const undoDelete = (DeletedUser) => {
     // Send request to server
     http
-      .post(`${apiUrl}/admin/all-users/undoDelete`, DeletedUser)
+      .post(`/admin/all-users/undoDelete`, DeletedUser)
       .then((response) => {
         // Set user to the response data Object
         let user = response.data;

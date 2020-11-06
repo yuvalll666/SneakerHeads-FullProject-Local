@@ -26,7 +26,7 @@ const useStyles = makeStyles((them) => ({
 /**
  * Component - UpdateProduct
  * @component
- * @param {Object} props - Containes product _id in params 
+ * @param {Object} props - Containes product _id in params
  */
 function UpdateProduct(props) {
   const productId = props.match.params.productId;
@@ -43,7 +43,7 @@ function UpdateProduct(props) {
    */
   useEffect(() => {
     http
-      .get(`${apiUrl}/admin/update-product/product_by_id?id=${productId}`)
+      .get(`/admin/update-product/product_by_id?id=${productId}`)
       .then((response) => {
         if (response && response.data) {
           // When server response set Product to the response data
@@ -86,18 +86,18 @@ function UpdateProduct(props) {
       });
     }
 
-      /**
+    /**
      * ProductInfo object
      * @type {{
-      * writer: String,
-      * images: Array,
-      * tags: Array,
-      * title: String,
-      * description: String,
-      * price: Number,
-      * brand: Number
-      * }}
-      */
+     * writer: String,
+     * images: Array,
+     * tags: Array,
+     * title: String,
+     * description: String,
+     * price: Number,
+     * brand: Number
+     * }}
+     */
     const productInfo = {
       writer: user._id,
       images: images,
@@ -107,7 +107,7 @@ function UpdateProduct(props) {
 
     try {
       await http.put(
-        `${apiUrl}/admin/update-product/product_by_id?id=${productId}`,
+        `/admin/update-product/product_by_id?id=${productId}`,
         productInfo
       );
       addToast("Product updated successfuly", {

@@ -16,11 +16,12 @@ const auth = require("../middleware/auth");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 const jwt = require("jsonwebtoken");
+const localUrl = require("../config");
 
 /**
-* Get user's history information
-* @returns {Object} data - Jhistory {Array.<Object>}
-*/
+ * Get user's history information
+ * @returns {Object} data - Jhistory {Array.<Object>}
+ */
 router.get("/getHistory", auth, (req, res) => {
   // Find user by _id
   User.findOne({ _id: req.user._id }, (err, user) => {
@@ -34,9 +35,9 @@ router.get("/getHistory", auth, (req, res) => {
 });
 
 /**
-* Create payment Object
-* @returns {Object} data - JWT token {String}
-*/
+ * Create payment Object
+ * @returns {Object} data - JWT token {String}
+ */
 router.post("/successBuy", auth, (req, res) => {
   let history = [];
   let transactionData = {};
@@ -98,9 +99,9 @@ router.post("/successBuy", auth, (req, res) => {
 });
 
 /**
-* Remove Product from cart
-* @returns {Object} data - JWT token {String}, products {Array.<Object>}, cart {Object}
-*/
+ * Remove Product from cart
+ * @returns {Object} data - JWT token {String}, products {Array.<Object>}, cart {Object}
+ */
 router.get("/removeFromCart", auth, (req, res) => {
   // Find user by _id
   User.findOneAndUpdate(
@@ -129,9 +130,9 @@ router.get("/removeFromCart", auth, (req, res) => {
 });
 
 /**
-* Add Product to cart
-* @returns {Object} data - JWT token {String}
-*/
+ * Add Product to cart
+ * @returns {Object} data - JWT token {String}
+ */
 router.post("/addToCart", auth, async (req, res) => {
   const { productId } = req.body;
   // Find user by _id
@@ -185,9 +186,9 @@ router.post("/addToCart", auth, async (req, res) => {
 });
 
 /**
-* Delete user from DB
-* @returns {Object} data - Deleted user {Object}
-*/
+ * Delete user from DB
+ * @returns {Object} data - Deleted user {Object}
+ */
 router.delete("/:id", auth, async (req, res) => {
   // Find user by _id and delete
   const user = await User.findOneAndDelete({
@@ -327,7 +328,7 @@ router.post("/", async (req, res) => {
     expiresIn: "1d",
   });
 
-  const url = `http://localhost:3900/confirmation/${emailToken}`;
+  const url = `${localUrl}/confirmation/${emailToken}`;
   sendIt(user, url);
 });
 

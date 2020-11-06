@@ -24,7 +24,7 @@ function Home() {
    */
   useEffect(() => {
     const limit = 8;
-    http.post(`${apiUrl}/products/getMostViews`, { limit }).then((response) => {
+    http.post(`/products/getMostViews`, { limit }).then((response) => {
       if (response.data.success) {
         setMostViewedProducts(response.data.products);
       } else {

@@ -39,7 +39,7 @@ function Payments() {
   useEffect(() => {
     // Send request to server
     http
-      .get(`${apiUrl}/admin/payments`)
+      .get(`/admin/payments`)
       .then((response) => {
         setPayments(response.data);
       })

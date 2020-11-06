@@ -19,6 +19,7 @@ import { getCurrentUser } from "../services/userService";
 import PageHeader from "./utils/PageHeader";
 import { useToasts } from "react-toast-notifications";
 import swal from "sweetalert2";
+import {localUrl} from "../config.json";
 
 /**
  * Component - Final step of signup wizard
@@ -39,7 +40,7 @@ function Result() {
    */
   async function onSubmit() {
     try {
-      await http.post(`http://localhost:3900/api/users`, data);
+      await http.post("/users", data);
       // Fire success popup
       swal
         .fire(
@@ -53,7 +54,6 @@ function Result() {
             history.push("/signin");
           }
         });
-
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data.error);
