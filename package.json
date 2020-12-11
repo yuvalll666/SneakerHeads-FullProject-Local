@@ -58,5 +58,5 @@
     "better-docs": "^2.3.2",
     "jsdoc": "^3.6.6"
   },
-  "proxy": "http://165.227.128.247:3900/api"
+  "proxy": "http://localhost:3900/api"
 }

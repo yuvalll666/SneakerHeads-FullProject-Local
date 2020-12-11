@@ -1,5 +1,5 @@
 {
-  "localUrl": "http://165.227.128.247:3000",
+  "localUrl": "http://localhost:3000",
   "userRole": {
     "NORMAL": 0,
     "EDITOR": 1,

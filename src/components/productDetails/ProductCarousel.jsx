@@ -20,7 +20,7 @@ function ProductCarousel(props) {
       let images = [];
       // Create array of image Objects
       product.images.map((item) => {
-        let url = "http://165.227.128.247:3000";
+        let url = "http://localhost:3000";
         images.push({
           original: `${url}/${item}`,
           thumbnail: `${url}/${item}`,
